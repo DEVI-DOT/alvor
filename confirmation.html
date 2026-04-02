@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Confirmed — ALVOR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:      #C9A84C;
+      --gold-dark: #A8872E;
+      --bg:        #FDFAF5;
+      --bg2:       #F5F0E8;
+      --text:      #1A1A1A;
+      --muted:     #6B6560;
+      --border:    #E8E0D0;
+      --green:     #1D9E75;
+      --white:     #FFFFFF;
+      --wa:        #25D366;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; font-family: inherit; border: none; background: none; }
+
+    /* ── ANNOUNCEMENT ── */
+    .ann {
+      background: var(--gold); text-align: center;
+      padding: 8px 48px; font-size: 0.76rem; font-weight: 500; letter-spacing: 0.04em;
+      position: relative;
+    }
+    .ann-close { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-size: 0.9rem; opacity: 0.6; cursor: pointer; }
+    .ann-close:hover { opacity: 1; }
+
+    /* ── NAVBAR ── */
+    .nav { position: sticky; top: 0; z-index: 100; background: var(--white); border-bottom: 1px solid var(--border); }
+    .nav-in { max-width: 1280px; margin: auto; padding: 0 24px; height: 64px; display: flex; align-items: center; gap: 20px; }
+    .logo { display: flex; align-items: center; gap: 9px; flex-shrink: 0; }
+    .logo svg { width: 32px; height: 32px; }
+    .logo-text { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; letter-spacing: 0.12em; }
+    .nav-links { display: flex; list-style: none; gap: 28px; margin: 0 auto; }
+    .nav-links a { font-size: 0.82rem; font-weight: 500; letter-spacing: 0.04em; color: var(--muted); text-transform: uppercase; transition: color .2s; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-right { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
+    .nav-icon { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: var(--text); font-size: 0.95rem; transition: background .2s; position: relative; }
+    .nav-icon:hover { background: var(--bg2); }
+    .badge { position: absolute; top: 2px; right: 2px; background: var(--gold); color: var(--white); font-size: 0.58rem; font-weight: 700; width: 15px; height: 15px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .hbg { display: none; flex-direction: column; gap: 5px; padding: 6px; }
+    .hbg span { display: block; width: 20px; height: 2px; background: var(--text); border-radius: 2px; }
+
+    /* drawer */
+    .drawer { display: none; position: fixed; inset: 0; z-index: 300; pointer-events: none; }
+    .drawer.open { pointer-events: all; }
+    .drawer-bg { position: absolute; inset: 0; background: rgba(0,0,0,.45); opacity: 0; transition: opacity .3s; }
+    .drawer.open .drawer-bg { opacity: 1; }
+    .drawer-panel { position: absolute; left: 0; top: 0; bottom: 0; width: 260px; background: var(--white); padding: 20px; transform: translateX(-100%); transition: transform .3s ease; overflow-y: auto; }
+    .drawer.open .drawer-panel { transform: translateX(0); }
+    .drawer-x { position: absolute; top: 14px; right: 14px; font-size: 1.2rem; color: var(--muted); cursor: pointer; }
+    .drawer-nav { list-style: none; margin-top: 44px; }
+    .drawer-nav li { border-bottom: 1px solid var(--border); }
+    .drawer-nav a { display: block; padding: 13px 0; font-size: 0.95rem; font-weight: 500; }
+
+    /* ── PROGRESS ── */
+    .progress { background: var(--white); border-bottom: 1px solid var(--border); padding: 14px 24px; }
+    .prog-in { max-width: 600px; margin: auto; display: flex; align-items: center; justify-content: center; }
+    .prog-step { display: flex; align-items: center; gap: 8px; font-size: 0.78rem; font-weight: 500; color: var(--muted); }
+    .prog-step.done { color: var(--green); }
+    .prog-num { width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 700; background: var(--white); }
+    .prog-step.done .prog-num { border-color: var(--green); background: var(--green); color: var(--white); }
+    .prog-line { flex: 1; height: 1px; background: var(--border); margin: 0 10px; max-width: 60px; }
+    .prog-line.done { background: var(--green); }
+
+    /* ── MAIN ── */
+    .main { max-width: 680px; margin: auto; padding: 56px 24px 80px; }
+
+    /* ── SUCCESS CARD ── */
+    .card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden; margin-bottom: 20px;
+    }
+
+    /* checkmark animation */
+    .check-wrap {
+      text-align: center; padding: 40px 24px 28px;
+      border-bottom: 1px solid var(--border);
+    }
+    .check-circle {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: #d1fae5; border: 2px solid #6ee7b7;
+      display: inline-flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+      animation: pop .5s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    @keyframes pop {
+      from { transform: scale(0.4); opacity: 0; }
+      to   { transform: scale(1);   opacity: 1; }
+    }
+    .check-circle i { color: var(--green); font-size: 1.8rem; }
+    .check-wrap h1 { font-family: 'Playfair Display', serif; font-size: 1.7rem; font-weight: 700; margin-bottom: 8px; }
+    .check-wrap p { color: var(--muted); font-size: 0.9rem; }
+
+    /* order id */
+    .order-id-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 24px; background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+    }
+    .order-id-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+    .order-id-value { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--gold-dark); }
+    .copy-btn {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.75rem; font-weight: 500; color: var(--muted);
+      padding: 6px 12px; border: 1px solid var(--border); border-radius: 6px;
+      background: var(--white); transition: all .2s; cursor: pointer;
+    }
+    .copy-btn:hover { color: var(--text); border-color: var(--muted); }
+    .copy-btn.copied { color: var(--green); border-color: var(--green); }
+
+    /* what happens next */
+    .steps-body { padding: 24px; }
+    .steps-title { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; }
+    .steps { display: flex; flex-direction: column; gap: 0; }
+    .step { display: flex; gap: 16px; }
+    .step-left { display: flex; flex-direction: column; align-items: center; }
+    .step-dot {
+      width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+      background: var(--bg2); border: 1.5px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; font-weight: 700; color: var(--muted);
+      transition: all .3s;
+    }
+    .step-dot.active { background: var(--gold); border-color: var(--gold); color: var(--white); }
+    .step-connector { width: 1px; flex: 1; background: var(--border); margin: 4px 0; min-height: 28px; }
+    .step:last-child .step-connector { display: none; }
+    .step-content { padding-bottom: 24px; flex: 1; }
+    .step:last-child .step-content { padding-bottom: 0; }
+    .step-content h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 3px; }
+    .step-content p { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+
+    /* ── ACTION BUTTONS ── */
+    .actions { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .btn-wa {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      width: 100%; padding: 15px;
+      background: var(--wa); color: var(--white);
+      font-size: 0.92rem; font-weight: 700; border-radius: 8px;
+      transition: background .2s, transform .15s, box-shadow .2s;
+    }
+    .btn-wa:hover { background: #128C7E; transform: translateY(-1px); box-shadow: 0 8px 20px rgba(37,211,102,.3); }
+    .btn-shop {
+      display: flex; align-items: center; justify-content: center; gap: 9px;
+      width: 100%; padding: 14px;
+      background: var(--gold); color: var(--text);
+      font-size: 0.88rem; font-weight: 700; border-radius: 8px;
+      transition: background .2s, transform .15s;
+    }
+    .btn-shop:hover { background: var(--gold-dark); transform: translateY(-1px); }
+    .btn-share {
+      display: flex; align-items: center; justify-content: center; gap: 9px;
+      width: 100%; padding: 13px;
+      border: 1.5px solid var(--border); border-radius: 8px;
+      font-size: 0.85rem; font-weight: 500; color: var(--muted);
+      transition: all .2s;
+    }
+    .btn-share:hover { color: var(--text); border-color: var(--muted); background: var(--bg2); }
+
+    /* ── NOTE ── */
+    .note {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 8px;
+      padding: 14px 16px; font-size: 0.78rem; color: var(--muted); line-height: 1.6;
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .note i { color: var(--gold); flex-shrink: 0; margin-top: 2px; }
+
+    /* ── FLOATING WA ── */
+    .float-wa {
+      position: fixed; bottom: 24px; right: 24px; z-index: 400;
+      width: 50px; height: 50px; background: var(--wa); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--white); font-size: 1.4rem;
+      box-shadow: 0 4px 16px rgba(37,211,102,.4); transition: transform .2s;
+    }
+    .float-wa:hover { transform: scale(1.08); }
+
+    /* ── FOOTER ── */
+    .footer { background: var(--text); color: var(--white); padding: 44px 24px 24px; }
+    .footer-g { max-width: 1280px; margin: auto; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 36px; margin-bottom: 36px; }
+    .f-logo { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+    .f-logo svg { width: 28px; height: 28px; }
+    .f-logo span { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; letter-spacing: .1em; }
+    .f-tag { font-size: 0.78rem; color: #888; font-style: italic; margin-bottom: 16px; }
+    .f-social a { font-size: 0.8rem; color: #aaa; margin-right: 14px; display: inline-flex; align-items: center; gap: 5px; transition: color .2s; }
+    .f-social a:hover { color: var(--gold); }
+    .f-col h4 { font-size: 0.7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .f-col ul { list-style: none; }
+    .f-col li { margin-bottom: 8px; }
+    .f-col a { font-size: 0.82rem; color: #aaa; transition: color .2s; }
+    .f-col a:hover { color: var(--white); }
+    .footer-bot { max-width: 1280px; margin: auto; padding-top: 18px; border-top: 1px solid #2e2e2e; display: flex; justify-content: space-between; font-size: 0.75rem; color: #555; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      .nav-links { display: none; }
+      .hbg { display: flex; }
+      .drawer { display: block; }
+      .footer-g { grid-template-columns: 1fr 1fr; gap: 24px; }
+    }
+    @media (max-width: 480px) {
+      .main { padding: 36px 16px 64px; }
+      .check-wrap { padding: 32px 16px 24px; }
+      .check-wrap h1 { font-size: 1.4rem; }
+      .order-id-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .ann { padding: 8px 40px; font-size: 0.72rem; }
+      .footer-g { grid-template-columns: 1fr; }
+      .footer-bot { flex-direction: column; gap: 6px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT -->
+<div class="ann" id="ann">
+  🪡 Free delivery across Andhra Pradesh &nbsp;·&nbsp; Pay only after WhatsApp confirmation
+  <span class="ann-close" onclick="this.parentElement.style.display='none'">✕</span>
+</div>
+
+<!-- NAVBAR -->
+<nav class="nav">
+  <div class="nav-in">
+    <button class="hbg" id="hbg"><span></span><span></span><span></span></button>
+    <a href="index.html" class="logo">
+      <svg viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="19" stroke="#C9A84C" stroke-width="1.5"/>
+        <path d="M20 4 L22.35 17.65 L36 20 L22.35 22.35 L20 36 L17.65 22.35 L4 20 L17.65 17.65 Z" fill="#C9A84C"/>
+        <circle cx="20" cy="20" r="3" fill="#FDFAF5"/>
+      </svg>
+      <span class="logo-text">ALVOR</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="shop.html"    class="nav-icon"><i class="fa-solid fa-magnifying-glass"></i></a>
+      <a href="account.html" class="nav-icon"><i class="fa-regular fa-heart"></i></a>
+      <a href="account.html" class="nav-icon"><i class="fa-regular fa-circle-user"></i></a>
+      <a href="cart.html"    class="nav-icon">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span class="badge" id="cartBadge" style="display:none">0</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="drawer" id="drawer">
+  <div class="drawer-bg" id="drawerBg"></div>
+  <div class="drawer-panel">
+    <span class="drawer-x" id="drawerX"><i class="fa-solid fa-xmark"></i></span>
+    <ul class="drawer-nav">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="account.html">My Account</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- PROGRESS — all done -->
+<div class="progress">
+  <div class="prog-in">
+    <div class="prog-step done">
+      <div class="prog-num"><i class="fa-solid fa-check"></i></div>
+      <span>Cart</span>
+    </div>
+    <div class="prog-line done"></div>
+    <div class="prog-step done">
+      <div class="prog-num"><i class="fa-solid fa-check"></i></div>
+      <span>Details</span>
+    </div>
+    <div class="prog-line done"></div>
+    <div class="prog-step done">
+      <div class="prog-num"><i class="fa-solid fa-check"></i></div>
+      <span>Confirm</span>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- SUCCESS CARD -->
+  <div class="card">
+
+    <!-- Checkmark + heading -->
+    <div class="check-wrap">
+      <div class="check-circle">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <h1>Order Placed Successfully!</h1>
+      <p>Thank you, <strong id="customerName">there</strong>. We've received your order.</p>
+    </div>
+
+    <!-- Order ID -->
+    <div class="order-id-row">
+      <div>
+        <div class="order-id-label">Your Order ID</div>
+        <div class="order-id-value" id="orderId">#ALVOR-XXXX</div>
+      </div>
+      <button class="copy-btn" id="copyBtn" onclick="copyOrderId()">
+        <i class="fa-regular fa-copy"></i> Copy
+      </button>
+    </div>
+
+    <!-- What happens next -->
+    <div class="steps-body">
+      <div class="steps-title">What happens next</div>
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-left">
+            <div class="step-dot active">1</div>
+            <div class="step-connector"></div>
+          </div>
+          <div class="step-content">
+            <h4>We receive your order</h4>
+            <p>Your order details have been recorded and sent to our team.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-left">
+            <div class="step-dot">2</div>
+            <div class="step-connector"></div>
+          </div>
+          <div class="step-content">
+            <h4>We WhatsApp you within 2–3 hours</h4>
+            <p>Our team will confirm stock availability and share payment details.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-left">
+            <div class="step-dot">3</div>
+            <div class="step-connector"></div>
+          </div>
+          <div class="step-content">
+            <h4>You pay after confirmation</h4>
+            <p>Payment is made only after you're happy with the confirmation. No advance, no risk.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-left">
+            <div class="step-dot">4</div>
+          </div>
+          <div class="step-content">
+            <h4>We deliver within 5–8 days</h4>
+            <p>Your handcrafted piece is carefully packed and delivered across Andhra Pradesh.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTION BUTTONS -->
+  <div class="actions">
+    <a class="btn-wa" id="waTrackBtn" href="#" target="_blank" rel="noopener">
+      <i class="fa-brands fa-whatsapp" style="font-size:1.1rem"></i>
+      Track on WhatsApp
+    </a>
+    <a class="btn-shop" href="shop.html">
+      <i class="fa-solid fa-store"></i>
+      Continue Shopping
+    </a>
+    <button class="btn-share" id="shareBtn" onclick="shareOrder()">
+      <i class="fa-solid fa-share-nodes"></i>
+      Share Order on WhatsApp
+    </button>
+  </div>
+
+  <!-- NOTE -->
+  <div class="note">
+    <i class="fa-solid fa-circle-info"></i>
+    <span>Keep your Order ID <strong id="orderIdNote">#ALVOR-XXXX</strong> handy. You can also view all past orders anytime from <a href="account.html" style="color:var(--gold)">My Account</a>.</span>
+  </div>
+
+</main>
+
+<!-- FLOATING WA -->
+<a href="https://wa.me/919182492525" class="float-wa" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-g">
+    <div>
+      <div class="f-logo">
+        <svg viewBox="0 0 40 40" fill="none">
+          <circle cx="20" cy="20" r="19" stroke="#C9A84C" stroke-width="1.5"/>
+          <path d="M20 4 L22.35 17.65 L36 20 L22.35 22.35 L20 36 L17.65 22.35 L4 20 L17.65 17.65 Z" fill="#C9A84C"/>
+          <circle cx="20" cy="20" r="3" fill="#1A1A1A"/>
+        </svg>
+        <span>ALVOR</span>
+      </div>
+      <div class="f-tag">Where Thread Meets Tradition</div>
+      <div class="f-social">
+        <a href="https://instagram.com/alvor_emb" target="_blank"><i class="fa-brands fa-instagram"></i> @alvor_emb</a>
+        <a href="https://wa.me/919182492525" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+      </div>
+    </div>
+    <div class="f-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="shop.html">All Products</a></li>
+        <li><a href="shop.html?category=Embroidery+Art">Embroidery Art</a></li>
+        <li><a href="shop.html?category=Framed+Pieces">Framed Pieces</a></li>
+        <li><a href="shop.html?category=Shop+Decor">Shop Decor</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h4>Info</h4>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="admin.html">Admin</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h4>Help</h4>
+      <ul>
+        <li><a href="account.html">My Orders</a></li>
+        <li><a href="https://wa.me/919182492525" target="_blank">WhatsApp Support</a></li>
+        <li><a href="contact.html">Get in Touch</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bot">
+    <span>© 2026 ALVOR. All rights reserved.</span>
+    <span>Handcrafted in Andhra Pradesh 🇮🇳</span>
+  </div>
+</footer>
+
+<script>
+  const WA_NUM = '919182492525';
+
+  /* ── READ URL PARAMS ── */
+  const params   = new URLSearchParams(window.location.search);
+  const orderId  = params.get('orderId') || 'ALVOR-XXXX';
+  const custName = params.get('name')    || 'there';
+
+  /* ── POPULATE PAGE ── */
+  document.getElementById('customerName').textContent = custName;
+  document.getElementById('orderId').textContent      = '#' + orderId;
+  document.getElementById('orderIdNote').textContent  = '#' + orderId;
+
+  /* ── WHATSAPP TRACK LINK ── */
+  const waMsg = encodeURIComponent(`Hi ALVOR! 🪡 I'd like to track my order #${orderId}. Could you share an update? Thank you!`);
+  document.getElementById('waTrackBtn').href = `https://wa.me/${WA_NUM}?text=${waMsg}`;
+
+  /* ── COPY ORDER ID ── */
+  function copyOrderId() {
+    navigator.clipboard.writeText(orderId).then(() => {
+      const btn = document.getElementById('copyBtn');
+      btn.classList.add('copied');
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied';
+      setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy'; }, 2000);
+    });
+  }
+
+  /* ── SHARE ORDER ── */
+  function shareOrder() {
+    const text = `I just placed a handcrafted art order with ALVOR! 🪡\nOrder ID: #${orderId}\nCheck them out: https://alvor.in\nInstagram: @alvor_emb`;
+    const url  = `https://wa.me/?text=${encodeURIComponent(text)}`;
+    window.open(url, '_blank');
+  }
+
+  /* ── MOBILE DRAWER ── */
+  document.getElementById('hbg').onclick      = () => { document.getElementById('drawer').classList.add('open');    document.body.style.overflow = 'hidden'; };
+  document.getElementById('drawerBg').onclick = () => { document.getElementById('drawer').classList.remove('open'); document.body.style.overflow = ''; };
+  document.getElementById('drawerX').onclick  = () => { document.getElementById('drawer').classList.remove('open'); document.body.style.overflow = ''; };
+</script>
+</body>
+</html>

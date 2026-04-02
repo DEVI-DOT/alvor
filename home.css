@@ -1,0 +1,1084 @@
+/* ============================================================
+   ALVOR — Home Page Stylesheet  (css/home.css)
+   "Where Thread Meets Tradition"
+   ============================================================
+   TABLE OF CONTENTS
+   01. Hero Section
+   02. Featured Products Strip
+   03. Categories Section
+   04. Why ALVOR Section
+   05. Bestsellers Section
+   06. Services / Shop Decoration Banner
+   07. Testimonials Section
+   08. Instagram Feed Section
+   09. Responsive Breakpoints
+   ============================================================ */
+
+
+/* ── 01. Hero Section ───────────────────────────────────────── */
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: var(--color-bg-dark);
+}
+
+/* Indian textile geometric CSS background pattern */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  background-color: #1A1208;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 28px,
+      rgba(201, 168, 76, 0.07) 28px,
+      rgba(201, 168, 76, 0.07) 30px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 28px,
+      rgba(201, 168, 76, 0.07) 28px,
+      rgba(201, 168, 76, 0.07) 30px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 58px,
+      rgba(201, 168, 76, 0.04) 58px,
+      rgba(201, 168, 76, 0.04) 60px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 58px,
+      rgba(201, 168, 76, 0.04) 58px,
+      rgba(201, 168, 76, 0.04) 60px
+    );
+  background-size: 60px 60px, 60px 60px, 60px 60px, 60px 60px;
+}
+
+/* Radial glow from centre */
+.hero__bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 80% 70% at 50% 40%,
+    rgba(201, 168, 76, 0.12) 0%,
+    rgba(26, 18, 8, 0.55) 55%,
+    rgba(26, 18, 8, 0.85) 100%
+  );
+}
+
+/* Dark overlay for text legibility */
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    175deg,
+    rgba(26, 18, 8, 0.50) 0%,
+    rgba(26, 18, 8, 0.30) 50%,
+    rgba(26, 18, 8, 0.70) 100%
+  );
+  z-index: 1;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: var(--space-16) var(--container-padding);
+  max-width: 860px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+/* Decorative top ornament */
+.hero__ornament {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+
+.hero__ornament-line {
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-primary));
+  opacity: 0.7;
+}
+
+.hero__ornament-line--right {
+  background: linear-gradient(90deg, var(--color-primary), transparent);
+}
+
+.hero__ornament-diamond {
+  width: 8px;
+  height: 8px;
+  background: var(--color-primary);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+.hero__label {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.hero__title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 6.5vw, 4.5rem);
+  font-weight: var(--weight-bold);
+  line-height: 1.1;
+  color: var(--color-white);
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.4);
+}
+
+.hero__title .text-gold {
+  color: var(--color-primary);
+  display: block;
+}
+
+.hero__subtitle {
+  font-size: clamp(var(--text-base), 2vw, var(--text-md));
+  color: rgba(255, 255, 255, 0.78);
+  line-height: var(--leading-loose);
+  max-width: 560px;
+  font-weight: var(--weight-regular);
+}
+
+.hero__actions {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: var(--space-2);
+}
+
+/* Scroll-down indicator */
+.hero__scroll {
+  position: absolute;
+  bottom: var(--space-8);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: var(--text-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  animation: hero-scroll-bounce 2.4s ease-in-out infinite;
+  cursor: pointer;
+  transition: color var(--transition-base);
+}
+
+.hero__scroll:hover {
+  color: var(--color-primary);
+}
+
+.hero__scroll-arrow {
+  width: 28px;
+  height: 28px;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+}
+
+@keyframes hero-scroll-bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0);   opacity: 0.5; }
+  50%       { transform: translateX(-50%) translateY(8px); opacity: 1; }
+}
+
+/* Hero entrance animations */
+.hero__content > * {
+  animation: hero-fade-up 0.9s ease forwards;
+  opacity: 0;
+}
+
+.hero__ornament { animation-delay: 0.10s; }
+.hero__label    { animation-delay: 0.22s; }
+.hero__title    { animation-delay: 0.36s; }
+.hero__subtitle { animation-delay: 0.50s; }
+.hero__actions  { animation-delay: 0.65s; }
+
+@keyframes hero-fade-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ── 02. Featured Products Strip ────────────────────────────── */
+
+.featured {
+  background: var(--color-bg);
+}
+
+.featured__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+}
+
+.featured__footer {
+  text-align: center;
+  margin-top: var(--space-10);
+}
+
+
+/* ── 03. Categories Section ─────────────────────────────────── */
+
+.categories {
+  background: var(--color-bg-secondary);
+}
+
+.categories__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.category-card {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--color-bg-dark);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.category-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-xl);
+}
+
+/* Warm Indian pattern per card */
+.category-card__bg {
+  position: absolute;
+  inset: 0;
+  background-size: 40px 40px;
+  transition: transform var(--transition-slow);
+}
+
+.category-card:hover .category-card__bg {
+  transform: scale(1.06);
+}
+
+/* Embroidery Art — saffron tones */
+.category-card--embroidery .category-card__bg {
+  background-color: #2B1A06;
+  background-image:
+    radial-gradient(circle at 20px 20px, rgba(201,168,76,0.18) 3px, transparent 3px),
+    radial-gradient(circle at 0px 0px,   rgba(201,168,76,0.10) 2px, transparent 2px);
+  background-size: 40px 40px, 20px 20px;
+}
+
+/* Framed Pieces — deep burgundy tones */
+.category-card--framed .category-card__bg {
+  background-color: #1E1010;
+  background-image:
+    repeating-linear-gradient(0deg,  transparent, transparent 18px, rgba(201,168,76,0.12) 18px, rgba(201,168,76,0.12) 20px),
+    repeating-linear-gradient(90deg, transparent, transparent 18px, rgba(201,168,76,0.08) 18px, rgba(201,168,76,0.08) 20px);
+  background-size: 20px 20px;
+}
+
+/* Shop Decor — teal-dark tones */
+.category-card--decor .category-card__bg {
+  background-color: #0D1E18;
+  background-image:
+    repeating-linear-gradient(
+       45deg, transparent, transparent 12px,
+       rgba(201,168,76,0.10) 12px, rgba(201,168,76,0.10) 14px
+    ),
+    repeating-linear-gradient(
+      -45deg, transparent, transparent 12px,
+       rgba(201,168,76,0.06) 12px, rgba(201,168,76,0.06) 14px
+    );
+  background-size: 28px 28px;
+}
+
+.category-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.78) 0%,
+    rgba(0,0,0,0.28) 55%,
+    transparent 100%
+  );
+  transition: background var(--transition-slow);
+}
+
+.category-card:hover .category-card__overlay {
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.85) 0%,
+    rgba(0,0,0,0.40) 60%,
+    rgba(201,168,76,0.05) 100%
+  );
+}
+
+.category-card__body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: var(--space-8) var(--space-6);
+  z-index: 1;
+}
+
+.category-card__icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(201,168,76,0.15);
+  border: 1px solid rgba(201,168,76,0.30);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-lg);
+  color: var(--color-primary);
+  margin-bottom: var(--space-4);
+  transition: background var(--transition-base), transform var(--transition-spring);
+}
+
+.category-card:hover .category-card__icon {
+  background: rgba(201,168,76,0.28);
+  transform: scale(1.1);
+}
+
+.category-card__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  color: var(--color-white);
+  margin-bottom: var(--space-2);
+}
+
+.category-card__count {
+  font-size: var(--text-sm);
+  color: rgba(255,255,255,0.55);
+  margin-bottom: var(--space-4);
+}
+
+.category-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--color-primary);
+  letter-spacing: 0.04em;
+  transition: gap var(--transition-base);
+}
+
+.category-card:hover .category-card__cta {
+  gap: var(--space-3);
+}
+
+.category-card__cta i {
+  font-size: 0.75rem;
+  transition: transform var(--transition-base);
+}
+
+.category-card:hover .category-card__cta i {
+  transform: translateX(3px);
+}
+
+
+/* ── 04. Why ALVOR Section ──────────────────────────────────── */
+
+.why-alvor {
+  background: var(--color-bg);
+}
+
+.why-alvor__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+}
+
+.why-card {
+  text-align: center;
+  padding: var(--space-8) var(--space-6);
+  border-radius: var(--radius-xl);
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-xs);
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base),
+    border-color var(--transition-base);
+}
+
+.why-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary);
+}
+
+.why-card__icon-wrap {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto var(--space-5);
+  background: var(--color-primary-muted);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  color: var(--color-primary);
+  transition: background var(--transition-base), transform var(--transition-spring);
+}
+
+.why-card:hover .why-card__icon-wrap {
+  background: var(--color-primary);
+  color: var(--color-white);
+  transform: scale(1.08) rotate(-3deg);
+}
+
+.why-card__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+  margin-bottom: var(--space-3);
+}
+
+.why-card__text {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: var(--leading-loose);
+}
+
+
+/* ── 05. Bestsellers Section ────────────────────────────────── */
+
+.bestsellers {
+  background: var(--color-bg-secondary);
+}
+
+.bestsellers__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+}
+
+.bestsellers__footer {
+  text-align: center;
+  margin-top: var(--space-10);
+}
+
+
+/* ── 06. Services / Shop Decoration Banner ──────────────────── */
+
+.services-banner {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-bg-dark);
+  padding-block: clamp(var(--space-16), 10vw, var(--space-24));
+}
+
+/* Geometric background */
+.services-banner__bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+       45deg, transparent, transparent 34px,
+       rgba(201,168,76,0.06) 34px, rgba(201,168,76,0.06) 36px
+    ),
+    repeating-linear-gradient(
+      -45deg, transparent, transparent 34px,
+       rgba(201,168,76,0.04) 34px, rgba(201,168,76,0.04) 36px
+    );
+  background-size: 72px 72px;
+}
+
+.services-banner__bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 70% 80% at 15% 50%,
+    rgba(201,168,76,0.10) 0%,
+    transparent 60%
+  );
+}
+
+.services-banner__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--space-10);
+}
+
+.services-banner__label {
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: var(--space-4);
+}
+
+.services-banner__title {
+  font-family: var(--font-heading);
+  font-size: clamp(var(--text-2xl), 4vw, var(--text-4xl));
+  font-weight: var(--weight-bold);
+  color: var(--color-white);
+  line-height: var(--leading-tight);
+  margin-bottom: var(--space-5);
+}
+
+.services-banner__text {
+  font-size: var(--text-base);
+  color: rgba(255,255,255,0.65);
+  line-height: var(--leading-loose);
+  max-width: 520px;
+  margin-bottom: var(--space-8);
+}
+
+/* Service feature pills */
+.services-banner__features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-8);
+}
+
+.services-banner__feature {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(201,168,76,0.25);
+  background: rgba(201,168,76,0.08);
+  font-size: var(--text-sm);
+  color: rgba(255,255,255,0.75);
+}
+
+.services-banner__feature i {
+  color: var(--color-primary);
+  font-size: 0.75rem;
+}
+
+/* Right side — decorative stat block */
+.services-banner__visual {
+  width: 220px;
+  height: 220px;
+  flex-shrink: 0;
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(201,168,76,0.20);
+  background: rgba(201,168,76,0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  text-align: center;
+  padding: var(--space-6);
+}
+
+.services-banner__visual-icon {
+  font-size: 3rem;
+  color: var(--color-primary);
+  opacity: 0.85;
+}
+
+.services-banner__visual-text {
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  color: rgba(255,255,255,0.6);
+  line-height: var(--leading-snug);
+}
+
+.services-banner__visual-stat {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  color: var(--color-primary);
+}
+
+
+/* ── 07. Testimonials Section ───────────────────────────────── */
+
+.testimonials {
+  background: var(--color-bg);
+}
+
+.testimonials__track {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.testimonial-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.testimonial-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.testimonial-card__stars {
+  display: flex;
+  gap: 3px;
+  color: var(--color-primary);
+  font-size: 0.85rem;
+}
+
+.testimonial-card__quote {
+  font-size: var(--text-base);
+  color: var(--color-text);
+  line-height: var(--leading-loose);
+  font-style: italic;
+  flex: 1;
+  position: relative;
+  padding-left: var(--space-5);
+}
+
+.testimonial-card__quote::before {
+  content: "\201C";
+  position: absolute;
+  left: 0;
+  top: -4px;
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  color: var(--color-primary);
+  opacity: 0.5;
+  line-height: 1;
+}
+
+.testimonial-card__footer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+.testimonial-card__avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--color-primary-muted);
+  border: 2px solid var(--color-primary);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+  color: var(--color-primary);
+  overflow: hidden;
+}
+
+.testimonial-card__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.testimonial-card__name {
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  line-height: 1.3;
+}
+
+.testimonial-card__location {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+/* Empty / error state */
+.testimonials__empty {
+  text-align: center;
+  padding: var(--space-12);
+  color: var(--color-text-muted);
+  grid-column: 1 / -1;
+}
+
+/* Mobile carousel dots */
+.testimonials__dots {
+  display: none;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+}
+
+.testimonials__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--color-border-dark);
+  border: none;
+  cursor: pointer;
+  transition: background var(--transition-base), width var(--transition-base);
+  padding: 0;
+}
+
+.testimonials__dot.active {
+  background: var(--color-primary);
+  width: 24px;
+}
+
+
+/* ── 08. Instagram Feed Section ─────────────────────────────── */
+
+.instagram {
+  background: var(--color-bg-secondary);
+}
+
+.instagram__header-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-primary);
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-md);
+  text-decoration: none;
+  transition: opacity var(--transition-fast);
+  margin-top: var(--space-3);
+}
+
+.instagram__header-link:hover { opacity: 0.75; }
+
+.instagram__header-link i { font-size: var(--text-xl); }
+
+.instagram__grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+}
+
+.instagram__item {
+  aspect-ratio: 1;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-bg-dark);
+  position: relative;
+  cursor: pointer;
+}
+
+/* First two items span 2 cols × 2 rows */
+.instagram__item:nth-child(1),
+.instagram__item:nth-child(2) {
+  grid-column: span 2;
+  grid-row: span 2;
+  aspect-ratio: unset;
+  min-height: 240px;
+}
+
+.instagram__item-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform var(--transition-slow);
+}
+
+.instagram__item:hover .instagram__item-bg {
+  transform: scale(1.06);
+}
+
+/* Placeholder warm gradient backgrounds for each slot */
+.instagram__item:nth-child(1) .instagram__item-bg {
+  background-color: #2B1A06;
+  background-image: radial-gradient(circle at 30% 40%, rgba(201,168,76,0.22) 30%, transparent 70%);
+}
+.instagram__item:nth-child(2) .instagram__item-bg {
+  background-color: #1E1010;
+  background-image: radial-gradient(circle at 70% 60%, rgba(201,168,76,0.18) 25%, transparent 65%);
+}
+.instagram__item:nth-child(3) .instagram__item-bg {
+  background-color: #101A1E;
+  background-image: radial-gradient(circle at 50% 50%, rgba(201,168,76,0.15) 20%, transparent 60%);
+}
+.instagram__item:nth-child(4) .instagram__item-bg {
+  background-color: #0D1E18;
+  background-image: radial-gradient(circle at 40% 30%, rgba(201,168,76,0.16) 22%, transparent 62%);
+}
+.instagram__item:nth-child(5) .instagram__item-bg {
+  background-color: #1A1208;
+  background-image: radial-gradient(circle at 60% 70%, rgba(201,168,76,0.18) 28%, transparent 68%);
+}
+.instagram__item:nth-child(6) .instagram__item-bg {
+  background-color: #1E180D;
+  background-image: radial-gradient(circle at 30% 60%, rgba(201,168,76,0.14) 24%, transparent 64%);
+}
+
+.instagram__item-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(26,18,8,0);
+  transition: background var(--transition-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.instagram__item:hover .instagram__item-overlay {
+  background: rgba(26,18,8,0.45);
+}
+
+.instagram__item-icon {
+  opacity: 0;
+  color: var(--color-white);
+  font-size: var(--text-2xl);
+  transform: scale(0.7);
+  transition:
+    opacity var(--transition-base),
+    transform var(--transition-spring);
+}
+
+.instagram__item:hover .instagram__item-icon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.instagram__footer {
+  text-align: center;
+  margin-top: var(--space-8);
+}
+
+
+/* ── 09. Responsive Breakpoints ─────────────────────────────── */
+
+/* Large tablet — ≤1200px */
+@media (max-width: 1200px) {
+  .featured__grid,
+  .bestsellers__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .why-alvor__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .instagram__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .instagram__item:nth-child(1),
+  .instagram__item:nth-child(2) {
+    grid-column: span 2;
+    grid-row: span 1;
+    min-height: 200px;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* Tablet — ≤1024px */
+@media (max-width: 1024px) {
+  .categories__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+  }
+
+  .services-banner__inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .services-banner__text {
+    margin-inline: auto;
+  }
+
+  .services-banner__features {
+    justify-content: center;
+  }
+
+  .services-banner__visual {
+    display: none;
+  }
+
+  .testimonials__track {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .instagram__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2);
+  }
+
+  .instagram__item:nth-child(1),
+  .instagram__item:nth-child(2) {
+    grid-column: span 1;
+    grid-row: span 1;
+    min-height: unset;
+    aspect-ratio: 1;
+  }
+}
+
+/* Mobile — ≤768px */
+@media (max-width: 768px) {
+
+  /* Hero */
+  .hero__actions {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+
+  .hero__actions .btn {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  /* Featured / Bestsellers */
+  .featured__grid,
+  .bestsellers__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+  }
+
+  /* Categories */
+  .categories__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+  }
+
+  .categories__grid .category-card:last-child {
+    grid-column: span 2;
+    aspect-ratio: 16 / 7;
+  }
+
+  .category-card {
+    aspect-ratio: 3 / 4;
+  }
+
+  /* Why ALVOR */
+  .why-alvor__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+  }
+
+  .why-card {
+    padding: var(--space-6) var(--space-4);
+  }
+
+  .why-card__icon-wrap {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+
+  /* Services banner */
+  .services-banner {
+    text-align: center;
+  }
+
+  /* Testimonials — horizontal scroll on mobile */
+  .testimonials__track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: var(--space-4);
+    padding-bottom: var(--space-3);
+    scrollbar-width: none;
+    grid-template-columns: unset;
+  }
+
+  .testimonials__track::-webkit-scrollbar { display: none; }
+
+  .testimonial-card {
+    min-width: 280px;
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+
+  .testimonials__dots {
+    display: flex;
+  }
+
+  /* Instagram */
+  .instagram__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2);
+  }
+}
+
+/* Small mobile — ≤480px */
+@media (max-width: 480px) {
+
+  .hero__ornament { display: none; }
+  .hero__scroll   { display: none; }
+
+  .hero__title {
+    font-size: clamp(1.9rem, 9vw, 2.6rem);
+  }
+
+  /* Stack featured to 2 col (keep consistent with global grid-4 override) */
+  .featured__grid,
+  .bestsellers__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+
+  /* Why ALVOR — single column */
+  .why-alvor__grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Categories — single column */
+  .categories__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .categories__grid .category-card:last-child {
+    grid-column: span 1;
+    aspect-ratio: 3 / 4;
+  }
+
+  /* Services feature pills — stack */
+  .services-banner__features {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Instagram — 2 col */
+  .instagram__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

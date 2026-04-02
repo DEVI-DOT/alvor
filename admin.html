@@ -1,0 +1,1803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ALVOR Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+/* ============================================================
+   ALVOR — css/admin.css   (minimalist dark)
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:       #111111;
+  --surface:  #1A1A1A;
+  --surface2: #222222;
+  --border:   #2A2A2A;
+  --gold:     #C9A84C;
+  --gold-dk:  #A8872E;
+  --text:     #F0EDE8;
+  --muted:    #7A7570;
+  --success:  #1D9E75;
+  --danger:   #D94F3D;
+  --sidebar-w: 200px;
+  --top-h:    52px;
+  --font:     'Inter', system-ui, sans-serif;
+  --display:  'Playfair Display', Georgia, serif;
+  --radius:   8px;
+  --trans:    0.2s ease;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; font-family: var(--font); }
+input, select, textarea { font-family: var(--font); }
+
+/* ── Login ───────────────────────────────────────────────── */
+.login-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+}
+
+.login-box {
+  width: 100%;
+  max-width: 360px;
+  padding: 40px 32px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.login-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 24px;
+}
+
+.login-box h1 {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.login-box p {
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 24px;
+}
+
+.btn-google {
+  width: 100%;
+  height: 44px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: border-color var(--trans), background var(--trans);
+}
+
+.btn-google:hover { border-color: var(--gold); background: var(--bg); }
+
+.login-error {
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--danger);
+}
+
+/* ── App Shell ───────────────────────────────────────────── */
+.admin-app {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ── Sidebar ─────────────────────────────────────────────── */
+.sidebar {
+  width: var(--sidebar-w);
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 100;
+  transition: transform var(--trans);
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 20px 16px;
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gold);
+  border-bottom: 1px solid var(--border);
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 12px 0;
+  overflow-y: auto;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  transition: color var(--trans), background var(--trans);
+}
+
+.nav-item i { width: 16px; font-size: 13px; flex-shrink: 0; }
+
+.nav-item:hover { color: var(--text); background: var(--surface2); }
+
+.nav-item.active {
+  color: var(--gold);
+  background: rgba(201,168,76,.08);
+  border-left: 2px solid var(--gold);
+  padding-left: 14px;
+}
+
+.sidebar-bottom {
+  border-top: 1px solid var(--border);
+  padding: 8px 0;
+}
+
+.nav-logout:hover { color: var(--danger) !important; }
+
+/* ── Main ────────────────────────────────────────────────── */
+.main-wrap {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Topbar */
+.topbar {
+  height: var(--top-h);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 16px;
+  padding: 4px;
+}
+
+.topbar-title {
+  flex: 1;
+  font-family: var(--display);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.topbar-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.user-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--border);
+}
+
+/* Content */
+.content {
+  padding: 24px 20px;
+  flex: 1;
+}
+
+/* Tab panels */
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ── Section Header ──────────────────────────────────────── */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.section-header h3 {
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.filter-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.quick-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* ── Stat Cards ──────────────────────────────────────────── */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.stat-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .6px;
+  color: var(--muted);
+}
+
+.stat-value {
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+}
+
+/* ── Table ───────────────────────────────────────────────── */
+.table-wrap {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.data-table th {
+  background: var(--surface);
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.data-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+  color: var(--text);
+}
+
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: var(--surface2); }
+
+.empty-row {
+  text-align: center;
+  color: var(--muted) !important;
+  padding: 32px !important;
+}
+
+.thumb {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 4px;
+  background: var(--surface2);
+  display: block;
+}
+
+.status-select {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+  font-size: 12px;
+  padding: 4px 6px;
+  outline: none;
+}
+
+.actions { display: flex; gap: 6px; }
+
+.wa-link { color: #25D366; text-decoration: underline; }
+
+/* ── Buttons ─────────────────────────────────────────────── */
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--gold);
+  color: #111;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 600;
+  transition: background var(--trans), transform var(--trans);
+}
+
+.btn-gold:hover { background: var(--gold-dk); transform: translateY(-1px); }
+.btn-gold:active { transform: scale(.97); }
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 500;
+  transition: border-color var(--trans), color var(--trans);
+}
+
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+.btn-danger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--danger);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 600;
+  transition: background var(--trans);
+}
+
+.btn-danger:hover { background: #b83d2f; }
+
+.btn-icon {
+  width: 30px;
+  height: 30px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--trans);
+}
+
+.btn-icon:hover { color: var(--text); border-color: var(--gold); }
+.btn-icon.danger:hover { color: var(--danger); border-color: var(--danger); }
+
+.input-sm {
+  height: 34px;
+  padding: 0 10px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 13px;
+  outline: none;
+  transition: border-color var(--trans);
+}
+
+.input-sm:focus { border-color: var(--gold); }
+
+/* ── Badges ──────────────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.badge-new        { background: rgba(201,168,76,.15); color: var(--gold); }
+.badge-contacted  { background: rgba(100,149,237,.15); color: #6495ED; }
+.badge-progress   { background: rgba(255,165,0,.15);   color: orange; }
+.badge-done       { background: rgba(29,158,117,.15);  color: var(--success); }
+.badge-cancelled  { background: rgba(217,79,61,.15);   color: var(--danger); }
+
+/* ── Toggle ──────────────────────────────────────────────── */
+.toggle { display: inline-flex; align-items: center; cursor: pointer; }
+.toggle input { display: none; }
+
+.toggle-track {
+  width: 36px;
+  height: 20px;
+  background: var(--border);
+  border-radius: 20px;
+  position: relative;
+  transition: background var(--trans);
+}
+
+.toggle-track::after {
+  content: '';
+  position: absolute;
+  top: 3px; left: 3px;
+  width: 14px; height: 14px;
+  background: var(--muted);
+  border-radius: 50%;
+  transition: transform var(--trans), background var(--trans);
+}
+
+.toggle input:checked + .toggle-track { background: rgba(29,158,117,.3); }
+.toggle input:checked + .toggle-track::after {
+  transform: translateX(16px);
+  background: var(--success);
+}
+
+/* ── Modals ──────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.7);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  backdrop-filter: blur(3px);
+}
+
+.modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 560px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  animation: popIn .2s ease both;
+}
+
+.modal--sm { max-width: 380px; }
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(.95) translateY(12px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.modal-head h3 {
+  font-family: var(--display);
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.modal-close {
+  width: 28px;
+  height: 28px;
+  background: var(--surface2);
+  border: none;
+  border-radius: 6px;
+  color: var(--muted);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--trans);
+}
+
+.modal-close:hover { color: var(--text); }
+
+.modal-body {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.modal-foot {
+  padding: 14px 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* ── Form Fields ─────────────────────────────────────────── */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.field-row {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.field label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .4px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 8px 12px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 13px;
+  outline: none;
+  transition: border-color var(--trans);
+  resize: vertical;
+}
+
+.input-field:focus { border-color: var(--gold); }
+.input-field::placeholder { color: var(--muted); }
+
+.field-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.tag-checkboxes {
+  display: flex;
+  gap: 12px;
+}
+
+.check-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  color: var(--muted);
+  cursor: pointer;
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+
+.check-label input { accent-color: var(--gold); }
+
+.image-preview-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.preview-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+/* ── Settings ────────────────────────────────────────────── */
+.settings-form {
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.settings-group {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.settings-group h4 {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .6px;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+/* ── Order Detail ────────────────────────────────────────── */
+.order-detail-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.od-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 13px;
+}
+
+.od-row span { color: var(--muted); flex-shrink: 0; }
+.od-row strong { text-align: right; }
+
+.order-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.order-item-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  padding: 6px 10px;
+  background: var(--surface2);
+  border-radius: 6px;
+  gap: 8px;
+}
+
+.order-item-row span:first-child { flex: 1; color: var(--muted); }
+.order-item-row span:last-child  { color: var(--gold); font-weight: 600; }
+
+/* ── Toast ───────────────────────────────────────────────── */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  padding: 10px 18px;
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 500;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease, transform .25s ease;
+  transform: translateY(8px);
+  z-index: 999;
+}
+
+.toast.show { opacity: 1; transform: translateY(0); }
+.toast-success { background: var(--success); color: #fff; }
+.toast-error   { background: var(--danger);  color: #fff; }
+.toast-info    { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVE
+   ════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); box-shadow: 4px 0 20px rgba(0,0,0,.5); }
+  .main-wrap { margin-left: 0; }
+  .menu-toggle { display: flex; }
+  .stat-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .field-grid { grid-template-columns: 1fr; }
+  .section-header { flex-direction: column; align-items: flex-start; }
+  .quick-actions { flex-wrap: wrap; }
+  .filter-row { width: 100%; }
+  .input-sm { flex: 1; }
+  .content { padding: 16px 12px; }
+}
+
+@media (max-width: 480px) {
+  .stat-grid { grid-template-columns: 1fr 1fr; }
+  .modal { max-height: 95vh; }
+  .modal-foot { flex-direction: column-reverse; }
+  .btn-gold, .btn-outline, .btn-danger { width: 100%; justify-content: center; }
+}
+
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     LOGIN SCREEN
+════════════════════════════════════════════ -->
+<div id="loginScreen" class="login-screen">
+  <div class="login-box">
+    <div class="login-logo">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+        <path d="M16 2L18.8 11.2H28.4L20.8 17L23.6 26.2L16 20.4L8.4 26.2L11.2 17L3.6 11.2H13.2L16 2Z" fill="#C9A84C"/>
+      </svg>
+      <span>ALVOR</span>
+    </div>
+    <h1>Admin Panel</h1>
+    <p>Sign in with your Google account to continue.</p>
+    <button id="btnGoogleLogin" class="btn-google">
+      <i class="fab fa-google"></i> Sign in with Google
+    </button>
+    <div id="loginError" class="login-error" style="display:none"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     ADMIN DASHBOARD
+════════════════════════════════════════════ -->
+<div id="adminApp" class="admin-app" style="display:none">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
+        <path d="M16 2L18.8 11.2H28.4L20.8 17L23.6 26.2L16 20.4L8.4 26.2L11.2 17L3.6 11.2H13.2L16 2Z" fill="#C9A84C"/>
+      </svg>
+      <span>ALVOR</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" data-tab="dashboard">
+        <i class="fas fa-gauge-high"></i><span>Dashboard</span>
+      </a>
+      <a href="#" class="nav-item" data-tab="products">
+        <i class="fas fa-box"></i><span>Products</span>
+      </a>
+      <a href="#" class="nav-item" data-tab="orders">
+        <i class="fas fa-receipt"></i><span>Orders</span>
+      </a>
+      <a href="#" class="nav-item" data-tab="customers">
+        <i class="fas fa-users"></i><span>Customers</span>
+      </a>
+      <a href="#" class="nav-item" data-tab="coupons">
+        <i class="fas fa-tag"></i><span>Coupons</span>
+      </a>
+      <a href="#" class="nav-item" data-tab="settings">
+        <i class="fas fa-sliders"></i><span>Settings</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <a href="index.html" target="_blank" class="nav-item">
+        <i class="fas fa-arrow-up-right-from-square"></i><span>View Site</span>
+      </a>
+      <button id="btnLogout" class="nav-item nav-logout">
+        <i class="fas fa-right-from-bracket"></i><span>Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="main-wrap">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+      <h2 class="topbar-title" id="topbarTitle">Dashboard</h2>
+      <div class="topbar-user">
+        <img id="userAvatar" src="" alt="" class="user-avatar" />
+        <span id="userName"></span>
+      </div>
+    </header>
+
+    <!-- Content Area -->
+    <main class="content">
+
+      <!-- ─── DASHBOARD TAB ─── -->
+      <section id="tab-dashboard" class="tab-panel active">
+
+        <div class="stat-grid">
+          <div class="stat-card">
+            <span class="stat-label">Total Products</span>
+            <span class="stat-value" id="statProducts">—</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Total Orders</span>
+            <span class="stat-value" id="statOrders">—</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">New Today</span>
+            <span class="stat-value" id="statToday">—</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">This Week</span>
+            <span class="stat-value" id="statWeek">—</span>
+          </div>
+        </div>
+
+        <div class="section-header">
+          <h3>Recent Orders</h3>
+          <div class="quick-actions">
+            <button class="btn-gold" onclick="openTab('products'); openProductModal()">
+              <i class="fas fa-plus"></i> Add Product
+            </button>
+            <button class="btn-outline" onclick="openTab('orders')">
+              View New Orders
+            </button>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="data-table" id="recentOrdersTable">
+            <thead>
+              <tr>
+                <th>Order ID</th><th>Customer</th><th>Amount</th><th>Status</th><th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="recentOrdersBody">
+              <tr><td colspan="5" class="empty-row">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ─── PRODUCTS TAB ─── -->
+      <section id="tab-products" class="tab-panel">
+
+        <div class="section-header">
+          <h3>Products</h3>
+          <button class="btn-gold" onclick="openProductModal()">
+            <i class="fas fa-plus"></i> Add Product
+          </button>
+        </div>
+
+        <div class="table-wrap">
+          <table class="data-table" id="productsTable">
+            <thead>
+              <tr>
+                <th>Image</th><th>Title</th><th>Category</th><th>Price</th>
+                <th>Stock</th><th>Visible</th><th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="productsBody">
+              <tr><td colspan="7" class="empty-row">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ─── ORDERS TAB ─── -->
+      <section id="tab-orders" class="tab-panel">
+
+        <div class="section-header">
+          <h3>Orders</h3>
+          <div class="filter-row">
+            <input type="text" id="orderSearch" class="input-sm" placeholder="Search name / phone / ID…" />
+            <select id="orderStatusFilter" class="input-sm">
+              <option value="">All Status</option>
+              <option value="new">New</option>
+              <option value="contacted">Contacted</option>
+              <option value="in_progress">In Progress</option>
+              <option value="completed">Completed</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="data-table" id="ordersTable">
+            <thead>
+              <tr>
+                <th>Order ID</th><th>Customer</th><th>Phone</th><th>Amount</th>
+                <th>Status</th><th>Date</th><th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="ordersBody">
+              <tr><td colspan="7" class="empty-row">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ─── CUSTOMERS TAB ─── -->
+      <section id="tab-customers" class="tab-panel">
+
+        <div class="section-header">
+          <h3>Customers</h3>
+        </div>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Name</th><th>Phone</th><th>Email</th><th>Orders</th><th>Last Order</th>
+              </tr>
+            </thead>
+            <tbody id="customersBody">
+              <tr><td colspan="5" class="empty-row">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ─── COUPONS TAB ─── -->
+      <section id="tab-coupons" class="tab-panel">
+
+        <div class="section-header">
+          <h3>Coupons</h3>
+          <button class="btn-gold" onclick="openCouponModal()">
+            <i class="fas fa-plus"></i> Add Coupon
+          </button>
+        </div>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Code</th><th>Discount</th><th>Min Order</th><th>Expiry</th><th>Active</th><th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="couponsBody">
+              <tr><td colspan="6" class="empty-row">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ─── SETTINGS TAB ─── -->
+      <section id="tab-settings" class="tab-panel">
+
+        <div class="section-header">
+          <h3>Settings</h3>
+        </div>
+
+        <div class="settings-form">
+
+          <div class="settings-group">
+            <h4>Hero Section</h4>
+            <div class="field">
+              <label>Hero Heading</label>
+              <input type="text" id="sHeroHeading" class="input-field" placeholder="e.g. Handcrafted With Heart" />
+            </div>
+            <div class="field">
+              <label>Hero Subheading</label>
+              <input type="text" id="sHeroSubheading" class="input-field" placeholder="Subheading text…" />
+            </div>
+          </div>
+
+          <div class="settings-group">
+            <h4>Brand</h4>
+            <div class="field">
+              <label>WhatsApp Number</label>
+              <input type="text" id="sWhatsapp" class="input-field" placeholder="919182492525" />
+            </div>
+            <div class="field">
+              <label>Instagram Handle</label>
+              <input type="text" id="sInstagram" class="input-field" placeholder="@alvor_emb" />
+            </div>
+            <div class="field">
+              <label>Delivery Days</label>
+              <input type="text" id="sDeliveryDays" class="input-field" placeholder="e.g. 5-7" />
+            </div>
+          </div>
+
+          <div class="settings-group">
+            <h4>Announcement Bar</h4>
+            <div class="field">
+              <label>Text</label>
+              <input type="text" id="sAnnouncement" class="input-field" placeholder="e.g. Free delivery across AP!" />
+            </div>
+            <div class="field field-row">
+              <label>Show Bar</label>
+              <label class="toggle">
+                <input type="checkbox" id="sAnnouncementActive" />
+                <span class="toggle-track"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="settings-group">
+            <h4>About Text</h4>
+            <div class="field">
+              <label>Story</label>
+              <textarea id="sAboutText" class="input-field" rows="5" placeholder="Brand story…"></textarea>
+            </div>
+          </div>
+
+          <button class="btn-gold" id="btnSaveSettings">
+            <i class="fas fa-check"></i> Save Settings
+          </button>
+        </div>
+      </section>
+
+    </main><!-- /content -->
+  </div><!-- /main-wrap -->
+</div><!-- /adminApp -->
+
+<!-- ═══════════════════════════════════════════
+     PRODUCT MODAL
+════════════════════════════════════════════ -->
+<div id="productModal" class="modal-overlay" style="display:none">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="productModalTitle">Add Product</h3>
+      <button class="modal-close" onclick="closeProductModal()"><i class="fas fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="pId" />
+
+      <div class="field-grid">
+        <div class="field">
+          <label>Title *</label>
+          <input type="text" id="pTitle" class="input-field" placeholder="Product name" />
+        </div>
+        <div class="field">
+          <label>Category *</label>
+          <select id="pCategory" class="input-field">
+            <option value="">Select…</option>
+            <option value="Embroidery Art">Embroidery Art</option>
+            <option value="Framed Pieces">Framed Pieces</option>
+            <option value="Shop Decor">Shop Decor</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Price (₹) *</label>
+          <input type="number" id="pPrice" class="input-field" placeholder="0" min="0" />
+        </div>
+        <div class="field">
+          <label>Original Price (₹)</label>
+          <input type="number" id="pOriginalPrice" class="input-field" placeholder="0" min="0" />
+        </div>
+        <div class="field">
+          <label>Stock *</label>
+          <input type="number" id="pStock" class="input-field" placeholder="0" min="0" />
+        </div>
+        <div class="field">
+          <label>Est. Delivery Days</label>
+          <input type="text" id="pDeliveryDays" class="input-field" placeholder="e.g. 5-7" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Description</label>
+        <textarea id="pDescription" class="input-field" rows="3" placeholder="Full product description…"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Sizes <small>(comma separated)</small></label>
+        <input type="text" id="pSizes" class="input-field" placeholder="Small, Medium, Large" />
+      </div>
+
+      <div class="field">
+        <label>Tags</label>
+        <div class="tag-checkboxes">
+          <label class="check-label"><input type="checkbox" id="tagNew" value="new" /> New</label>
+          <label class="check-label"><input type="checkbox" id="tagBestseller" value="bestseller" /> Bestseller</label>
+          <label class="check-label"><input type="checkbox" id="tagFeatured" value="featured" /> Featured</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Images</label>
+        <input type="file" id="pImages" class="input-field" multiple accept="image/*" />
+        <div id="pImagePreview" class="image-preview-row"></div>
+      </div>
+
+      <div class="field field-row">
+        <label>Visible</label>
+        <label class="toggle">
+          <input type="checkbox" id="pVisible" checked />
+          <span class="toggle-track"></span>
+        </label>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-outline" onclick="closeProductModal()">Cancel</button>
+      <button class="btn-gold" id="btnSaveProduct">Save Product</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     ORDER DETAIL MODAL
+════════════════════════════════════════════ -->
+<div id="orderModal" class="modal-overlay" style="display:none">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="orderModalTitle">Order Detail</h3>
+      <button class="modal-close" onclick="closeOrderModal()"><i class="fas fa-xmark"></i></button>
+    </div>
+    <div class="modal-body" id="orderModalBody">
+      <!-- Filled by JS -->
+    </div>
+    <div class="modal-foot">
+      <button class="btn-outline" onclick="closeOrderModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     COUPON MODAL
+════════════════════════════════════════════ -->
+<div id="couponModal" class="modal-overlay" style="display:none">
+  <div class="modal modal--sm">
+    <div class="modal-head">
+      <h3>Add Coupon</h3>
+      <button class="modal-close" onclick="closeCouponModal()"><i class="fas fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="cId" />
+      <div class="field">
+        <label>Code *</label>
+        <input type="text" id="cCode" class="input-field" placeholder="e.g. ALVOR10" style="text-transform:uppercase" />
+      </div>
+      <div class="field-grid">
+        <div class="field">
+          <label>Discount %</label>
+          <input type="number" id="cDiscount" class="input-field" placeholder="10" min="1" max="100" />
+        </div>
+        <div class="field">
+          <label>Min Order (₹)</label>
+          <input type="number" id="cMinOrder" class="input-field" placeholder="500" min="0" />
+        </div>
+      </div>
+      <div class="field">
+        <label>Expiry Date</label>
+        <input type="date" id="cExpiry" class="input-field" />
+      </div>
+      <div class="field field-row">
+        <label>Active</label>
+        <label class="toggle">
+          <input type="checkbox" id="cActive" checked />
+          <span class="toggle-track"></span>
+        </label>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-outline" onclick="closeCouponModal()">Cancel</button>
+      <button class="btn-gold" id="btnSaveCoupon">Save Coupon</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     DELETE CONFIRM MODAL
+════════════════════════════════════════════ -->
+<div id="deleteModal" class="modal-overlay" style="display:none">
+  <div class="modal modal--sm">
+    <div class="modal-head">
+      <h3>Confirm Delete</h3>
+      <button class="modal-close" onclick="closeDeleteModal()"><i class="fas fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <p id="deleteMessage" style="color:var(--muted);font-size:14px;line-height:1.6"></p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-outline" onclick="closeDeleteModal()">Cancel</button>
+      <button class="btn-danger" id="btnConfirmDelete">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast"></div>
+
+<!-- Firebase SDK -->
+<script type="module">
+  import { initializeApp }            from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getFirestore, collection, getDocs, doc, addDoc, updateDoc, deleteDoc, query, where, orderBy, limit, serverTimestamp, getDoc }
+    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+  import { getStorage, ref, uploadBytes, getDownloadURL }
+    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
+  import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
+    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+  /* ─── CONFIG — replace with your Firebase project ─── */
+  const firebaseConfig = {
+    apiKey:            "YOUR_API_KEY",
+    authDomain:        "YOUR_AUTH_DOMAIN",
+    projectId:         "YOUR_PROJECT_ID",
+    storageBucket:     "YOUR_STORAGE_BUCKET",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId:             "YOUR_APP_ID"
+  };
+
+  const ADMIN_EMAIL = "YOUR_ADMIN@gmail.com"; // ← replace
+
+  /* ─── Init ─── */
+  const app  = initializeApp(firebaseConfig);
+  const db   = getFirestore(app);
+  const storage = getStorage(app);
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+
+  /* ─── Auth ─── */
+  onAuthStateChanged(auth, user => {
+    if (user && user.email === ADMIN_EMAIL) {
+      showApp(user);
+    } else if (user) {
+      showToast("Access denied.", "error");
+      signOut(auth);
+      showLogin();
+    } else {
+      showLogin();
+    }
+  });
+
+  document.getElementById("btnGoogleLogin").onclick = async () => {
+    try { await signInWithPopup(auth, provider); }
+    catch(e) { showLoginError(e.message); }
+  };
+
+  document.getElementById("btnLogout").onclick = () => signOut(auth);
+
+  function showLogin() {
+    document.getElementById("loginScreen").style.display = "flex";
+    document.getElementById("adminApp").style.display    = "none";
+  }
+
+  function showApp(user) {
+    document.getElementById("loginScreen").style.display = "none";
+    document.getElementById("adminApp").style.display    = "flex";
+    document.getElementById("userAvatar").src = user.photoURL || "";
+    document.getElementById("userName").textContent = user.displayName?.split(" ")[0] || "";
+    loadDashboard();
+  }
+
+  function showLoginError(msg) {
+    const el = document.getElementById("loginError");
+    el.textContent = msg;
+    el.style.display = "block";
+  }
+
+  /* ─── Tab Navigation ─── */
+  window.openTab = function(name) {
+    document.querySelectorAll(".nav-item").forEach(el => el.classList.remove("active"));
+    document.querySelector(`[data-tab="${name}"]`)?.classList.add("active");
+    document.querySelectorAll(".tab-panel").forEach(el => el.classList.remove("active"));
+    document.getElementById(`tab-${name}`).classList.add("active");
+    document.getElementById("topbarTitle").textContent =
+      name.charAt(0).toUpperCase() + name.slice(1);
+    if (name === "dashboard") loadDashboard();
+    if (name === "products")  loadProducts();
+    if (name === "orders")    loadOrders();
+    if (name === "customers") loadCustomers();
+    if (name === "coupons")   loadCoupons();
+    if (name === "settings")  loadSettings();
+  };
+
+  document.querySelectorAll(".nav-item[data-tab]").forEach(el => {
+    el.addEventListener("click", e => {
+      e.preventDefault();
+      openTab(el.dataset.tab);
+    });
+  });
+
+  document.getElementById("menuToggle").onclick = () =>
+    document.getElementById("sidebar").classList.toggle("open");
+
+  /* ─── Helpers ─── */
+  function formatPrice(n) { return "₹" + Number(n).toLocaleString("en-IN"); }
+  function formatDate(ts) {
+    if (!ts) return "—";
+    const d = ts.toDate ? ts.toDate() : new Date(ts);
+    return d.toLocaleDateString("en-IN", { day:"2-digit", month:"short", year:"numeric" });
+  }
+  function statusBadge(s) {
+    const map = { new:"badge-new", contacted:"badge-contacted", in_progress:"badge-progress",
+                  completed:"badge-done", cancelled:"badge-cancelled" };
+    return `<span class="badge ${map[s]||''}">${s||"new"}</span>`;
+  }
+
+  window.showToast = function(msg, type="success") {
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.className = `toast toast-${type} show`;
+    setTimeout(() => t.className = "toast", 2800);
+  };
+
+  /* ══════════════════════════════════════════
+     DASHBOARD
+  ══════════════════════════════════════════ */
+  async function loadDashboard() {
+    try {
+      const [prodSnap, orderSnap] = await Promise.all([
+        getDocs(collection(db, "products")),
+        getDocs(collection(db, "orders"))
+      ]);
+      const orders = orderSnap.docs.map(d => ({...d.data(), id: d.id}));
+      const today  = new Date(); today.setHours(0,0,0,0);
+      const week   = new Date(today); week.setDate(week.getDate()-7);
+      const todayOrders = orders.filter(o => o.createdAt?.toDate?.() >= today);
+      const weekOrders  = orders.filter(o => o.createdAt?.toDate?.() >= week);
+
+      document.getElementById("statProducts").textContent = prodSnap.size;
+      document.getElementById("statOrders").textContent   = orders.length;
+      document.getElementById("statToday").textContent    = todayOrders.length;
+      document.getElementById("statWeek").textContent     = weekOrders.length;
+
+      const recent = orders.sort((a,b)=>
+        (b.createdAt?.seconds||0)-(a.createdAt?.seconds||0)).slice(0,5);
+      document.getElementById("recentOrdersBody").innerHTML = recent.length
+        ? recent.map(o => `
+          <tr>
+            <td>${o.id}</td>
+            <td>${o.customerName||"—"}</td>
+            <td>${formatPrice(o.totalAmount||0)}</td>
+            <td>${statusBadge(o.status)}</td>
+            <td>${formatDate(o.createdAt)}</td>
+          </tr>`).join("")
+        : `<tr><td colspan="5" class="empty-row">No orders yet.</td></tr>`;
+    } catch(e) { showToast("Error loading dashboard","error"); }
+  }
+
+  /* ══════════════════════════════════════════
+     PRODUCTS
+  ══════════════════════════════════════════ */
+  let allProducts = [];
+
+  async function loadProducts() {
+    document.getElementById("productsBody").innerHTML = `<tr><td colspan="7" class="empty-row">Loading…</td></tr>`;
+    try {
+      const snap = await getDocs(collection(db, "products"));
+      allProducts = snap.docs.map(d => ({...d.data(), id:d.id}));
+      renderProducts(allProducts);
+    } catch(e) { showToast("Error loading products","error"); }
+  }
+
+  function renderProducts(list) {
+    document.getElementById("productsBody").innerHTML = list.length
+      ? list.map(p => `
+        <tr>
+          <td><img src="${p.mainImage||''}" class="thumb" onerror="this.style.display='none'" /></td>
+          <td>${p.title||"—"}</td>
+          <td>${p.category||"—"}</td>
+          <td>${formatPrice(p.price||0)}</td>
+          <td>${p.stock??0}</td>
+          <td>
+            <label class="toggle">
+              <input type="checkbox" ${p.visible?"checked":""} onchange="toggleVisible('${p.id}',this.checked)" />
+              <span class="toggle-track"></span>
+            </label>
+          </td>
+          <td class="actions">
+            <button class="btn-icon" onclick="editProduct('${p.id}')"><i class="fas fa-pen"></i></button>
+            <button class="btn-icon danger" onclick="confirmDelete('products','${p.id}','${p.title}')"><i class="fas fa-trash"></i></button>
+          </td>
+        </tr>`).join("")
+      : `<tr><td colspan="7" class="empty-row">No products found.</td></tr>`;
+  }
+
+  window.toggleVisible = async function(id, val) {
+    try {
+      await updateDoc(doc(db,"products",id), { visible: val });
+      showToast("Visibility updated");
+    } catch(e) { showToast("Error","error"); }
+  };
+
+  /* Product Modal */
+  window.openProductModal = function() {
+    document.getElementById("productModalTitle").textContent = "Add Product";
+    document.getElementById("pId").value = "";
+    ["pTitle","pPrice","pOriginalPrice","pStock","pDeliveryDays","pDescription","pSizes"].forEach(id => {
+      document.getElementById(id).value = "";
+    });
+    document.getElementById("pCategory").value = "";
+    document.getElementById("pVisible").checked = true;
+    ["tagNew","tagBestseller","tagFeatured"].forEach(id => document.getElementById(id).checked = false);
+    document.getElementById("pImagePreview").innerHTML = "";
+    document.getElementById("productModal").style.display = "flex";
+  };
+
+  window.editProduct = function(id) {
+    const p = allProducts.find(x => x.id === id);
+    if (!p) return;
+    document.getElementById("productModalTitle").textContent = "Edit Product";
+    document.getElementById("pId").value            = p.id;
+    document.getElementById("pTitle").value         = p.title||"";
+    document.getElementById("pCategory").value      = p.category||"";
+    document.getElementById("pPrice").value         = p.price||"";
+    document.getElementById("pOriginalPrice").value = p.originalPrice||"";
+    document.getElementById("pStock").value         = p.stock||"";
+    document.getElementById("pDeliveryDays").value  = p.estimatedDays||"";
+    document.getElementById("pDescription").value   = p.description||"";
+    document.getElementById("pSizes").value         = (p.sizes||[]).join(", ");
+    document.getElementById("pVisible").checked     = p.visible !== false;
+    ["tagNew","tagBestseller","tagFeatured"].forEach(id => {
+      document.getElementById(id).checked = (p.tags||[]).includes(id.replace("tag","").toLowerCase());
+    });
+    const prev = document.getElementById("pImagePreview");
+    prev.innerHTML = (p.images||[]).map(url =>
+      `<img src="${url}" class="preview-img" />`).join("");
+    document.getElementById("productModal").style.display = "flex";
+  };
+
+  window.closeProductModal = function() {
+    document.getElementById("productModal").style.display = "none";
+  };
+
+  document.getElementById("pImages").onchange = function() {
+    const prev = document.getElementById("pImagePreview");
+    prev.innerHTML = "";
+    [...this.files].forEach(f => {
+      const r = new FileReader();
+      r.onload = e => {
+        const img = document.createElement("img");
+        img.src = e.target.result;
+        img.className = "preview-img";
+        prev.appendChild(img);
+      };
+      r.readAsDataURL(f);
+    });
+  };
+
+  document.getElementById("btnSaveProduct").onclick = async function() {
+    const title    = document.getElementById("pTitle").value.trim();
+    const category = document.getElementById("pCategory").value;
+    const price    = parseFloat(document.getElementById("pPrice").value);
+    if (!title || !category || isNaN(price)) {
+      showToast("Fill required fields","error"); return;
+    }
+    this.disabled = true; this.textContent = "Saving…";
+    try {
+      const tags = ["tagNew","tagBestseller","tagFeatured"]
+        .filter(id => document.getElementById(id).checked)
+        .map(id => id.replace("tag","").toLowerCase());
+
+      let images = [];
+      const files = document.getElementById("pImages").files;
+      for (const file of files) {
+        const r = ref(storage, `products/${Date.now()}_${file.name}`);
+        await uploadBytes(r, file);
+        images.push(await getDownloadURL(r));
+      }
+
+      const data = {
+        title,
+        category,
+        price,
+        originalPrice: parseFloat(document.getElementById("pOriginalPrice").value)||0,
+        stock:         parseInt(document.getElementById("pStock").value)||0,
+        estimatedDays: document.getElementById("pDeliveryDays").value.trim(),
+        description:   document.getElementById("pDescription").value.trim(),
+        sizes:         document.getElementById("pSizes").value.split(",").map(s=>s.trim()).filter(Boolean),
+        tags,
+        visible:       document.getElementById("pVisible").checked,
+      };
+
+      const id = document.getElementById("pId").value;
+      if (id) {
+        if (images.length) { data.images = images; data.mainImage = images[0]; }
+        await updateDoc(doc(db,"products",id), data);
+        showToast("Product updated");
+      } else {
+        data.images    = images;
+        data.mainImage = images[0]||"";
+        data.createdAt = serverTimestamp();
+        await addDoc(collection(db,"products"), data);
+        showToast("Product added");
+      }
+      closeProductModal();
+      loadProducts();
+    } catch(e) { showToast("Error: "+e.message,"error"); }
+    finally { this.disabled=false; this.textContent="Save Product"; }
+  };
+
+  /* ══════════════════════════════════════════
+     ORDERS
+  ══════════════════════════════════════════ */
+  let allOrders = [];
+
+  async function loadOrders() {
+    document.getElementById("ordersBody").innerHTML = `<tr><td colspan="7" class="empty-row">Loading…</td></tr>`;
+    try {
+      const snap = await getDocs(collection(db,"orders"));
+      allOrders = snap.docs.map(d=>({...d.data(),id:d.id}))
+        .sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
+      renderOrders(allOrders);
+    } catch(e) { showToast("Error loading orders","error"); }
+  }
+
+  function renderOrders(list) {
+    document.getElementById("ordersBody").innerHTML = list.length
+      ? list.map(o => `
+        <tr>
+          <td>${o.id}</td>
+          <td>${o.customerName||"—"}</td>
+          <td>
+            <a href="https://wa.me/${o.customerPhone}" target="_blank" class="wa-link">
+              ${o.customerPhone||"—"}
+            </a>
+          </td>
+          <td>${formatPrice(o.totalAmount||0)}</td>
+          <td>
+            <select class="status-select" onchange="updateOrderStatus('${o.id}',this.value)">
+              ${["new","contacted","in_progress","completed","cancelled"].map(s=>
+                `<option value="${s}" ${o.status===s?"selected":""}>${s}</option>`
+              ).join("")}
+            </select>
+          </td>
+          <td>${formatDate(o.createdAt)}</td>
+          <td>
+            <button class="btn-icon" onclick="viewOrder('${o.id}')"><i class="fas fa-eye"></i></button>
+          </td>
+        </tr>`).join("")
+      : `<tr><td colspan="7" class="empty-row">No orders found.</td></tr>`;
+  }
+
+  /* Live search + filter */
+  document.getElementById("orderSearch").oninput = filterOrders;
+  document.getElementById("orderStatusFilter").onchange = filterOrders;
+
+  function filterOrders() {
+    const q  = document.getElementById("orderSearch").value.toLowerCase();
+    const st = document.getElementById("orderStatusFilter").value;
+    renderOrders(allOrders.filter(o =>
+      (!q || [o.id,o.customerName,o.customerPhone].some(v=>(v||"").toLowerCase().includes(q))) &&
+      (!st || o.status === st)
+    ));
+  }
+
+  window.updateOrderStatus = async function(id, status) {
+    try {
+      await updateDoc(doc(db,"orders",id), { status, updatedAt: serverTimestamp() });
+      showToast("Status updated");
+      const o = allOrders.find(x=>x.id===id);
+      if (o) o.status = status;
+    } catch(e) { showToast("Error","error"); }
+  };
+
+  window.viewOrder = function(id) {
+    const o = allOrders.find(x=>x.id===id);
+    if (!o) return;
+    document.getElementById("orderModalTitle").textContent = `Order ${o.id}`;
+    document.getElementById("orderModalBody").innerHTML = `
+      <div class="order-detail-grid">
+        <div class="od-row"><span>Customer</span><strong>${o.customerName||"—"}</strong></div>
+        <div class="od-row"><span>Phone</span><a href="https://wa.me/${o.customerPhone}" target="_blank" class="wa-link">${o.customerPhone||"—"}</a></div>
+        <div class="od-row"><span>Email</span><strong>${o.customerEmail||"—"}</strong></div>
+        <div class="od-row"><span>Address</span><strong>${o.deliveryArea||"—"}</strong></div>
+        <div class="od-row"><span>Status</span>${statusBadge(o.status)}</div>
+        <div class="od-row"><span>Total</span><strong>${formatPrice(o.totalAmount||0)}</strong></div>
+        <div class="od-row"><span>Date</span><strong>${formatDate(o.createdAt)}</strong></div>
+        ${o.notes?`<div class="od-row"><span>Notes</span><strong>${o.notes}</strong></div>`:""}
+      </div>
+      <h4 style="margin:16px 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted)">Items</h4>
+      <div class="order-items-list">
+        ${(o.items||[]).map(i=>`
+          <div class="order-item-row">
+            <span>${i.title||"Item"}</span>
+            <span>×${i.quantity||1}</span>
+            <span>${formatPrice((i.price||0)*(i.quantity||1))}</span>
+          </div>`).join("") || "<p style='color:var(--muted);font-size:13px'>No items data.</p>"}
+      </div>`;
+    document.getElementById("orderModal").style.display = "flex";
+  };
+
+  window.closeOrderModal = function() {
+    document.getElementById("orderModal").style.display = "none";
+  };
+
+  /* ══════════════════════════════════════════
+     CUSTOMERS
+  ══════════════════════════════════════════ */
+  async function loadCustomers() {
+    document.getElementById("customersBody").innerHTML = `<tr><td colspan="5" class="empty-row">Loading…</td></tr>`;
+    try {
+      const snap = await getDocs(collection(db,"customers"));
+      const list = snap.docs.map(d=>({...d.data(),id:d.id}));
+      document.getElementById("customersBody").innerHTML = list.length
+        ? list.map(c=>`
+          <tr>
+            <td>${c.name||"—"}</td>
+            <td>${c.phone||"—"}</td>
+            <td>${c.email||"—"}</td>
+            <td>${(c.orderHistory||[]).length}</td>
+            <td>${formatDate(c.createdAt)}</td>
+          </tr>`).join("")
+        : `<tr><td colspan="5" class="empty-row">No customers yet.</td></tr>`;
+    } catch(e) { showToast("Error loading customers","error"); }
+  }
+
+  /* ══════════════════════════════════════════
+     COUPONS
+  ══════════════════════════════════════════ */
+  let allCoupons = [];
+
+  async function loadCoupons() {
+    document.getElementById("couponsBody").innerHTML = `<tr><td colspan="6" class="empty-row">Loading…</td></tr>`;
+    try {
+      const snap = await getDocs(collection(db,"coupons"));
+      allCoupons = snap.docs.map(d=>({...d.data(),id:d.id}));
+      document.getElementById("couponsBody").innerHTML = allCoupons.length
+        ? allCoupons.map(c=>`
+          <tr>
+            <td><strong>${c.code}</strong></td>
+            <td>${c.discountPercent||0}%</td>
+            <td>${formatPrice(c.minOrder||0)}</td>
+            <td>${c.expiryDate||"—"}</td>
+            <td>${c.active
+              ? '<span class="badge badge-done">Active</span>'
+              : '<span class="badge badge-cancelled">Off</span>'}</td>
+            <td class="actions">
+              <button class="btn-icon danger" onclick="confirmDelete('coupons','${c.id}','${c.code}')">
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+          </tr>`).join("")
+        : `<tr><td colspan="6" class="empty-row">No coupons.</td></tr>`;
+    } catch(e) { showToast("Error loading coupons","error"); }
+  }
+
+  window.openCouponModal = function() {
+    ["cId","cCode","cDiscount","cMinOrder","cExpiry"].forEach(id =>
+      document.getElementById(id).value = "");
+    document.getElementById("cActive").checked = true;
+    document.getElementById("couponModal").style.display = "flex";
+  };
+
+  window.closeCouponModal = function() {
+    document.getElementById("couponModal").style.display = "none";
+  };
+
+  document.getElementById("btnSaveCoupon").onclick = async function() {
+    const code = document.getElementById("cCode").value.trim().toUpperCase();
+    if (!code) { showToast("Enter a code","error"); return; }
+    this.disabled = true;
+    try {
+      await addDoc(collection(db,"coupons"), {
+        code,
+        discountPercent: parseInt(document.getElementById("cDiscount").value)||0,
+        minOrder:        parseInt(document.getElementById("cMinOrder").value)||0,
+        expiryDate:      document.getElementById("cExpiry").value||"",
+        active:          document.getElementById("cActive").checked,
+      });
+      showToast("Coupon saved");
+      closeCouponModal();
+      loadCoupons();
+    } catch(e) { showToast("Error","error"); }
+    finally { this.disabled=false; }
+  };
+
+  /* ══════════════════════════════════════════
+     SETTINGS
+  ══════════════════════════════════════════ */
+  async function loadSettings() {
+    try {
+      const snap = await getDocs(collection(db,"settings"));
+      if (snap.empty) return;
+      const s = snap.docs[0].data();
+      document.getElementById("sHeroHeading").value      = s.heroHeading||"";
+      document.getElementById("sHeroSubheading").value   = s.heroSubheading||"";
+      document.getElementById("sWhatsapp").value         = s.whatsappNumber||"";
+      document.getElementById("sInstagram").value        = s.instagramHandle||"";
+      document.getElementById("sDeliveryDays").value     = s.deliveryDays||"";
+      document.getElementById("sAnnouncement").value     = s.announcementBar||"";
+      document.getElementById("sAnnouncementActive").checked = !!s.announcementActive;
+      document.getElementById("sAboutText").value        = s.aboutText||"";
+      document.getElementById("btnSaveSettings")._docId  = snap.docs[0].id;
+    } catch(e) { showToast("Error loading settings","error"); }
+  }
+
+  document.getElementById("btnSaveSettings").onclick = async function() {
+    this.disabled = true; this.textContent = "Saving…";
+    try {
+      const data = {
+        heroHeading:        document.getElementById("sHeroHeading").value.trim(),
+        heroSubheading:     document.getElementById("sHeroSubheading").value.trim(),
+        whatsappNumber:     document.getElementById("sWhatsapp").value.trim(),
+        instagramHandle:    document.getElementById("sInstagram").value.trim(),
+        deliveryDays:       document.getElementById("sDeliveryDays").value.trim(),
+        announcementBar:    document.getElementById("sAnnouncement").value.trim(),
+        announcementActive: document.getElementById("sAnnouncementActive").checked,
+        aboutText:          document.getElementById("sAboutText").value.trim(),
+      };
+      const id = this._docId;
+      if (id) {
+        await updateDoc(doc(db,"settings",id), data);
+      } else {
+        await addDoc(collection(db,"settings"), data);
+      }
+      showToast("Settings saved");
+    } catch(e) { showToast("Error: "+e.message,"error"); }
+    finally { this.disabled=false; this.textContent="Save Settings"; }
+  };
+
+  /* ══════════════════════════════════════════
+     DELETE
+  ══════════════════════════════════════════ */
+  window.confirmDelete = function(col, id, name) {
+    document.getElementById("deleteMessage").textContent =
+      `Delete "${name}"? This cannot be undone.`;
+    document.getElementById("btnConfirmDelete").onclick = async () => {
+      try {
+        await deleteDoc(doc(db, col, id));
+        showToast("Deleted");
+        closeDeleteModal();
+        if (col === "products") loadProducts();
+        if (col === "coupons")  loadCoupons();
+      } catch(e) { showToast("Error","error"); }
+    };
+    document.getElementById("deleteModal").style.display = "flex";
+  };
+
+  window.closeDeleteModal = function() {
+    document.getElementById("deleteModal").style.display = "none";
+  };
+
+  /* Close modals on overlay click */
+  document.querySelectorAll(".modal-overlay").forEach(el => {
+    el.addEventListener("click", e => {
+      if (e.target === el) el.style.display = "none";
+    });
+  });
+
+</script>
+</body>
+</html>

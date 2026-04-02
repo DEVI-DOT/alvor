@@ -1,0 +1,1929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="pageTitle">Product — ALVOR | Handcrafted Embroidery Art</title>
+  <meta name="description" id="pageDesc" content="Premium handcrafted embroidery art from ALVOR, Andhra Pradesh." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    /* ══════════════════════════════════════════════════════
+       CSS CUSTOM PROPERTIES
+    ══════════════════════════════════════════════════════ */
+    :root {
+      --color-primary: #C9A84C;
+      --color-primary-dark: #A8872E;
+      --color-primary-light: #E8D5A3;
+      --color-bg: #FDFAF5;
+      --color-bg-secondary: #F5F0E8;
+      --color-text: #1A1A1A;
+      --color-text-muted: #6B6560;
+      --color-border: #E8E0D0;
+      --color-success: #1D9E75;
+      --color-white: #FFFFFF;
+      --color-dark: #1A1A1A;
+      --color-dark-2: #2A2520;
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --space-1: 8px;  --space-2: 16px; --space-3: 24px;
+      --space-4: 32px; --space-5: 48px; --space-6: 64px;
+      --space-7: 96px; --space-8: 128px;
+      --radius-sm: 4px; --radius-md: 8px;
+      --radius-lg: 16px; --radius-full: 9999px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.10);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.14);
+      --shadow-xl: 0 20px 60px rgba(0,0,0,0.18);
+      --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+      --navbar-height: 72px;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       RESET & BASE
+    ══════════════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: var(--font-body); background: var(--color-bg); color: var(--color-text); line-height: 1.6; overflow-x: hidden; }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; border: none; background: none; font-family: var(--font-body); }
+    ul { list-style: none; }
+    input, select, textarea { font-family: var(--font-body); }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--color-bg-secondary); }
+    ::-webkit-scrollbar-thumb { background: var(--color-primary); border-radius: 3px; }
+
+    /* ══════════════════════════════════════════════════════
+       ANNOUNCEMENT BAR
+    ══════════════════════════════════════════════════════ */
+    .announcement-bar {
+      background: var(--color-primary); color: var(--color-dark);
+      text-align: center; padding: 10px var(--space-4);
+      font-size: 13px; font-weight: 500; letter-spacing: 0.04em;
+      position: relative; z-index: 1001;
+    }
+    .announcement-bar.hidden { display: none; }
+    .announcement-bar .close-btn {
+      position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+      width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;
+      border-radius: 50%; font-size: 14px; color: var(--color-dark); transition: background var(--transition);
+    }
+    .announcement-bar .close-btn:hover { background: rgba(0,0,0,0.1); }
+
+    /* ══════════════════════════════════════════════════════
+       NAVBAR
+    ══════════════════════════════════════════════════════ */
+    .navbar {
+      position: sticky; top: 0; z-index: 1000; height: var(--navbar-height);
+      display: flex; align-items: center; padding: 0 var(--space-4);
+      background: rgba(253,250,245,0.97); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+      transition: box-shadow var(--transition);
+    }
+    .navbar.scrolled { box-shadow: var(--shadow-md); }
+    .navbar-inner {
+      max-width: 1400px; width: 100%; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; gap: var(--space-3);
+    }
+    .navbar-logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .navbar-logo .logo-svg { width: 36px; height: 36px; }
+    .navbar-logo .brand-name { font-family: var(--font-heading); font-size: 22px; font-weight: 700; letter-spacing: 0.12em; color: var(--color-text); }
+    .navbar-links { display: flex; align-items: center; gap: var(--space-4); }
+    .navbar-links a {
+      font-size: 14px; font-weight: 500; letter-spacing: 0.05em;
+      color: var(--color-text); position: relative; padding-bottom: 2px;
+      transition: color var(--transition);
+    }
+    .navbar-links a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1.5px; background: var(--color-primary); transition: width var(--transition); }
+    .navbar-links a:hover::after { width: 100%; }
+    .navbar-links a:hover { color: var(--color-primary-dark); }
+    .navbar-actions { display: flex; align-items: center; gap: var(--space-2); }
+    .nav-icon-btn {
+      width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+      border-radius: var(--radius-full); font-size: 16px; color: var(--color-text);
+      transition: background var(--transition), color var(--transition); position: relative;
+    }
+    .nav-icon-btn:hover { background: var(--color-bg-secondary); color: var(--color-primary-dark); }
+    .cart-badge {
+      position: absolute; top: 4px; right: 4px; background: var(--color-primary); color: var(--color-dark);
+      font-size: 10px; font-weight: 700; width: 16px; height: 16px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav-order-btn {
+      display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px;
+      background: var(--color-primary); color: var(--color-dark); font-size: 13px; font-weight: 600;
+      letter-spacing: 0.04em; border-radius: var(--radius-full);
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+    .nav-order-btn:hover { background: var(--color-primary-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(201,168,76,0.35); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; width: 40px; height: 40px; align-items: center; justify-content: center; border-radius: var(--radius-md); transition: background var(--transition); }
+    .hamburger:hover { background: var(--color-bg-secondary); }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--color-text); border-radius: 2px; transition: transform var(--transition), opacity var(--transition); }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+
+    /* Mobile Drawer */
+    .mobile-drawer { position: fixed; top: 0; right: -100%; width: min(340px,90vw); height: 100vh; background: var(--color-bg); z-index: 1100; display: flex; flex-direction: column; padding: var(--space-4); transition: right 0.4s cubic-bezier(0.4,0,0.2,1); box-shadow: -8px 0 40px rgba(0,0,0,0.15); overflow-y: auto; }
+    .mobile-drawer.open { right: 0; }
+    .drawer-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 1099; opacity: 0; pointer-events: none; transition: opacity var(--transition); }
+    .drawer-overlay.active { opacity: 1; pointer-events: all; }
+    .drawer-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-5); padding-bottom: var(--space-3); border-bottom: 1px solid var(--color-border); }
+    .drawer-close { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-full); font-size: 18px; color: var(--color-text-muted); transition: background var(--transition); }
+    .drawer-close:hover { background: var(--color-bg-secondary); }
+    .drawer-nav { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+    .drawer-nav a { padding: 14px 12px; font-size: 16px; font-weight: 500; color: var(--color-text); border-radius: var(--radius-md); display: flex; align-items: center; gap: 12px; transition: background var(--transition), color var(--transition); }
+    .drawer-nav a i { width: 20px; color: var(--color-primary); }
+    .drawer-nav a:hover { background: var(--color-bg-secondary); color: var(--color-primary-dark); }
+    .drawer-actions { margin-top: var(--space-4); padding-top: var(--space-4); border-top: 1px solid var(--color-border); }
+    .drawer-whatsapp-btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px; background: #25D366; color: white; font-size: 15px; font-weight: 600; border-radius: var(--radius-md); transition: background var(--transition); }
+    .drawer-whatsapp-btn:hover { background: #1DA851; }
+
+    /* ══════════════════════════════════════════════════════
+       BUTTONS
+    ══════════════════════════════════════════════════════ */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 14px 28px; font-family: var(--font-body); font-size: 14px; font-weight: 600;
+      letter-spacing: 0.04em; border-radius: var(--radius-full);
+      transition: all var(--transition); cursor: pointer; border: 2px solid transparent;
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn-primary { background: var(--color-primary); color: var(--color-dark); border-color: var(--color-primary); }
+    .btn-primary:hover { background: var(--color-primary-dark); border-color: var(--color-primary-dark); box-shadow: 0 6px 20px rgba(201,168,76,0.4); transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: var(--color-text); border-color: var(--color-border); }
+    .btn-outline:hover { border-color: var(--color-text); background: var(--color-text); color: white; transform: translateY(-2px); }
+    .btn-whatsapp { background: #25D366; color: white; border-color: #25D366; }
+    .btn-whatsapp:hover { background: #1DA851; border-color: #1DA851; box-shadow: 0 6px 20px rgba(37,211,102,0.4); transform: translateY(-2px); }
+    .btn-icon { padding: 12px 20px; }
+    .btn-full { width: 100%; border-radius: var(--radius-md); }
+
+    /* ══════════════════════════════════════════════════════
+       BREADCRUMB
+    ══════════════════════════════════════════════════════ */
+    .breadcrumb-bar { background: var(--color-white); border-bottom: 1px solid var(--color-border); }
+    .breadcrumb {
+      max-width: 1300px; margin: 0 auto; padding: 14px var(--space-4);
+      display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--color-text-muted); flex-wrap: wrap;
+    }
+    .breadcrumb a { color: var(--color-text-muted); transition: color var(--transition); }
+    .breadcrumb a:hover { color: var(--color-primary-dark); }
+    .breadcrumb i { font-size: 9px; }
+    .breadcrumb .current { color: var(--color-text); font-weight: 500; }
+
+    /* ══════════════════════════════════════════════════════
+       PAGE SKELETON (loading state)
+    ══════════════════════════════════════════════════════ */
+    .skeleton {
+      background: linear-gradient(90deg, var(--color-bg-secondary) 25%, #EDE8DE 50%, var(--color-bg-secondary) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+      border-radius: var(--radius-md);
+    }
+    @keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+
+    /* ══════════════════════════════════════════════════════
+       PRODUCT SECTION WRAPPER
+    ══════════════════════════════════════════════════════ */
+    .product-section {
+      max-width: 1300px; margin: 0 auto;
+      padding: var(--space-5) var(--space-4);
+    }
+    .product-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-6);
+      align-items: start;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       LEFT COLUMN — IMAGE GALLERY
+    ══════════════════════════════════════════════════════ */
+    .gallery-col { position: sticky; top: calc(var(--navbar-height) + 20px); }
+
+    /* Main image */
+    .gallery-main {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--color-bg-secondary);
+      aspect-ratio: 4/5;
+      cursor: zoom-in;
+      border: 1px solid var(--color-border);
+    }
+    .gallery-main img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.4s ease;
+      display: block;
+    }
+    .gallery-main:hover img { transform: scale(1.04); }
+    .gallery-main .product-placeholder-large {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 16px;
+      background: linear-gradient(135deg, #F5F0E8, #EDE5D5);
+    }
+    .gallery-main .product-placeholder-large i { font-size: 64px; color: var(--color-primary); opacity: 0.4; }
+    .gallery-main .product-placeholder-large span { font-family: var(--font-heading); font-size: 20px; color: var(--color-text-muted); letter-spacing: 0.15em; }
+
+    /* Gallery badge */
+    .gallery-badge {
+      position: absolute; top: 16px; left: 16px;
+      padding: 5px 12px; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase; border-radius: var(--radius-full); z-index: 2;
+    }
+    .badge-new { background: var(--color-primary); color: var(--color-dark); }
+    .badge-bestseller { background: var(--color-dark); color: var(--color-primary); }
+    .badge-sale { background: #E53935; color: white; }
+
+    /* Gallery share btn */
+    .gallery-share-row {
+      position: absolute; top: 16px; right: 16px;
+      display: flex; flex-direction: column; gap: 8px; z-index: 2;
+    }
+    .gallery-action-btn {
+      width: 38px; height: 38px;
+      background: rgba(255,255,255,0.92); backdrop-filter: blur(6px);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 15px; color: var(--color-text-muted);
+      transition: all var(--transition); box-shadow: var(--shadow-sm);
+    }
+    .gallery-action-btn:hover { background: white; color: var(--color-primary-dark); box-shadow: var(--shadow-md); }
+    .gallery-action-btn.wishlisted { color: #E53935; }
+
+    /* Zoom indicator */
+    .zoom-hint {
+      position: absolute; bottom: 14px; right: 14px;
+      background: rgba(0,0,0,0.55); color: white;
+      font-size: 11px; padding: 4px 10px; border-radius: var(--radius-full);
+      letter-spacing: 0.06em; pointer-events: none;
+      opacity: 0; transition: opacity var(--transition);
+    }
+    .gallery-main:hover .zoom-hint { opacity: 1; }
+
+    /* Thumbnails */
+    .gallery-thumbs {
+      display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap;
+    }
+    .gallery-thumb {
+      width: 72px; height: 72px; border-radius: var(--radius-md);
+      overflow: hidden; cursor: pointer; flex-shrink: 0;
+      border: 2px solid var(--color-border);
+      transition: border-color var(--transition), transform var(--transition);
+      background: var(--color-bg-secondary);
+    }
+    .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .gallery-thumb.active { border-color: var(--color-primary); }
+    .gallery-thumb:hover { border-color: var(--color-primary-dark); transform: translateY(-2px); }
+    .gallery-thumb .thumb-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #EDE5D5, #E0D5C0);
+    }
+    .gallery-thumb .thumb-placeholder i { font-size: 22px; color: var(--color-primary); opacity: 0.5; }
+
+    /* ══════════════════════════════════════════════════════
+       RIGHT COLUMN — PRODUCT INFO
+    ══════════════════════════════════════════════════════ */
+    .info-col { display: flex; flex-direction: column; gap: var(--space-3); }
+
+    /* Category tag */
+    .product-category-tag {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--color-primary-dark);
+    }
+
+    /* Title */
+    .product-title {
+      font-family: var(--font-heading);
+      font-size: clamp(24px, 3.5vw, 36px);
+      font-weight: 600; color: var(--color-text); line-height: 1.18;
+    }
+
+    /* Ratings row */
+    .product-ratings {
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    }
+    .stars-row { display: flex; align-items: center; gap: 3px; }
+    .stars-row i { font-size: 14px; color: var(--color-primary); }
+    .rating-number { font-size: 14px; font-weight: 600; color: var(--color-text); }
+    .review-link {
+      font-size: 13px; color: var(--color-primary-dark); text-decoration: underline;
+      cursor: pointer; transition: color var(--transition);
+    }
+    .review-link:hover { color: var(--color-primary); }
+    .rating-divider { width: 1px; height: 14px; background: var(--color-border); }
+    .stock-indicator {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 13px; font-weight: 500;
+    }
+    .stock-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .stock-dot.in { background: var(--color-success); }
+    .stock-dot.low { background: #F59E0B; }
+    .stock-dot.out { background: #E53935; }
+
+    /* Price */
+    .product-price-row {
+      display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+      padding: var(--space-2) var(--space-3);
+      background: var(--color-bg-secondary);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+    }
+    .price-main { font-family: var(--font-heading); font-size: 34px; font-weight: 700; color: var(--color-primary-dark); }
+    .price-orig { font-size: 18px; color: var(--color-text-muted); text-decoration: line-through; }
+    .price-discount-badge {
+      padding: 4px 12px; background: rgba(229,57,53,0.1); color: #E53935;
+      font-size: 13px; font-weight: 700; border-radius: var(--radius-full);
+      border: 1px solid rgba(229,57,53,0.2);
+    }
+
+    /* Short desc */
+    .product-short-desc { font-size: 15px; color: var(--color-text-muted); line-height: 1.75; }
+
+    /* Divider */
+    .info-divider { height: 1px; background: var(--color-border); }
+
+    /* Size selector */
+    .selector-label {
+      font-size: 13px; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--color-text); margin-bottom: 10px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .size-guide-link { font-size: 12px; font-weight: 500; color: var(--color-primary-dark); text-decoration: underline; text-transform: none; letter-spacing: 0; cursor: pointer; }
+    .size-options { display: flex; gap: 8px; flex-wrap: wrap; }
+    .size-btn {
+      padding: 8px 18px; border-radius: var(--radius-full);
+      border: 1.5px solid var(--color-border); font-size: 14px; font-weight: 500;
+      color: var(--color-text-muted); transition: all var(--transition);
+      min-width: 60px; text-align: center;
+    }
+    .size-btn:hover:not(.unavailable) { border-color: var(--color-primary); color: var(--color-primary-dark); }
+    .size-btn.active { background: var(--color-dark); color: var(--color-primary); border-color: var(--color-dark); font-weight: 600; }
+    .size-btn.unavailable { opacity: 0.35; cursor: not-allowed; text-decoration: line-through; }
+
+    /* Quantity selector */
+    .qty-row { display: flex; align-items: center; gap: 12px; }
+    .qty-selector {
+      display: flex; align-items: center;
+      border: 1.5px solid var(--color-border); border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+    .qty-btn {
+      width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: var(--color-text-muted);
+      transition: background var(--transition), color var(--transition);
+    }
+    .qty-btn:hover { background: var(--color-bg-secondary); color: var(--color-text); }
+    .qty-input {
+      width: 52px; height: 42px; text-align: center; border: none; border-left: 1.5px solid var(--color-border); border-right: 1.5px solid var(--color-border);
+      font-size: 16px; font-weight: 600; color: var(--color-text); background: var(--color-white);
+      outline: none;
+    }
+    .qty-label { font-size: 13px; color: var(--color-text-muted); }
+
+    /* Delivery estimate */
+    .delivery-box {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 14px var(--space-3);
+      background: rgba(29,158,117,0.07);
+      border: 1px solid rgba(29,158,117,0.2);
+      border-radius: var(--radius-md);
+    }
+    .delivery-box i { font-size: 20px; color: var(--color-success); margin-top: 2px; flex-shrink: 0; }
+    .delivery-title { font-size: 14px; font-weight: 600; color: var(--color-success); margin-bottom: 2px; }
+    .delivery-sub { font-size: 13px; color: var(--color-text-muted); }
+
+    /* CTA buttons */
+    .cta-buttons { display: flex; flex-direction: column; gap: 10px; }
+    .cta-buttons .btn { border-radius: var(--radius-md); font-size: 15px; padding: 15px 24px; }
+
+    /* Share row */
+    .share-row {
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    }
+    .share-label { font-size: 13px; color: var(--color-text-muted); font-weight: 500; }
+    .share-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 14px; border-radius: var(--radius-full);
+      border: 1px solid var(--color-border);
+      font-size: 12px; font-weight: 600; color: var(--color-text-muted);
+      transition: all var(--transition);
+    }
+    .share-btn:hover { border-color: var(--color-primary); color: var(--color-primary-dark); background: var(--color-bg-secondary); }
+    .share-btn.whatsapp:hover { background: #25D366; color: white; border-color: #25D366; }
+    .share-btn.instagram:hover { background: #E1306C; color: white; border-color: #E1306C; }
+    .share-btn.copy:hover { background: var(--color-dark); color: white; border-color: var(--color-dark); }
+
+    /* Trust badges */
+    .trust-badges {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      padding: var(--space-3);
+      background: var(--color-bg-secondary);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+    }
+    .trust-badge {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      text-align: center;
+    }
+    .trust-badge i { font-size: 20px; color: var(--color-primary); }
+    .trust-badge span { font-size: 11px; font-weight: 600; color: var(--color-text-muted); line-height: 1.3; letter-spacing: 0.02em; }
+
+    /* ══════════════════════════════════════════════════════
+       TABS SECTION (below fold)
+    ══════════════════════════════════════════════════════ */
+    .tabs-section { max-width: 1300px; margin: 0 auto; padding: 0 var(--space-4) var(--space-5); }
+
+    .tabs-header {
+      display: flex; gap: 0;
+      border-bottom: 2px solid var(--color-border);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .tabs-header::-webkit-scrollbar { display: none; }
+
+    .tab-btn {
+      padding: 14px var(--space-3); font-size: 14px; font-weight: 600;
+      letter-spacing: 0.04em; color: var(--color-text-muted);
+      border-bottom: 2px solid transparent; margin-bottom: -2px;
+      white-space: nowrap; transition: color var(--transition), border-color var(--transition);
+    }
+    .tab-btn:hover { color: var(--color-primary-dark); }
+    .tab-btn.active { color: var(--color-primary-dark); border-bottom-color: var(--color-primary); }
+
+    .tab-panel { display: none; padding: var(--space-5) 0; }
+    .tab-panel.active { display: block; }
+
+    /* Description tab */
+    .product-full-desc {
+      font-size: 15px; color: var(--color-text-muted); line-height: 1.85;
+      max-width: 720px;
+    }
+    .product-full-desc p { margin-bottom: 16px; }
+    .product-full-desc h3 { font-family: var(--font-heading); font-size: 20px; color: var(--color-text); margin-bottom: 12px; margin-top: var(--space-3); }
+    .product-detail-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+    .product-detail-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--color-text-muted); }
+    .product-detail-list li i { color: var(--color-primary); margin-top: 2px; flex-shrink: 0; }
+
+    /* Size guide tab */
+    .size-guide-table {
+      width: 100%; border-collapse: collapse;
+      font-size: 14px; max-width: 600px;
+    }
+    .size-guide-table th {
+      background: var(--color-dark); color: var(--color-primary);
+      padding: 12px 16px; text-align: left;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .size-guide-table td {
+      padding: 12px 16px; border-bottom: 1px solid var(--color-border);
+      color: var(--color-text-muted); vertical-align: top;
+    }
+    .size-guide-table tr:nth-child(even) td { background: var(--color-bg-secondary); }
+    .size-guide-note {
+      font-size: 13px; color: var(--color-text-muted);
+      margin-top: 16px; padding: 12px 16px;
+      background: rgba(201,168,76,0.07); border-radius: var(--radius-md);
+      border-left: 3px solid var(--color-primary);
+    }
+
+    /* Delivery tab */
+    .delivery-steps { display: flex; flex-direction: column; gap: var(--space-3); max-width: 580px; }
+    .delivery-step {
+      display: flex; align-items: flex-start; gap: var(--space-2);
+    }
+    .step-num {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--color-primary); color: var(--color-dark);
+      font-size: 14px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .step-content-title { font-size: 15px; font-weight: 600; color: var(--color-text); margin-bottom: 2px; }
+    .step-content-desc { font-size: 14px; color: var(--color-text-muted); line-height: 1.6; }
+    .delivery-info-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3);
+      margin-bottom: var(--space-4);
+    }
+    .delivery-info-card {
+      padding: var(--space-3); background: var(--color-white);
+      border: 1px solid var(--color-border); border-radius: var(--radius-md); text-align: center;
+    }
+    .delivery-info-card i { font-size: 24px; color: var(--color-primary); margin-bottom: 8px; }
+    .delivery-info-card .d-title { font-size: 14px; font-weight: 600; color: var(--color-text); margin-bottom: 4px; }
+    .delivery-info-card .d-sub { font-size: 13px; color: var(--color-text-muted); }
+
+    /* Reviews tab */
+    .reviews-summary {
+      display: grid; grid-template-columns: auto 1fr;
+      gap: var(--space-4); align-items: center;
+      padding: var(--space-4);
+      background: var(--color-white); border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg); margin-bottom: var(--space-4);
+    }
+    .reviews-big-score {
+      text-align: center;
+      padding: 0 var(--space-3);
+      border-right: 1px solid var(--color-border);
+    }
+    .big-rating { font-family: var(--font-heading); font-size: 56px; font-weight: 700; color: var(--color-primary-dark); line-height: 1; }
+    .big-stars { display: flex; gap: 4px; justify-content: center; margin: 6px 0; }
+    .big-stars i { font-size: 18px; color: var(--color-primary); }
+    .big-count { font-size: 13px; color: var(--color-text-muted); }
+    .reviews-breakdown { display: flex; flex-direction: column; gap: 8px; }
+    .breakdown-row { display: flex; align-items: center; gap: 10px; }
+    .breakdown-label { font-size: 13px; color: var(--color-text-muted); white-space: nowrap; width: 36px; text-align: right; }
+    .breakdown-bar { flex: 1; height: 8px; background: var(--color-bg-secondary); border-radius: var(--radius-full); overflow: hidden; }
+    .breakdown-fill { height: 100%; background: var(--color-primary); border-radius: var(--radius-full); transition: width 0.8s ease; }
+    .breakdown-count { font-size: 12px; color: var(--color-text-muted); width: 20px; }
+
+    /* Write review */
+    .write-review-toggle {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: var(--space-4);
+    }
+    .write-review-form {
+      background: var(--color-white); border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg); padding: var(--space-4);
+      margin-bottom: var(--space-4); display: none;
+    }
+    .write-review-form.open { display: block; }
+    .form-label { font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 6px; display: block; }
+    .form-input {
+      width: 100%; padding: 10px 14px;
+      border: 1.5px solid var(--color-border); border-radius: var(--radius-md);
+      font-size: 14px; color: var(--color-text); background: var(--color-bg);
+      transition: border-color var(--transition);
+    }
+    .form-input:focus { outline: none; border-color: var(--color-primary); }
+    .form-textarea { min-height: 100px; resize: vertical; }
+    .star-select { display: flex; gap: 8px; margin-bottom: var(--space-3); }
+    .star-select i { font-size: 24px; color: var(--color-border); cursor: pointer; transition: color var(--transition); }
+    .star-select i.selected, .star-select i:hover, .star-select i.hovered { color: var(--color-primary); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2); margin-bottom: var(--space-2); }
+
+    /* Individual reviews */
+    .reviews-list { display: flex; flex-direction: column; gap: var(--space-3); }
+    .review-card {
+      background: var(--color-white); border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg); padding: var(--space-3);
+    }
+    .review-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: var(--space-2); }
+    .reviewer { display: flex; align-items: center; gap: 12px; }
+    .reviewer-avatar {
+      width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-heading); font-size: 17px; font-weight: 600; color: var(--color-dark);
+    }
+    .reviewer-name { font-size: 14px; font-weight: 600; color: var(--color-text); }
+    .reviewer-date { font-size: 12px; color: var(--color-text-muted); }
+    .review-stars { display: flex; gap: 3px; }
+    .review-stars i { font-size: 13px; color: var(--color-primary); }
+    .review-text { font-size: 14px; color: var(--color-text-muted); line-height: 1.75; }
+    .reviews-empty {
+      text-align: center; padding: var(--space-5);
+      font-size: 15px; color: var(--color-text-muted);
+    }
+    .reviews-empty i { font-size: 40px; color: var(--color-border); display: block; margin-bottom: 12px; }
+
+    /* ══════════════════════════════════════════════════════
+       RECENTLY VIEWED
+    ══════════════════════════════════════════════════════ */
+    .recently-section, .related-section {
+      max-width: 1300px; margin: 0 auto;
+      padding: 0 var(--space-4) var(--space-7);
+    }
+    .section-heading-row {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: var(--space-4);
+    }
+    .section-heading {
+      font-family: var(--font-heading); font-size: 26px; font-weight: 600; color: var(--color-text);
+    }
+    .section-heading-link { font-size: 14px; font-weight: 500; color: var(--color-primary-dark); }
+    .section-heading-link:hover { text-decoration: underline; }
+
+    /* Ornament */
+    .ornament-divider {
+      display: flex; align-items: center; gap: var(--space-2);
+      margin-bottom: var(--space-4);
+    }
+    .ornament-divider::before, .ornament-divider::after { content: ''; flex: 1; height: 1px; background: var(--color-border); }
+    .ornament-divider i { font-size: 12px; color: var(--color-primary); }
+
+    /* Mini product cards */
+    .mini-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-3); }
+
+    .mini-card {
+      background: var(--color-white); border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg); overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .mini-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+    .mini-card-image {
+      aspect-ratio: 1; overflow: hidden; background: var(--color-bg-secondary);
+      position: relative; display: block;
+    }
+    .mini-card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .mini-card:hover .mini-card-image img { transform: scale(1.06); }
+    .mini-card-image .product-placeholder {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 8px; background: linear-gradient(135deg, #F5F0E8, #EDE5D5);
+    }
+    .mini-card-image .product-placeholder i { font-size: 28px; color: var(--color-primary); opacity: 0.4; }
+    .mini-card-image .product-placeholder span { font-size: 10px; color: var(--color-text-muted); letter-spacing: 0.1em; }
+    .mini-card-body { padding: 12px; }
+    .mini-card-title { font-family: var(--font-heading); font-size: 14px; font-weight: 500; color: var(--color-text); margin-bottom: 4px; line-height: 1.3; }
+    .mini-card-price { font-size: 15px; font-weight: 700; color: var(--color-primary-dark); margin-bottom: 8px; }
+    .mini-card-btn { width: 100%; padding: 8px; background: var(--color-bg-secondary); color: var(--color-text); font-size: 12px; font-weight: 600; border-radius: var(--radius-md); transition: background var(--transition), color var(--transition); }
+    .mini-card-btn:hover { background: var(--color-primary); color: var(--color-dark); }
+
+    /* ══════════════════════════════════════════════════════
+       SIZE GUIDE MODAL
+    ══════════════════════════════════════════════════════ */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+      z-index: 2000; display: flex; align-items: center; justify-content: center;
+      padding: var(--space-4); opacity: 0; pointer-events: none;
+      transition: opacity var(--transition);
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal-box {
+      background: var(--color-white); border-radius: var(--radius-lg);
+      max-width: 560px; width: 100%; max-height: 85vh; overflow-y: auto;
+      padding: var(--space-4);
+      transform: scale(0.95) translateY(16px);
+      transition: transform var(--transition);
+      position: relative;
+    }
+    .modal-overlay.open .modal-box { transform: scale(1) translateY(0); }
+    .modal-close-btn {
+      position: absolute; top: 16px; right: 16px;
+      width: 34px; height: 34px; border-radius: 50%;
+      background: var(--color-bg-secondary);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; color: var(--color-text-muted);
+      transition: background var(--transition);
+    }
+    .modal-close-btn:hover { background: var(--color-border); }
+    .modal-title { font-family: var(--font-heading); font-size: 22px; font-weight: 600; color: var(--color-text); margin-bottom: var(--space-3); }
+
+    /* ══════════════════════════════════════════════════════
+       TOAST
+    ══════════════════════════════════════════════════════ */
+    .toast-container { position: fixed; bottom: 100px; right: 28px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
+    .toast { padding: 12px 18px; border-radius: var(--radius-md); font-size: 14px; font-weight: 500; box-shadow: var(--shadow-lg); opacity: 0; transform: translateX(20px); transition: all 0.3s ease; pointer-events: all; max-width: 300px; display: flex; align-items: center; gap: 10px; }
+    .toast.show { opacity: 1; transform: translateX(0); }
+    .toast-success { background: var(--color-success); color: white; }
+    .toast-error { background: #E53935; color: white; }
+    .toast-info { background: var(--color-dark); color: white; }
+
+    /* ══════════════════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════════════════ */
+    .footer { background: var(--color-dark); color: rgba(255,255,255,0.75); padding: var(--space-7) 0 0; }
+    .footer-grid { max-width: 1300px; margin: 0 auto; padding: 0 var(--space-4) var(--space-6); display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--space-5); border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .footer-brand .brand-name { font-family: var(--font-heading); font-size: 24px; font-weight: 700; letter-spacing: 0.12em; color: var(--color-white); margin-bottom: 4px; }
+    .footer-tagline { font-size: 13px; color: var(--color-primary); letter-spacing: 0.06em; font-style: italic; margin-bottom: var(--space-3); }
+    .footer-brand-desc { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.55); margin-bottom: var(--space-4); max-width: 280px; }
+    .footer-social { display: flex; gap: 10px; }
+    .footer-social-btn { width: 38px; height: 38px; border-radius: var(--radius-md); background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 16px; color: rgba(255,255,255,0.6); transition: all var(--transition); }
+    .footer-social-btn:hover { background: var(--color-primary); border-color: var(--color-primary); color: var(--color-dark); transform: translateY(-2px); }
+    .footer-delivery-note { display: flex; align-items: center; gap: 8px; font-size: 12px; color: rgba(255,255,255,0.35); margin-top: var(--space-3); padding: 10px 14px; background: rgba(255,255,255,0.04); border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,0.06); }
+    .footer-delivery-note i { color: var(--color-primary); }
+    .footer-col-title { font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-white); margin-bottom: var(--space-3); }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 14px; color: rgba(255,255,255,0.55); transition: color var(--transition); }
+    .footer-links a:hover { color: var(--color-primary); }
+    .footer-contact-item { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: rgba(255,255,255,0.55); margin-bottom: 12px; }
+    .footer-contact-item i { color: var(--color-primary); margin-top: 2px; flex-shrink: 0; }
+    .footer-whatsapp-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: #25D366; color: white; font-size: 13px; font-weight: 600; border-radius: var(--radius-md); transition: background var(--transition), transform var(--transition); }
+    .footer-whatsapp-btn:hover { background: #1DA851; transform: translateY(-2px); }
+    .footer-bottom { max-width: 1300px; margin: 0 auto; padding: var(--space-3) var(--space-4); display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); flex-wrap: wrap; }
+    .footer-bottom-copy { font-size: 12px; color: rgba(255,255,255,0.3); }
+    .footer-bottom-links { display: flex; gap: var(--space-3); }
+    .footer-bottom-links a { font-size: 12px; color: rgba(255,255,255,0.3); transition: color var(--transition); }
+    .footer-bottom-links a:hover { color: var(--color-primary); }
+
+    /* Floating WhatsApp */
+    .float-whatsapp { position: fixed; bottom: 28px; right: 28px; width: 56px; height: 56px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; color: white; box-shadow: 0 4px 20px rgba(37,211,102,0.45); z-index: 999; transition: transform var(--transition), box-shadow var(--transition); animation: waPulse 3s ease-in-out infinite; }
+    .float-whatsapp:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.55); animation: none; }
+    @keyframes waPulse { 0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,0.45); } 50% { box-shadow: 0 4px 20px rgba(37,211,102,0.45), 0 0 0 10px rgba(37,211,102,0.08); } }
+
+    /* ══════════════════════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .product-layout { grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+      .gallery-col { position: static; }
+      .mini-grid { grid-template-columns: repeat(3, 1fr); }
+      .trust-badges { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+    }
+    @media (max-width: 900px) {
+      .navbar-links { display: none; }
+      .nav-order-btn { display: none; }
+      .hamburger { display: flex; }
+      .delivery-info-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .product-layout { grid-template-columns: 1fr; }
+      .gallery-col { position: static; }
+      .mini-grid { grid-template-columns: repeat(2, 1fr); }
+      .reviews-summary { grid-template-columns: 1fr; }
+      .reviews-big-score { border-right: none; border-bottom: 1px solid var(--color-border); padding-bottom: var(--space-3); }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .product-section { padding: var(--space-3) var(--space-2); }
+      .tabs-section, .recently-section, .related-section { padding-left: var(--space-2); padding-right: var(--space-2); }
+      .mini-grid { grid-template-columns: repeat(2, 1fr); gap: var(--space-2); }
+      .trust-badges { grid-template-columns: repeat(2, 1fr); }
+      .delivery-info-grid { grid-template-columns: 1fr; }
+      .float-whatsapp { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── ANNOUNCEMENT BAR ──────────────────────────────── -->
+  <div class="announcement-bar" id="announcementBar">
+    <span id="announcementText">🎉 Free delivery across Andhra Pradesh &nbsp;·&nbsp; Custom orders welcome!</span>
+    <button class="close-btn" onclick="dismissAnnouncement()" aria-label="Dismiss"><i class="fas fa-times"></i></button>
+  </div>
+
+  <!-- ── NAVBAR ────────────────────────────────────────── -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-logo">
+        <svg class="logo-svg" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <polygon points="20,2 24,14 36,14 27,22 31,34 20,27 9,34 13,22 4,14 16,14" fill="#C9A84C" opacity="0.95"/>
+          <circle cx="20" cy="20" r="5" fill="none" stroke="#C9A84C" stroke-width="1.2"/>
+          <circle cx="20" cy="20" r="2" fill="#A8872E"/>
+        </svg>
+        <span class="brand-name">ALVOR</span>
+      </a>
+      <ul class="navbar-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="navbar-actions">
+        <a href="shop.html" class="nav-icon-btn" aria-label="Search"><i class="fas fa-search"></i></a>
+        <a href="account.html" class="nav-icon-btn" aria-label="Wishlist"><i class="far fa-heart"></i></a>
+        <a href="account.html" class="nav-icon-btn" aria-label="Account"><i class="far fa-user"></i></a>
+        <a href="cart.html" class="nav-icon-btn" aria-label="Cart">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="cart-badge" id="cartBadge">0</span>
+        </a>
+        <a href="https://wa.me/919182492525" target="_blank" class="nav-order-btn"><i class="fab fa-whatsapp"></i> Order Now</a>
+        <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="drawer-header">
+      <a href="index.html" class="navbar-logo">
+        <svg class="logo-svg" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <polygon points="20,2 24,14 36,14 27,22 31,34 20,27 9,34 13,22 4,14 16,14" fill="#C9A84C" opacity="0.95"/>
+          <circle cx="20" cy="20" r="5" fill="none" stroke="#C9A84C" stroke-width="1.2"/>
+          <circle cx="20" cy="20" r="2" fill="#A8872E"/>
+        </svg>
+        <span class="brand-name">ALVOR</span>
+      </a>
+      <button class="drawer-close" onclick="closeDrawer()"><i class="fas fa-times"></i></button>
+    </div>
+    <nav class="drawer-nav">
+      <a href="index.html"><i class="fas fa-home"></i> Home</a>
+      <a href="shop.html"><i class="fas fa-store"></i> Shop</a>
+      <a href="services.html"><i class="fas fa-paint-brush"></i> Services</a>
+      <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
+      <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+      <a href="cart.html"><i class="fas fa-shopping-bag"></i> Cart <span id="drawerCartCount" style="margin-left:auto;background:var(--color-primary);color:var(--color-dark);font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px;">0</span></a>
+      <a href="account.html"><i class="far fa-user"></i> My Account</a>
+    </nav>
+    <div class="drawer-actions">
+      <a href="https://wa.me/919182492525" target="_blank" class="drawer-whatsapp-btn"><i class="fab fa-whatsapp"></i> Order on WhatsApp</a>
+    </div>
+  </div>
+
+  <!-- ── BREADCRUMB ─────────────────────────────────────── -->
+  <div class="breadcrumb-bar">
+    <nav class="breadcrumb" aria-label="Breadcrumb" id="breadcrumb">
+      <a href="index.html">Home</a>
+      <i class="fas fa-chevron-right"></i>
+      <a href="shop.html">Shop</a>
+      <i class="fas fa-chevron-right"></i>
+      <span class="current" id="breadcrumbCategory">Loading…</span>
+      <i class="fas fa-chevron-right"></i>
+      <span class="current" id="breadcrumbTitle">Loading…</span>
+    </nav>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       PRODUCT DETAIL — TWO COLUMN LAYOUT
+  ══════════════════════════════════════════════════════ -->
+  <div class="product-section" id="productSection">
+
+    <!-- Loading skeleton -->
+    <div class="product-layout" id="productSkeleton">
+      <div>
+        <div class="skeleton" style="aspect-ratio:4/5;border-radius:var(--radius-lg);margin-bottom:12px;"></div>
+        <div style="display:flex;gap:10px;">
+          <div class="skeleton" style="width:72px;height:72px;border-radius:var(--radius-md);"></div>
+          <div class="skeleton" style="width:72px;height:72px;border-radius:var(--radius-md);"></div>
+          <div class="skeleton" style="width:72px;height:72px;border-radius:var(--radius-md);"></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;padding-top:8px;">
+        <div class="skeleton" style="height:12px;width:30%;"></div>
+        <div class="skeleton" style="height:40px;width:85%;"></div>
+        <div class="skeleton" style="height:40px;width:60%;"></div>
+        <div class="skeleton" style="height:60px;"></div>
+        <div class="skeleton" style="height:50px;"></div>
+        <div class="skeleton" style="height:50px;"></div>
+        <div class="skeleton" style="height:50px;"></div>
+        <div class="skeleton" style="height:100px;"></div>
+      </div>
+    </div>
+
+    <!-- Actual product content (hidden until loaded) -->
+    <div class="product-layout" id="productContent" style="display:none;">
+
+      <!-- ── LEFT: IMAGE GALLERY ── -->
+      <div class="gallery-col">
+        <div class="gallery-main" id="galleryMain">
+          <div class="product-placeholder-large">
+            <i class="fas fa-palette"></i>
+            <span>ALVOR</span>
+          </div>
+          <div class="gallery-badge badge-new" id="galleryBadge" style="display:none;"></div>
+          <div class="gallery-share-row">
+            <button class="gallery-action-btn" id="galleryWishlistBtn" onclick="toggleWishlist()" aria-label="Add to wishlist">
+              <i class="far fa-heart" id="galleryWishlistIcon"></i>
+            </button>
+            <button class="gallery-action-btn" onclick="shareProduct('whatsapp')" aria-label="Share on WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+            </button>
+          </div>
+          <span class="zoom-hint"><i class="fas fa-search-plus"></i> Zoom</span>
+        </div>
+        <div class="gallery-thumbs" id="galleryThumbs"></div>
+      </div>
+
+      <!-- ── RIGHT: PRODUCT INFO ── -->
+      <div class="info-col" id="infoCol">
+
+        <!-- Category -->
+        <div class="product-category-tag" id="productCategory"></div>
+
+        <!-- Title -->
+        <h1 class="product-title" id="productTitle">Loading…</h1>
+
+        <!-- Ratings -->
+        <div class="product-ratings" id="productRatings">
+          <div class="stars-row" id="productStars"></div>
+          <span class="rating-number" id="productRatingNum"></span>
+          <div class="rating-divider"></div>
+          <a class="review-link" onclick="switchTab('reviews')" id="reviewCountLink"></a>
+          <div class="rating-divider"></div>
+          <div class="stock-indicator" id="stockIndicator"></div>
+        </div>
+
+        <!-- Price -->
+        <div class="product-price-row" id="productPriceRow"></div>
+
+        <!-- Short description -->
+        <p class="product-short-desc" id="productShortDesc"></p>
+
+        <div class="info-divider"></div>
+
+        <!-- Size Selector -->
+        <div id="sizeSelector">
+          <div class="selector-label">
+            Size
+            <span class="size-guide-link" onclick="openSizeGuide()">Size Guide <i class="fas fa-ruler-combined"></i></span>
+          </div>
+          <div class="size-options" id="sizeOptions"></div>
+        </div>
+
+        <!-- Quantity -->
+        <div>
+          <div class="selector-label" style="margin-bottom:10px;">Quantity</div>
+          <div class="qty-row">
+            <div class="qty-selector">
+              <button class="qty-btn" onclick="changeQty(-1)" aria-label="Decrease">−</button>
+              <input type="number" class="qty-input" id="qtyInput" value="1" min="1" max="99" readonly />
+              <button class="qty-btn" onclick="changeQty(1)" aria-label="Increase">+</button>
+            </div>
+            <span class="qty-label" id="qtyStockNote"></span>
+          </div>
+        </div>
+
+        <!-- Delivery estimate -->
+        <div class="delivery-box" id="deliveryBox">
+          <i class="fas fa-truck"></i>
+          <div>
+            <div class="delivery-title">Estimated Delivery</div>
+            <div class="delivery-sub" id="deliverySub">Calculating…</div>
+          </div>
+        </div>
+
+        <div class="info-divider"></div>
+
+        <!-- CTA Buttons -->
+        <div class="cta-buttons">
+          <button class="btn btn-primary btn-full" onclick="handleAddToCart()">
+            <i class="fas fa-shopping-bag"></i> Add to Cart
+          </button>
+          <a class="btn btn-whatsapp btn-full" id="whatsappOrderBtn" href="#" target="_blank">
+            <i class="fab fa-whatsapp"></i> Order on WhatsApp
+          </a>
+        </div>
+
+        <!-- Share row -->
+        <div class="share-row">
+          <span class="share-label">Share:</span>
+          <button class="share-btn whatsapp" onclick="shareProduct('whatsapp')">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+          </button>
+          <button class="share-btn instagram" onclick="shareProduct('instagram')">
+            <i class="fab fa-instagram"></i> Instagram
+          </button>
+          <button class="share-btn copy" onclick="shareProduct('copy')">
+            <i class="fas fa-link"></i> Copy Link
+          </button>
+        </div>
+
+        <!-- Trust badges -->
+        <div class="trust-badges">
+          <div class="trust-badge">
+            <i class="fas fa-hands"></i>
+            <span>100% Handcrafted</span>
+          </div>
+          <div class="trust-badge">
+            <i class="fas fa-award"></i>
+            <span>Premium Frame</span>
+          </div>
+          <div class="trust-badge">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>AP Delivery</span>
+          </div>
+          <div class="trust-badge">
+            <i class="fas fa-pencil-ruler"></i>
+            <span>Custom Available</span>
+          </div>
+        </div>
+
+      </div><!-- /info-col -->
+    </div><!-- /product-layout -->
+
+    <!-- Error state -->
+    <div id="productError" style="display:none;text-align:center;padding:var(--space-8) var(--space-4);">
+      <div style="font-size:56px;margin-bottom:var(--space-3);">🎨</div>
+      <h2 style="font-family:var(--font-heading);font-size:28px;margin-bottom:var(--space-2);">Product Not Found</h2>
+      <p style="color:var(--color-text-muted);margin-bottom:var(--space-4);">This product may have been removed or the link is incorrect.</p>
+      <a href="shop.html" class="btn btn-primary"><i class="fas fa-store"></i> Browse All Products</a>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       TABS SECTION
+  ══════════════════════════════════════════════════════ -->
+  <div class="tabs-section" id="tabsSection" style="display:none;">
+
+    <div class="tabs-header" role="tablist">
+      <button class="tab-btn active" onclick="switchTab('description')" id="tab-description" role="tab">Description</button>
+      <button class="tab-btn" onclick="switchTab('sizeguide')" id="tab-sizeguide" role="tab">Size Guide</button>
+      <button class="tab-btn" onclick="switchTab('delivery')" id="tab-delivery" role="tab">Delivery Info</button>
+      <button class="tab-btn" onclick="switchTab('reviews')" id="tab-reviews" role="tab">Reviews (<span id="reviewTabCount">0</span>)</button>
+    </div>
+
+    <!-- Description -->
+    <div class="tab-panel active" id="panel-description" role="tabpanel">
+      <div class="product-full-desc" id="fullDescription">
+        <p>Loading product description…</p>
+      </div>
+    </div>
+
+    <!-- Size Guide -->
+    <div class="tab-panel" id="panel-sizeguide" role="tabpanel">
+      <table class="size-guide-table">
+        <thead>
+          <tr>
+            <th>Size</th>
+            <th>Dimensions (inches)</th>
+            <th>Dimensions (cm)</th>
+            <th>Best For</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Small</strong></td><td>8" × 10"</td><td>20 × 25 cm</td><td>Desk, shelf, gifting</td></tr>
+          <tr><td><strong>Medium</strong></td><td>12" × 16"</td><td>30 × 40 cm</td><td>Bedroom, study rooms</td></tr>
+          <tr><td><strong>Large</strong></td><td>18" × 24"</td><td>45 × 60 cm</td><td>Living rooms, offices</td></tr>
+          <tr><td><strong>XL</strong></td><td>24" × 36"</td><td>60 × 90 cm</td><td>Feature walls, commercial spaces</td></tr>
+        </tbody>
+      </table>
+      <div class="size-guide-note">
+        <strong>Note:</strong> All measurements are approximate and include the frame where applicable. Custom sizes are available on request — <a href="https://wa.me/919182492525" target="_blank" style="color:var(--color-primary-dark);">contact us on WhatsApp</a>.
+      </div>
+    </div>
+
+    <!-- Delivery Info -->
+    <div class="tab-panel" id="panel-delivery" role="tabpanel">
+      <div class="delivery-info-grid">
+        <div class="delivery-info-card">
+          <i class="fas fa-map-marker-alt"></i>
+          <div class="d-title">Delivery Zone</div>
+          <div class="d-sub">Andhra Pradesh only</div>
+        </div>
+        <div class="delivery-info-card">
+          <i class="fas fa-rupee-sign"></i>
+          <div class="d-title">Delivery Cost</div>
+          <div class="d-sub">Free on all orders</div>
+        </div>
+        <div class="delivery-info-card">
+          <i class="fas fa-clock"></i>
+          <div class="d-title">Processing Time</div>
+          <div class="d-sub" id="deliveryInfoDays">5–7 business days</div>
+        </div>
+      </div>
+      <div class="delivery-steps">
+        <div class="delivery-step">
+          <div class="step-num">1</div>
+          <div>
+            <div class="step-content-title">Place Order</div>
+            <div class="step-content-desc">Add to cart and complete checkout, or click "Order on WhatsApp" to message us directly with your details.</div>
+          </div>
+        </div>
+        <div class="delivery-step">
+          <div class="step-num">2</div>
+          <div>
+            <div class="step-content-title">WhatsApp Confirmation</div>
+            <div class="step-content-desc">We'll message you within 2–3 hours to confirm your order, discuss customisation if needed, and share payment details.</div>
+          </div>
+        </div>
+        <div class="delivery-step">
+          <div class="step-num">3</div>
+          <div>
+            <div class="step-content-title">Payment</div>
+            <div class="step-content-desc">Pay only after we confirm. We accept UPI, bank transfer, and cash on delivery for select areas.</div>
+          </div>
+        </div>
+        <div class="delivery-step">
+          <div class="step-num">4</div>
+          <div>
+            <div class="step-content-title">Careful Packaging & Delivery</div>
+            <div class="step-content-desc">Your piece is bubble-wrapped and packed in a rigid box to ensure it arrives in perfect condition. Tracking shared via WhatsApp.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reviews -->
+    <div class="tab-panel" id="panel-reviews" role="tabpanel">
+
+      <!-- Summary -->
+      <div class="reviews-summary" id="reviewsSummary">
+        <div class="reviews-big-score">
+          <div class="big-rating" id="bigRating">5.0</div>
+          <div class="big-stars" id="bigStars"></div>
+          <div class="big-count" id="bigCount">0 reviews</div>
+        </div>
+        <div class="reviews-breakdown" id="reviewsBreakdown"></div>
+      </div>
+
+      <!-- Write Review -->
+      <div class="write-review-toggle">
+        <span style="font-size:15px;font-weight:600;color:var(--color-text);">Customer Reviews</span>
+        <button class="btn btn-outline btn-sm" style="border-radius:var(--radius-md);" onclick="toggleReviewForm()">
+          <i class="fas fa-pen"></i> Write a Review
+        </button>
+      </div>
+
+      <div class="write-review-form" id="writeReviewForm">
+        <h3 style="font-family:var(--font-heading);font-size:18px;margin-bottom:var(--space-3);">Share Your Experience</h3>
+        <div style="margin-bottom:var(--space-2);">
+          <label class="form-label">Your Rating *</label>
+          <div class="star-select" id="starSelect">
+            <i class="far fa-star" data-val="1" onclick="selectStar(1)"></i>
+            <i class="far fa-star" data-val="2" onclick="selectStar(2)"></i>
+            <i class="far fa-star" data-val="3" onclick="selectStar(3)"></i>
+            <i class="far fa-star" data-val="4" onclick="selectStar(4)"></i>
+            <i class="far fa-star" data-val="5" onclick="selectStar(5)"></i>
+          </div>
+        </div>
+        <div class="form-row">
+          <div>
+            <label class="form-label">Your Name *</label>
+            <input type="text" class="form-input" id="reviewName" placeholder="e.g. Priya S." />
+          </div>
+          <div>
+            <label class="form-label">City</label>
+            <input type="text" class="form-input" id="reviewCity" placeholder="e.g. Vijayawada" />
+          </div>
+        </div>
+        <div style="margin-bottom:var(--space-3);">
+          <label class="form-label">Your Review *</label>
+          <textarea class="form-input form-textarea" id="reviewText" placeholder="Tell others about your experience with this piece…"></textarea>
+        </div>
+        <button class="btn btn-primary" style="border-radius:var(--radius-md);" onclick="submitReview()">
+          <i class="fas fa-paper-plane"></i> Submit Review
+        </button>
+      </div>
+
+      <!-- Reviews list -->
+      <div class="reviews-list" id="reviewsList">
+        <div class="reviews-empty">
+          <i class="fas fa-comment-alt"></i>
+          No reviews yet. Be the first to share your experience!
+        </div>
+      </div>
+
+    </div><!-- /panel-reviews -->
+
+  </div><!-- /tabs-section -->
+
+  <!-- ══════════════════════════════════════════════════════
+       RECENTLY VIEWED
+  ══════════════════════════════════════════════════════ -->
+  <div class="recently-section" id="recentlyViewedSection" style="display:none;">
+    <div class="section-heading-row">
+      <h2 class="section-heading">Recently Viewed</h2>
+      <a href="shop.html" class="section-heading-link">View All <i class="fas fa-arrow-right"></i></a>
+    </div>
+    <div class="ornament-divider"><i class="fas fa-star"></i></div>
+    <div class="mini-grid" id="recentlyViewedGrid"></div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       RELATED PRODUCTS
+  ══════════════════════════════════════════════════════ -->
+  <div class="related-section" id="relatedSection" style="display:none;">
+    <div class="section-heading-row">
+      <h2 class="section-heading">You May Also Like</h2>
+      <a href="shop.html" class="section-heading-link">See All <i class="fas fa-arrow-right"></i></a>
+    </div>
+    <div class="ornament-divider"><i class="fas fa-gem"></i></div>
+    <div class="mini-grid" id="relatedGrid"></div>
+  </div>
+
+  <!-- ── SIZE GUIDE MODAL ──────────────────────────────── -->
+  <div class="modal-overlay" id="sizeGuideModal" onclick="handleSizeModalClick(event)">
+    <div class="modal-box">
+      <button class="modal-close-btn" onclick="closeSizeGuide()"><i class="fas fa-times"></i></button>
+      <div class="modal-title"><i class="fas fa-ruler-combined" style="color:var(--color-primary);margin-right:8px;"></i>Size Guide</div>
+      <table class="size-guide-table" style="margin-bottom:16px;">
+        <thead>
+          <tr><th>Size</th><th>Inches</th><th>Centimeters</th><th>Best For</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Small</strong></td><td>8" × 10"</td><td>20 × 25 cm</td><td>Desk, shelf, gifting</td></tr>
+          <tr><td><strong>Medium</strong></td><td>12" × 16"</td><td>30 × 40 cm</td><td>Bedroom, study</td></tr>
+          <tr><td><strong>Large</strong></td><td>18" × 24"</td><td>45 × 60 cm</td><td>Living rooms, offices</td></tr>
+          <tr><td><strong>XL</strong></td><td>24" × 36"</td><td>60 × 90 cm</td><td>Feature walls, commercial</td></tr>
+        </tbody>
+      </table>
+      <div class="size-guide-note">Custom sizes available — <a href="https://wa.me/919182492525" target="_blank" style="color:var(--color-primary-dark);">WhatsApp us</a> for a quote.</div>
+    </div>
+  </div>
+
+  <!-- ── FOOTER ─────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+          <svg width="32" height="32" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <polygon points="20,2 24,14 36,14 27,22 31,34 20,27 9,34 13,22 4,14 16,14" fill="#C9A84C" opacity="0.95"/>
+            <circle cx="20" cy="20" r="5" fill="none" stroke="#C9A84C" stroke-width="1.2"/>
+            <circle cx="20" cy="20" r="2" fill="#A8872E"/>
+          </svg>
+          <div class="brand-name">ALVOR</div>
+        </div>
+        <div class="footer-tagline">Where Thread Meets Tradition</div>
+        <p class="footer-brand-desc">Premium handcrafted embroidery art from the heart of Andhra Pradesh.</p>
+        <div class="footer-social">
+          <a href="https://instagram.com/alvor_emb" target="_blank" class="footer-social-btn"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/919182492525" target="_blank" class="footer-social-btn"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <div class="footer-delivery-note"><i class="fas fa-map-marker-alt"></i><span>Delivering across Andhra Pradesh</span></div>
+      </div>
+      <div>
+        <div class="footer-col-title">Shop</div>
+        <ul class="footer-links">
+          <li><a href="shop.html">All Products</a></li>
+          <li><a href="shop.html?category=Embroidery Art">Embroidery Art</a></li>
+          <li><a href="shop.html?category=Framed Pieces">Framed Pieces</a></li>
+          <li><a href="shop.html?category=Shop Decor">Shop Decor</a></li>
+          <li><a href="services.html">Shop Decoration</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Info</div>
+        <ul class="footer-links">
+          <li><a href="about.html">About ALVOR</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="account.html">My Account</a></li>
+          <li><a href="cart.html">My Cart</a></li>
+          <li><a href="admin.html">Admin Panel</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Connect</div>
+        <div class="footer-contact-item"><i class="fab fa-instagram"></i><a href="https://instagram.com/alvor_emb" target="_blank">@alvor_emb</a></div>
+        <div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span>Andhra Pradesh, India</span></div>
+        <div class="footer-contact-item"><i class="fas fa-clock"></i><span>WhatsApp replies within 2–3 hours</span></div>
+        <a href="https://wa.me/919182492525" target="_blank" class="footer-whatsapp-btn"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-copy">© 2026 ALVOR. All rights reserved. Made with ❤️ in Andhra Pradesh.</div>
+      <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms</a><a href="#">Shipping Policy</a></div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp -->
+  <a href="https://wa.me/919182492525" target="_blank" class="float-whatsapp" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- ══════════════════════════════════════════════════════
+       FIREBASE — load product by URL param ?id=
+  ══════════════════════════════════════════════════════ -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, doc, getDoc, collection, query, where, limit, getDocs, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    // TODO: Replace with your Firebase config
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    let db;
+    try {
+      const app = initializeApp(firebaseConfig);
+      db = getFirestore(app);
+    } catch(e) {
+      console.warn('Firebase not configured. Demo mode active.');
+    }
+
+    // ── Demo product data ─────────────────────────────────────────────
+    const DEMO_PRODUCTS = [
+      { id:'p1', title:'Golden Lotus Embroidery', category:'Embroidery Art', price:2499, originalPrice:3200, tags:['new'], sizes:['Small','Medium','Large'], stock:5, avgRating:5, reviewCount:12, estimatedDays:5, description:'A breathtaking lotus embroidery crafted with silk threads on premium cotton canvas. Each petal is hand-stitched with meticulous detail, reflecting the timeless beauty of Indian floral art.\n\nThe golden thread work catches light beautifully, making this piece a centrepiece for any room. Backed with archival fabric and fitted with a hand-polished teakwood frame included as standard.', images:[], mainImage:'' },
+      { id:'p2', title:'Peacock Mandala Wall Art', category:'Framed Pieces', price:3999, tags:['bestseller'], sizes:['Medium','Large'], stock:3, avgRating:5, reviewCount:8, estimatedDays:7, description:'Majestic peacock mandala framed in a rich teak wood border. Every feather is stitched individually, creating a three-dimensional depth that photographs beautifully. A centrepiece for any room.', images:[], mainImage:'' },
+      { id:'p3', title:'Floral Heritage Frame', category:'Framed Pieces', price:1899, originalPrice:2500, tags:[], sizes:['Small'], stock:8, avgRating:4, reviewCount:5, estimatedDays:4, description:'Delicate floral pattern inspired by Kalamkari tradition. Comes ready to hang with all mounting hardware included. Perfect as a gift.', images:[], mainImage:'' },
+      { id:'p4', title:'Traditional Motif Tapestry', category:'Embroidery Art', price:4500, tags:['bestseller','featured'], sizes:['Large','XL'], stock:2, avgRating:5, reviewCount:20, estimatedDays:8, description:'Grand tapestry featuring interlocking geometric motifs from Andhra heritage, woven in 14 colours. This statement piece commands attention and transforms any space.', images:[], mainImage:'' },
+    ];
+
+    const DEMO_REVIEWS = {
+      'p1': [
+        { id:'r1', customerName:'Priya Sharma', city:'Vijayawada', rating:5, comment:'Absolutely stunning work! The embroidery piece I ordered for my living room is a conversation starter every time we have guests. The craftsmanship is exceptional.', createdAt:{ seconds: Date.now()/1000 - 86400*10 } },
+        { id:'r2', customerName:'Ravi Kumar', city:'Guntur', rating:5, comment:'Beautiful piece, arrived well packed. The golden thread work is exactly as shown. Very happy with the quality!', createdAt:{ seconds: Date.now()/1000 - 86400*5 } },
+        { id:'r3', customerName:'Ananya Reddy', city:'Hyderabad', rating:4, comment:'Great quality embroidery, the frame is solid. Took about a week to arrive but worth the wait. Will order again!', createdAt:{ seconds: Date.now()/1000 - 86400*2 } },
+      ],
+      'p2': [
+        { id:'r4', customerName:'Kavitha N.', city:'Vijayawada', rating:5, comment:'The peacock mandala is just magnificent. I get compliments every day. Worth every rupee!', createdAt:{ seconds: Date.now()/1000 - 86400*7 } },
+      ],
+    };
+
+    // ── Main loader ───────────────────────────────────────────────────
+    async function loadProduct() {
+      const params = new URLSearchParams(window.location.search);
+      const productId = params.get('id');
+
+      if (!productId) { showError(); return; }
+
+      let product = null;
+
+      if (db) {
+        try {
+          const snap = await getDoc(doc(db, 'products', productId));
+          if (snap.exists()) {
+            product = { id: snap.id, ...snap.data() };
+          }
+        } catch(e) {
+          console.warn('Firestore fetch failed:', e);
+        }
+      }
+
+      // Fallback to demo
+      if (!product) {
+        product = DEMO_PRODUCTS.find(p => p.id === productId) || DEMO_PRODUCTS[0];
+        product = { ...product, id: productId };
+      }
+
+      if (!product) { showError(); return; }
+
+      window.__CURRENT_PRODUCT = product;
+      renderProduct(product);
+      loadReviews(productId);
+      loadRelated(product);
+      loadRecentlyViewed(productId, product);
+      saveRecentlyViewed(productId, product);
+    }
+
+    // ── Render product ────────────────────────────────────────────────
+    function renderProduct(p) {
+      // Page meta
+      document.getElementById('pageTitle').textContent = `${p.title} — ALVOR`;
+      document.getElementById('pageDesc').setAttribute('content', p.description?.slice(0,150) || '');
+
+      // Breadcrumb
+      document.getElementById('breadcrumbCategory').textContent = p.category || 'Shop';
+      const catLink = document.getElementById('breadcrumbCategory');
+      catLink.outerHTML = `<a href="shop.html?category=${encodeURIComponent(p.category)}" class="current" id="breadcrumbCategory">${p.category}</a>`;
+      document.getElementById('breadcrumbTitle').textContent = p.title;
+
+      // Category tag
+      document.getElementById('productCategory').textContent = p.category || '';
+
+      // Title
+      document.getElementById('productTitle').textContent = p.title;
+
+      // Stars
+      const rating = p.avgRating || 5;
+      let starsHTML = '';
+      for (let i=1;i<=5;i++) starsHTML += `<i class="${i<=rating?'fas':'far'} fa-star"></i>`;
+      document.getElementById('productStars').innerHTML = starsHTML;
+      document.getElementById('productRatingNum').textContent = Number(rating).toFixed(1);
+      const rc = p.reviewCount || 0;
+      document.getElementById('reviewCountLink').textContent = `${rc} review${rc!==1?'s':''}`;
+      document.getElementById('reviewTabCount').textContent = rc;
+      document.getElementById('bigRating').textContent = Number(rating).toFixed(1);
+      let bigStarsHTML = '';
+      for (let i=1;i<=5;i++) bigStarsHTML += `<i class="${i<=Math.round(rating)?'fas':'far'} fa-star"></i>`;
+      document.getElementById('bigStars').innerHTML = bigStarsHTML;
+      document.getElementById('bigCount').textContent = `${rc} review${rc!==1?'s':''}`;
+
+      // Stock
+      const stock = p.stock || 0;
+      let stockHTML = '';
+      if (stock <= 0) stockHTML = `<span class="stock-dot out"></span> Out of Stock`;
+      else if (stock <= 3) stockHTML = `<span class="stock-dot low"></span> Only ${stock} left`;
+      else stockHTML = `<span class="stock-dot in"></span> In Stock`;
+      document.getElementById('stockIndicator').innerHTML = stockHTML;
+      document.getElementById('qtyStockNote').textContent = stock > 0 ? `${stock} available` : 'Currently out of stock';
+
+      // Price
+      const disc = p.originalPrice && p.originalPrice > p.price ? Math.round((1 - p.price/p.originalPrice)*100) : 0;
+      let priceHTML = `<span class="price-main">₹${Number(p.price).toLocaleString('en-IN')}</span>`;
+      if (disc > 0) {
+        priceHTML += `<span class="price-orig">₹${Number(p.originalPrice).toLocaleString('en-IN')}</span>`;
+        priceHTML += `<span class="price-discount-badge">Save ${disc}%</span>`;
+      }
+      document.getElementById('productPriceRow').innerHTML = priceHTML;
+
+      // Short description (first paragraph)
+      const lines = (p.description || 'A beautifully handcrafted embroidery piece from ALVOR's collection.').split('\n');
+      document.getElementById('productShortDesc').textContent = lines[0];
+
+      // Full description
+      let fullDescHTML = '';
+      const paras = (p.description || '').split('\n').filter(l => l.trim());
+      if (paras.length > 0) {
+        paras.forEach(para => { fullDescHTML += `<p>${para}</p>`; });
+      }
+      fullDescHTML += `
+        <h3>Product Details</h3>
+        <ul class="product-detail-list">
+          <li><i class="fas fa-check-circle"></i><span>100% hand-stitched by skilled artisans</span></li>
+          <li><i class="fas fa-check-circle"></i><span>Category: ${p.category || 'ALVOR Collection'}</span></li>
+          <li><i class="fas fa-check-circle"></i><span>Available sizes: ${(p.sizes||['Standard']).join(', ')}</span></li>
+          <li><i class="fas fa-check-circle"></i><span>Premium frame included (where applicable)</span></li>
+          <li><i class="fas fa-check-circle"></i><span>Archival-quality materials — designed to last decades</span></li>
+          <li><i class="fas fa-check-circle"></i><span>Bubble-wrapped and rigid-boxed for safe delivery</span></li>
+          <li><i class="fas fa-check-circle"></i><span>Custom sizing available on request</span></li>
+        </ul>`;
+      document.getElementById('fullDescription').innerHTML = fullDescHTML;
+
+      // Sizes
+      const sizeOpts = document.getElementById('sizeOptions');
+      const sizes = p.sizes?.length ? p.sizes : ['Standard'];
+      sizeOpts.innerHTML = sizes.map((s,i) =>
+        `<button class="size-btn${i===0?' active':''}" onclick="selectSize(this,'${s}')" data-size="${s}">${s}</button>`
+      ).join('');
+      window.__selectedSize = sizes[0];
+
+      // Delivery estimate
+      const days = p.estimatedDays || 5;
+      document.getElementById('deliverySub').textContent = `${days}–${days+2} business days within Andhra Pradesh · Free delivery`;
+      document.getElementById('deliveryInfoDays').textContent = `${days}–${days+2} business days`;
+
+      // Delivery tab
+      const est = new Date();
+      est.setDate(est.getDate() + days + 2);
+      const estStr = est.toLocaleDateString('en-IN', { day:'numeric', month:'long', year:'numeric' });
+      document.getElementById('deliverySub').textContent = `Estimated by ${estStr} · Free delivery across AP`;
+
+      // Gallery
+      renderGallery(p);
+
+      // WhatsApp link
+      updateWhatsAppLink(p);
+
+      // Badge
+      const badgeEl = document.getElementById('galleryBadge');
+      if (p.tags?.includes('bestseller')) { badgeEl.textContent='Bestseller'; badgeEl.className='gallery-badge badge-bestseller'; badgeEl.style.display='block'; }
+      else if (p.tags?.includes('new')) { badgeEl.textContent='New'; badgeEl.className='gallery-badge badge-new'; badgeEl.style.display='block'; }
+      else if (disc > 0) { badgeEl.textContent=`-${disc}%`; badgeEl.className='gallery-badge badge-sale'; badgeEl.style.display='block'; }
+
+      // Wishlist state
+      try {
+        const wl = JSON.parse(localStorage.getItem('alvor_wishlist')||'[]');
+        if (wl.includes(p.id)) {
+          document.getElementById('galleryWishlistIcon').className = 'fas fa-heart';
+          document.getElementById('galleryWishlistBtn').classList.add('wishlisted');
+        }
+      } catch(e) {}
+
+      // Show content, hide skeleton
+      document.getElementById('productSkeleton').style.display = 'none';
+      document.getElementById('productContent').style.display = 'grid';
+      document.getElementById('tabsSection').style.display = 'block';
+    }
+
+    // ── Render gallery ────────────────────────────────────────────────
+    function renderGallery(p) {
+      const main = document.getElementById('galleryMain');
+      const thumbsWrap = document.getElementById('galleryThumbs');
+
+      const images = p.images?.filter(Boolean) || [];
+      const allImages = p.mainImage ? [p.mainImage, ...images] : images;
+
+      if (allImages.length === 0) {
+        // Keep placeholder
+        thumbsWrap.innerHTML = '';
+        return;
+      }
+
+      // Set main image
+      main.innerHTML = `
+        <img src="${allImages[0]}" alt="${p.title}" id="mainImg" />
+        <div class="gallery-badge badge-new" id="galleryBadge" style="display:none;"></div>
+        <div class="gallery-share-row">
+          <button class="gallery-action-btn" id="galleryWishlistBtn" onclick="toggleWishlist()" aria-label="Wishlist">
+            <i class="far fa-heart" id="galleryWishlistIcon"></i>
+          </button>
+          <button class="gallery-action-btn" onclick="shareProduct('whatsapp')" aria-label="Share">
+            <i class="fab fa-whatsapp"></i>
+          </button>
+        </div>
+        <span class="zoom-hint"><i class="fas fa-search-plus"></i> Zoom</span>`;
+
+      // Thumbnails
+      thumbsWrap.innerHTML = allImages.map((src, i) =>
+        `<div class="gallery-thumb ${i===0?'active':''}" onclick="switchImage('${src}', this)">
+           <img src="${src}" alt="View ${i+1}" loading="lazy" />
+         </div>`
+      ).join('');
+    }
+
+    // ── Load reviews ──────────────────────────────────────────────────
+    async function loadReviews(productId) {
+      let reviews = [];
+      if (db) {
+        try {
+          const q = query(collection(db,'reviews'), where('productId','==',productId), limit(20));
+          const snap = await getDocs(q);
+          snap.forEach(d => reviews.push({ id: d.id, ...d.data() }));
+        } catch(e) { console.warn('Reviews fetch failed:', e); }
+      }
+      if (!reviews.length) {
+        reviews = DEMO_REVIEWS[productId] || DEMO_REVIEWS['p1'] || [];
+      }
+      window.__PRODUCT_REVIEWS = reviews;
+      renderReviews(reviews);
+    }
+
+    function renderReviews(reviews) {
+      const list = document.getElementById('reviewsList');
+      const summary = reviews.length;
+
+      if (!summary) {
+        list.innerHTML = `<div class="reviews-empty"><i class="fas fa-comment-alt"></i>No reviews yet. Be the first!</div>`;
+        renderBreakdown([]);
+        return;
+      }
+
+      // Breakdown
+      renderBreakdown(reviews);
+
+      // Individual cards
+      list.innerHTML = reviews.map(r => {
+        let starsH = '';
+        for (let i=1;i<=5;i++) starsH += `<i class="${i<=r.rating?'fas':'far'} fa-star"></i>`;
+        const date = r.createdAt?.seconds ? new Date(r.createdAt.seconds*1000).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}) : 'Recently';
+        const initial = (r.customerName||'A')[0].toUpperCase();
+        return `
+          <div class="review-card">
+            <div class="review-header">
+              <div class="reviewer">
+                <div class="reviewer-avatar">${initial}</div>
+                <div>
+                  <div class="reviewer-name">${r.customerName || 'Anonymous'}</div>
+                  <div class="reviewer-date">${r.city||'Andhra Pradesh'} · ${date}</div>
+                </div>
+              </div>
+              <div class="review-stars">${starsH}</div>
+            </div>
+            <p class="review-text">${r.comment}</p>
+          </div>`;
+      }).join('');
+    }
+
+    function renderBreakdown(reviews) {
+      const counts = [0,0,0,0,0];
+      reviews.forEach(r => { if (r.rating>=1 && r.rating<=5) counts[r.rating-1]++; });
+      const total = reviews.length || 1;
+      const wrap = document.getElementById('reviewsBreakdown');
+      wrap.innerHTML = [5,4,3,2,1].map(star => {
+        const cnt = counts[star-1];
+        const pct = Math.round(cnt/total*100);
+        return `
+          <div class="breakdown-row">
+            <span class="breakdown-label">${star}★</span>
+            <div class="breakdown-bar"><div class="breakdown-fill" style="width:${pct}%"></div></div>
+            <span class="breakdown-count">${cnt}</span>
+          </div>`;
+      }).join('');
+    }
+
+    // ── Submit review ─────────────────────────────────────────────────
+    window.submitReview = async function() {
+      const name = document.getElementById('reviewName').value.trim();
+      const city = document.getElementById('reviewCity').value.trim();
+      const text = document.getElementById('reviewText').value.trim();
+      const rating = window.__selectedRating || 0;
+      const p = window.__CURRENT_PRODUCT;
+
+      if (!name) { showToast('Please enter your name', 'error'); return; }
+      if (!rating) { showToast('Please select a star rating', 'error'); return; }
+      if (!text) { showToast('Please write your review', 'error'); return; }
+
+      const reviewData = {
+        productId: p?.id || '',
+        customerName: name,
+        city,
+        rating,
+        comment: text,
+        createdAt: serverTimestamp ? serverTimestamp() : { seconds: Date.now()/1000 }
+      };
+
+      if (db) {
+        try {
+          await addDoc(collection(db,'reviews'), reviewData);
+        } catch(e) { console.warn('Could not save review:', e); }
+      }
+
+      // Optimistic UI update
+      const reviews = window.__PRODUCT_REVIEWS || [];
+      reviews.unshift({ ...reviewData, id: 'local_' + Date.now(), createdAt: { seconds: Date.now()/1000 } });
+      window.__PRODUCT_REVIEWS = reviews;
+      renderReviews(reviews);
+
+      // Reset form
+      document.getElementById('reviewName').value = '';
+      document.getElementById('reviewCity').value = '';
+      document.getElementById('reviewText').value = '';
+      window.__selectedRating = 0;
+      document.querySelectorAll('#starSelect i').forEach(i => i.className = 'far fa-star');
+      document.getElementById('writeReviewForm').classList.remove('open');
+      showToast('Thank you for your review! 🌟', 'success');
+    };
+
+    // ── Load related products ─────────────────────────────────────────
+    async function loadRelated(product) {
+      let related = [];
+      if (db) {
+        try {
+          const q = query(collection(db,'products'), where('category','==',product.category), where('visible','==',true), limit(5));
+          const snap = await getDocs(q);
+          snap.forEach(d => { if (d.id !== product.id) related.push({ id:d.id, ...d.data() }); });
+        } catch(e) {}
+      }
+      if (!related.length) {
+        related = DEMO_PRODUCTS.filter(p => p.category === product.category && p.id !== product.id).slice(0,4);
+        if (!related.length) related = DEMO_PRODUCTS.filter(p => p.id !== product.id).slice(0,4);
+      }
+      related = related.slice(0,4);
+      if (!related.length) return;
+      document.getElementById('relatedGrid').innerHTML = related.map(buildMiniCard).join('');
+      document.getElementById('relatedSection').style.display = 'block';
+    }
+
+    // ── Load recently viewed ──────────────────────────────────────────
+    function loadRecentlyViewed(currentId, currentProduct) {
+      try {
+        let rv = JSON.parse(localStorage.getItem('alvor_recently_viewed') || '[]');
+        rv = rv.filter(p => p.id !== currentId).slice(0, 4);
+        if (!rv.length) return;
+        document.getElementById('recentlyViewedGrid').innerHTML = rv.map(buildMiniCard).join('');
+        document.getElementById('recentlyViewedSection').style.display = 'block';
+      } catch(e) {}
+    }
+
+    function saveRecentlyViewed(productId, product) {
+      try {
+        let rv = JSON.parse(localStorage.getItem('alvor_recently_viewed') || '[]');
+        rv = rv.filter(p => p.id !== productId);
+        rv.unshift({ id:productId, title:product.title, price:product.price, category:product.category, mainImage:product.mainImage||'' });
+        rv = rv.slice(0, 8);
+        localStorage.setItem('alvor_recently_viewed', JSON.stringify(rv));
+      } catch(e) {}
+    }
+
+    function buildMiniCard(p) {
+      const imgHTML = p.mainImage
+        ? `<img src="${p.mainImage}" alt="${p.title}" loading="lazy" />`
+        : `<div class="product-placeholder"><i class="fas fa-palette"></i><span>ALVOR</span></div>`;
+      return `
+        <div class="mini-card">
+          <a href="product.html?id=${p.id}" class="mini-card-image">${imgHTML}</a>
+          <div class="mini-card-body">
+            <div class="mini-card-title"><a href="product.html?id=${p.id}">${p.title}</a></div>
+            <div class="mini-card-price">₹${Number(p.price).toLocaleString('en-IN')}</div>
+            <button class="mini-card-btn" onclick="quickAddToCart('${p.id}','${(p.title||'').replace(/'/g,"\\'")}',${p.price},'${p.mainImage||''}')">Add to Cart</button>
+          </div>
+        </div>`;
+    }
+
+    // Expose to global
+    window.__loadReviews = loadReviews;
+
+    // Init
+    document.addEventListener('DOMContentLoaded', loadProduct);
+
+    function showError() {
+      document.getElementById('productSkeleton').style.display = 'none';
+      document.getElementById('productError').style.display = 'block';
+    }
+  </script>
+
+  <!-- ══════════════════════════════════════════════════════
+       VANILLA JS — UI INTERACTIONS
+  ══════════════════════════════════════════════════════ -->
+  <script>
+    /* ── Gallery ───────────────────────────────────────── */
+    window.switchImage = function(src, thumbEl) {
+      const mainImg = document.getElementById('mainImg');
+      if (mainImg) {
+        mainImg.style.opacity = '0';
+        mainImg.style.transform = 'scale(0.97)';
+        setTimeout(() => {
+          mainImg.src = src;
+          mainImg.style.opacity = '1';
+          mainImg.style.transform = 'scale(1)';
+        }, 180);
+      }
+      document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+      if (thumbEl) thumbEl.classList.add('active');
+    };
+
+    /* Gallery image transition style */
+    const styleTag = document.createElement('style');
+    styleTag.textContent = '#mainImg { transition: opacity 0.18s ease, transform 0.18s ease; }';
+    document.head.appendChild(styleTag);
+
+    /* ── Size selector ─────────────────────────────────── */
+    window.selectSize = function(btn, size) {
+      document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      window.__selectedSize = size;
+      updateWhatsAppLink(window.__CURRENT_PRODUCT);
+    };
+
+    /* ── Quantity ───────────────────────────────────────── */
+    window.changeQty = function(delta) {
+      const input = document.getElementById('qtyInput');
+      const max = window.__CURRENT_PRODUCT?.stock || 99;
+      let val = parseInt(input.value, 10) + delta;
+      val = Math.max(1, Math.min(max, val));
+      input.value = val;
+    };
+
+    /* ── WhatsApp order link ────────────────────────────── */
+    function updateWhatsAppLink(p) {
+      if (!p) return;
+      const size = window.__selectedSize || (p.sizes?.[0]) || 'Standard';
+      const qty = document.getElementById('qtyInput')?.value || 1;
+      const msg = encodeURIComponent(`Hi ALVOR! I'd like to order:\n\n🎨 *${p.title}*\nSize: ${size}\nQty: ${qty}\nPrice: ₹${Number(p.price).toLocaleString('en-IN')}\n\nCould you confirm availability and delivery details?`);
+      const btn = document.getElementById('whatsappOrderBtn');
+      if (btn) btn.href = `https://wa.me/919182492525?text=${msg}`;
+    }
+    window.updateWhatsAppLink = updateWhatsAppLink;
+
+    /* ── Add to Cart ────────────────────────────────────── */
+    window.handleAddToCart = function() {
+      const p = window.__CURRENT_PRODUCT;
+      if (!p) { showToast('Product not loaded yet.', 'error'); return; }
+      const size = window.__selectedSize || (p.sizes?.[0]) || 'Standard';
+      const qty = parseInt(document.getElementById('qtyInput').value, 10) || 1;
+      addToCartFull(p.id, p.title, p.price, p.mainImage||'', size, qty);
+    };
+
+    function addToCartFull(productId, title, price, imageURL, size, qty) {
+      try {
+        let cart = JSON.parse(localStorage.getItem('alvor_cart') || '[]');
+        const key = `${productId}_${size}`;
+        const existing = cart.find(i => i.productId === productId && i.size === size);
+        if (existing) {
+          existing.quantity = (existing.quantity || 1) + qty;
+        } else {
+          cart.push({ productId, title, price, imageURL, quantity: qty, size });
+        }
+        localStorage.setItem('alvor_cart', JSON.stringify(cart));
+        updateCartBadge();
+        showToast(`"${title}" (${size}) added to cart!`, 'success');
+      } catch(e) {
+        showToast('Could not add to cart.', 'error');
+      }
+    }
+
+    window.quickAddToCart = function(id, title, price, img) {
+      addToCartFull(id, title, price, img, 'Standard', 1);
+    };
+
+    function updateCartBadge() {
+      try {
+        const cart = JSON.parse(localStorage.getItem('alvor_cart') || '[]');
+        const count = cart.reduce((s,i) => s+(i.quantity||1), 0);
+        document.getElementById('cartBadge').textContent = count;
+        const dc = document.getElementById('drawerCartCount');
+        if (dc) dc.textContent = count;
+      } catch(e) {}
+    }
+    updateCartBadge();
+    window.addEventListener('storage', updateCartBadge);
+
+    /* ── Wishlist ────────────────────────────────────────── */
+    window.toggleWishlist = function() {
+      const p = window.__CURRENT_PRODUCT;
+      if (!p) return;
+      try {
+        let wl = JSON.parse(localStorage.getItem('alvor_wishlist') || '[]');
+        const icon = document.getElementById('galleryWishlistIcon');
+        const btn = document.getElementById('galleryWishlistBtn');
+        if (wl.includes(p.id)) {
+          wl = wl.filter(x => x !== p.id);
+          icon.className = 'far fa-heart';
+          btn.classList.remove('wishlisted');
+          showToast('Removed from wishlist', 'info');
+        } else {
+          wl.push(p.id);
+          icon.className = 'fas fa-heart';
+          btn.classList.add('wishlisted');
+          showToast('Added to wishlist! ❤️', 'success');
+        }
+        localStorage.setItem('alvor_wishlist', JSON.stringify(wl));
+      } catch(e) {}
+    };
+
+    /* ── Share ──────────────────────────────────────────── */
+    window.shareProduct = function(platform) {
+      const p = window.__CURRENT_PRODUCT;
+      const url = window.location.href;
+      const title = p?.title || 'ALVOR Handcrafted Art';
+
+      if (platform === 'whatsapp') {
+        const msg = encodeURIComponent(`Check out this beautiful piece from ALVOR! 🎨\n\n"${title}"\n${url}`);
+        window.open(`https://wa.me/?text=${msg}`, '_blank');
+      } else if (platform === 'instagram') {
+        showToast('Open Instagram and share this link: ' + url, 'info');
+        navigator.clipboard?.writeText(url);
+      } else if (platform === 'copy') {
+        navigator.clipboard?.writeText(url).then(() => {
+          showToast('Link copied to clipboard!', 'success');
+        }).catch(() => {
+          showToast('Copy this link: ' + url, 'info');
+        });
+      }
+    };
+
+    /* ── Tabs ────────────────────────────────────────────── */
+    window.switchTab = function(tabName) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('tab-' + tabName)?.classList.add('active');
+      document.getElementById('panel-' + tabName)?.classList.add('active');
+      if (tabName === 'reviews') {
+        document.getElementById('panel-reviews').scrollIntoView({ behavior:'smooth', block:'start' });
+      }
+    };
+
+    /* ── Star rating selector ───────────────────────────── */
+    window.selectStar = function(val) {
+      window.__selectedRating = val;
+      document.querySelectorAll('#starSelect i').forEach((el, idx) => {
+        el.className = idx < val ? 'fas fa-star selected' : 'far fa-star';
+      });
+    };
+
+    // Hover effect on stars
+    document.addEventListener('DOMContentLoaded', () => {
+      const stars = document.querySelectorAll('#starSelect i');
+      stars.forEach((star, idx) => {
+        star.addEventListener('mouseenter', () => {
+          stars.forEach((s, i) => s.classList.toggle('hovered', i <= idx));
+        });
+        star.addEventListener('mouseleave', () => {
+          stars.forEach(s => s.classList.remove('hovered'));
+        });
+      });
+    });
+
+    /* ── Review form toggle ─────────────────────────────── */
+    window.toggleReviewForm = function() {
+      const form = document.getElementById('writeReviewForm');
+      form.classList.toggle('open');
+      if (form.classList.contains('open')) {
+        form.scrollIntoView({ behavior:'smooth', block:'start' });
+      }
+    };
+
+    /* ── Size Guide modal ───────────────────────────────── */
+    window.openSizeGuide = function() {
+      document.getElementById('sizeGuideModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    };
+    window.closeSizeGuide = function() {
+      document.getElementById('sizeGuideModal').classList.remove('open');
+      document.body.style.overflow = '';
+    };
+    window.handleSizeModalClick = function(e) {
+      if (e.target === document.getElementById('sizeGuideModal')) closeSizeGuide();
+    };
+
+    /* ── Toast ──────────────────────────────────────────── */
+    window.showToast = function(message, type='info') {
+      const c = document.getElementById('toastContainer');
+      const t = document.createElement('div');
+      t.className = `toast toast-${type}`;
+      const ic = type==='success' ? 'fa-check-circle' : type==='error' ? 'fa-exclamation-circle' : 'fa-info-circle';
+      t.innerHTML = `<i class="fas ${ic}"></i> ${message}`;
+      c.appendChild(t);
+      requestAnimationFrame(() => requestAnimationFrame(() => t.classList.add('show')));
+      setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 300); }, 3500);
+    };
+
+    /* ── Navbar scroll ──────────────────────────────────── */
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 30);
+    }, { passive:true });
+
+    /* ── Announcement bar ───────────────────────────────── */
+    window.dismissAnnouncement = function() {
+      document.getElementById('announcementBar').classList.add('hidden');
+      sessionStorage.setItem('announcementDismissed','1');
+    };
+    if (sessionStorage.getItem('announcementDismissed')) {
+      document.getElementById('announcementBar')?.classList.add('hidden');
+    }
+
+    /* ── Nav Drawer ─────────────────────────────────────── */
+    document.getElementById('hamburger').addEventListener('click', () => {
+      const open = document.getElementById('mobileDrawer').classList.toggle('open');
+      document.getElementById('hamburger').classList.toggle('active', open);
+      document.getElementById('drawerOverlay').classList.toggle('active', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    window.closeDrawer = function() {
+      document.getElementById('mobileDrawer').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('active');
+      document.getElementById('drawerOverlay').classList.remove('active');
+      document.body.style.overflow = '';
+    };
+
+    /* ── ESC key ────────────────────────────────────────── */
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') { closeDrawer(); closeSizeGuide(); }
+    });
+  </script>
+
+</body>
+</html>

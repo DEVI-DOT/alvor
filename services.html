@@ -1,0 +1,3674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop Decoration Services — ALVOR | Transform Your Space</title>
+  <meta name="description" content="ALVOR's end-to-end shop decoration service for cafes, restaurants, boutiques, and offices across Andhra Pradesh. Get a free consultation today." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Shop Decoration Services — ALVOR" />
+  <meta property="og:description" content="Transform your commercial space with premium handcrafted embroidery art. Serving cafes, restaurants, boutiques and offices across Andhra Pradesh." />
+  <meta property="og:type" content="website" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Stylesheets -->
+  <style>
+/* ============================================================
+   ALVOR — Combined Stylesheet (global.css + services.css)
+   Inlined into services.html
+   ============================================================ */
+
+/* ============================================================
+   ALVOR — Global Stylesheet
+   "Where Thread Meets Tradition"
+   ============================================================
+   TABLE OF CONTENTS
+   01. CSS Custom Properties (Design Tokens)
+   02. CSS Reset & Base
+   03. Typography
+   04. Utility Classes
+   05. Announcement Bar
+   06. Navbar
+   07. Mobile Nav Drawer
+   08. Footer
+   09. Floating WhatsApp Button
+   10. Toast Notifications
+   11. Loading Skeletons
+   12. Product Cards (shared)
+   13. Section Dividers & Decorative Elements
+   14. Buttons
+   15. Form Elements
+   16. Modals
+   17. Badges & Tags
+   18. Scroll Animations
+   19. Page Transition
+   20. Responsive Breakpoints
+   ============================================================ */
+
+/* ── 01. CSS Custom Properties ─────────────────────────────── */
+:root {
+  /* Brand Colours */
+  --color-primary:        #C9A84C;
+  --color-primary-dark:   #A8872E;
+  --color-primary-light:  #E8CC7A;
+  --color-primary-muted:  rgba(201, 168, 76, 0.12);
+
+  /* Backgrounds */
+  --color-bg:             #FDFAF5;
+  --color-bg-secondary:   #F5F0E8;
+  --color-bg-dark:        #1A1208;
+  --color-bg-card:        #FFFFFF;
+
+  /* Text */
+  --color-text:           #1A1A1A;
+  --color-text-muted:     #6B6560;
+  --color-text-light:     #9B958F;
+  --color-text-inverse:   #FFFFFF;
+
+  /* Borders */
+  --color-border:         #E8E0D0;
+  --color-border-dark:    #C8C0B0;
+
+  /* Semantic */
+  --color-success:        #1D9E75;
+  --color-success-light:  rgba(29, 158, 117, 0.12);
+  --color-error:          #D94F4F;
+  --color-error-light:    rgba(217, 79, 79, 0.12);
+  --color-warning:        #E8A020;
+  --color-info:           #3B82F6;
+
+  /* Neutrals */
+  --color-white:          #FFFFFF;
+  --color-black:          #000000;
+
+  /* Typography */
+  --font-heading:         'Playfair Display', Georgia, serif;
+  --font-body:            'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Font Sizes — fluid scale */
+  --text-xs:    0.75rem;    /* 12px */
+  --text-sm:    0.875rem;   /* 14px */
+  --text-base:  1rem;       /* 16px */
+  --text-md:    1.125rem;   /* 18px */
+  --text-lg:    1.25rem;    /* 20px */
+  --text-xl:    1.5rem;     /* 24px */
+  --text-2xl:   1.875rem;   /* 30px */
+  --text-3xl:   2.25rem;    /* 36px */
+  --text-4xl:   3rem;       /* 48px */
+  --text-5xl:   3.75rem;    /* 60px */
+
+  /* Font Weights */
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-semibold:600;
+  --weight-bold:    700;
+
+  /* Line Heights */
+  --leading-tight:  1.2;
+  --leading-snug:   1.4;
+  --leading-normal: 1.6;
+  --leading-loose:  1.8;
+
+  /* Spacing — 8px base unit */
+  --space-1:   0.25rem;   /* 4px  */
+  --space-2:   0.5rem;    /* 8px  */
+  --space-3:   0.75rem;   /* 12px */
+  --space-4:   1rem;      /* 16px */
+  --space-5:   1.25rem;   /* 20px */
+  --space-6:   1.5rem;    /* 24px */
+  --space-8:   2rem;      /* 32px */
+  --space-10:  2.5rem;    /* 40px */
+  --space-12:  3rem;      /* 48px */
+  --space-16:  4rem;      /* 64px */
+  --space-20:  5rem;      /* 80px */
+  --space-24:  6rem;      /* 96px */
+
+  /* Border Radius */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-2xl:  24px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-xs:  0 1px 2px rgba(26,18,8,0.06);
+  --shadow-sm:  0 2px 8px rgba(26,18,8,0.08);
+  --shadow-md:  0 4px 16px rgba(26,18,8,0.10);
+  --shadow-lg:  0 8px 32px rgba(26,18,8,0.12);
+  --shadow-xl:  0 16px 48px rgba(26,18,8,0.16);
+  --shadow-gold:0 4px 20px rgba(201,168,76,0.30);
+
+  /* Transitions */
+  --transition-fast:   150ms ease;
+  --transition-base:   250ms ease;
+  --transition-slow:   400ms ease;
+  --transition-spring: 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Layout */
+  --container-max:     1280px;
+  --container-padding: clamp(1rem, 5vw, 2rem);
+
+  /* Navbar */
+  --navbar-height: 72px;
+  --announcement-height: 44px;
+
+  /* Z-index scale */
+  --z-base:        1;
+  --z-dropdown:    100;
+  --z-sticky:      200;
+  --z-overlay:     300;
+  --z-modal:       400;
+  --z-toast:       500;
+  --z-top:         600;
+}
+
+/* ── 02. CSS Reset & Base ───────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-normal);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Offset for sticky navbar */
+body.has-announcement {
+  padding-top: calc(var(--navbar-height) + var(--announcement-height));
+}
+body:not(.has-announcement) {
+  padding-top: var(--navbar-height);
+}
+
+/* Hero pages — no top padding, navbar overlaps */
+body.hero-page {
+  padding-top: 0;
+}
+
+img, video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+ul, ol { list-style: none; }
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+  background: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+input, textarea, select {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+}
+
+table { border-collapse: collapse; }
+
+/* Focus styles — accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-primary-muted);
+  color: var(--color-text);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--color-bg-secondary); }
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: var(--radius-full);
+}
+
+/* ── 03. Typography ─────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: clamp(var(--text-3xl), 5vw, var(--text-5xl)); }
+h2 { font-size: clamp(var(--text-2xl), 4vw, var(--text-4xl)); }
+h3 { font-size: clamp(var(--text-xl),  3vw, var(--text-3xl)); }
+h4 { font-size: clamp(var(--text-lg),  2vw, var(--text-2xl)); }
+h5 { font-size: var(--text-xl); }
+h6 { font-size: var(--text-lg); }
+
+p { line-height: var(--leading-loose); }
+
+.section-label {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: var(--space-3);
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(var(--text-2xl), 3.5vw, var(--text-4xl));
+  color: var(--color-text);
+  margin-bottom: var(--space-4);
+}
+
+.section-subtitle {
+  font-size: var(--text-md);
+  color: var(--color-text-muted);
+  line-height: var(--leading-loose);
+  max-width: 600px;
+}
+
+.text-gold    { color: var(--color-primary); }
+.text-muted   { color: var(--color-text-muted); }
+.text-success { color: var(--color-success); }
+.text-error   { color: var(--color-error); }
+
+/* ── 04. Utility Classes ────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
+}
+
+.section {
+  padding-block: clamp(var(--space-12), 8vw, var(--space-24));
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: clamp(var(--space-8), 5vw, var(--space-16));
+}
+
+.flex        { display: flex; }
+.flex-center { display: flex; align-items: center; justify-content: center; }
+.flex-between{ display: flex; align-items: center; justify-content: space-between; }
+.flex-col    { display: flex; flex-direction: column; }
+.gap-2       { gap: var(--space-2); }
+.gap-4       { gap: var(--space-4); }
+.gap-6       { gap: var(--space-6); }
+.gap-8       { gap: var(--space-8); }
+
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-6); }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-6); }
+
+.text-center { text-align: center; }
+.text-left   { text-align: left; }
+.text-right  { text-align: right; }
+
+.w-full  { width: 100%; }
+.h-full  { height: 100%; }
+
+.hidden  { display: none !important; }
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.overflow-hidden { overflow: hidden; }
+.relative        { position: relative; }
+
+/* Aspect ratios */
+.aspect-square    { aspect-ratio: 1 / 1; }
+.aspect-product   { aspect-ratio: 3 / 4; }
+.aspect-landscape { aspect-ratio: 16 / 9; }
+.aspect-banner    { aspect-ratio: 21 / 9; }
+
+.img-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ── 05. Announcement Bar ───────────────────────────────────── */
+.announcement-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--announcement-height);
+  background: var(--color-primary);
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  z-index: var(--z-sticky);
+  transition: transform var(--transition-base);
+  overflow: hidden;
+}
+
+.announcement-bar.dismissed {
+  transform: translateY(-100%);
+}
+
+.announcement-bar__text {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+.announcement-bar__close {
+  position: absolute;
+  right: var(--space-4);
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  transition: background var(--transition-fast);
+}
+
+.announcement-bar__close:hover {
+  background: rgba(0,0,0,0.1);
+}
+
+/* ── 06. Navbar ─────────────────────────────────────────────── */
+.navbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: var(--navbar-height);
+  display: flex;
+  align-items: center;
+  z-index: var(--z-sticky);
+  transition:
+    background var(--transition-slow),
+    box-shadow var(--transition-slow),
+    top var(--transition-base);
+}
+
+/* When announcement bar is visible */
+body.has-announcement .navbar {
+  top: var(--announcement-height);
+}
+body:not(.has-announcement) .navbar,
+body.has-announcement .announcement-bar.dismissed ~ .navbar {
+  top: 0;
+}
+
+/* Transparent state (over hero) */
+.navbar--transparent {
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Solid state (on scroll) */
+.navbar--solid {
+  background: var(--color-white);
+  box-shadow: var(--shadow-sm);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.navbar__inner {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+}
+
+/* Logo */
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.navbar__logo-svg {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+}
+
+.navbar__logo-text {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.06em;
+  color: var(--color-text);
+  transition: color var(--transition-fast);
+}
+
+.navbar--transparent .navbar__logo-text,
+.navbar--transparent .navbar__nav-link,
+.navbar--transparent .navbar__icon-btn {
+  color: var(--color-white);
+}
+
+.navbar--transparent .navbar__logo-text:hover,
+.navbar--transparent .navbar__nav-link:hover {
+  color: var(--color-primary-light);
+}
+
+/* Centre nav links */
+.navbar__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.navbar__nav-link {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.03em;
+  color: var(--color-text);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  transition:
+    color var(--transition-fast),
+    background var(--transition-fast);
+  white-space: nowrap;
+}
+
+.navbar__nav-link:hover,
+.navbar__nav-link.active {
+  color: var(--color-primary);
+  background: var(--color-primary-muted);
+}
+
+.navbar--transparent .navbar__nav-link.active {
+  background: rgba(255,255,255,0.15);
+  color: var(--color-primary-light);
+}
+
+/* Right icons */
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.navbar__icon-btn {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-md);
+  color: var(--color-text);
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-spring);
+}
+
+.navbar__icon-btn:hover {
+  background: var(--color-primary-muted);
+  color: var(--color-primary);
+  transform: scale(1.08);
+}
+
+.navbar--transparent .navbar__icon-btn:hover {
+  background: rgba(255,255,255,0.15);
+  color: var(--color-primary-light);
+}
+
+/* Cart badge */
+.navbar__cart-badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  min-width: 18px;
+  height: 18px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+  color: var(--color-text);
+  font-size: 10px;
+  font-weight: var(--weight-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 4px;
+  line-height: 1;
+  box-shadow: 0 0 0 2px var(--color-white);
+  transition: transform var(--transition-spring);
+}
+
+.navbar__cart-badge.bump {
+  transform: scale(1.4);
+}
+
+/* Order Now CTA button */
+.navbar__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-5);
+  background: var(--color-primary);
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.03em;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+  transition:
+    background var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-spring);
+  margin-left: var(--space-2);
+}
+
+.navbar__cta:hover {
+  background: var(--color-primary-dark);
+  box-shadow: var(--shadow-gold);
+  transform: translateY(-1px);
+}
+
+.navbar__cta:active { transform: translateY(0); }
+
+/* Hamburger */
+.navbar__hamburger {
+  display: none;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  font-size: var(--text-xl);
+  transition: background var(--transition-fast);
+}
+
+.navbar--transparent .navbar__hamburger { color: var(--color-white); }
+.navbar__hamburger:hover { background: var(--color-primary-muted); }
+
+/* ── 07. Mobile Nav Drawer ──────────────────────────────────── */
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26,18,8,0.6);
+  backdrop-filter: blur(4px);
+  z-index: var(--z-overlay);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-slow);
+}
+
+.nav-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.nav-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(360px, 90vw);
+  height: 100vh;
+  height: 100dvh;
+  background: var(--color-white);
+  z-index: var(--z-modal);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform var(--transition-slow) cubic-bezier(0.32, 0, 0.15, 1);
+  overflow-y: auto;
+}
+
+.nav-drawer.open {
+  transform: translateX(0);
+}
+
+.nav-drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.nav-drawer__close {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.nav-drawer__close:hover {
+  background: var(--color-error-light);
+  color: var(--color-error);
+}
+
+.nav-drawer__links {
+  flex: 1;
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.nav-drawer__link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-4);
+  border-radius: var(--radius-lg);
+  font-size: var(--text-md);
+  font-weight: var(--weight-medium);
+  color: var(--color-text);
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.nav-drawer__link i {
+  width: 20px;
+  color: var(--color-primary);
+  font-size: var(--text-base);
+}
+
+.nav-drawer__link:hover,
+.nav-drawer__link.active {
+  background: var(--color-primary-muted);
+  color: var(--color-primary-dark);
+}
+
+.nav-drawer__divider {
+  height: 1px;
+  background: var(--color-border);
+  margin-block: var(--space-4);
+}
+
+.nav-drawer__footer {
+  padding: var(--space-6);
+  border-top: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.nav-drawer__whatsapp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-4);
+  background: var(--color-success);
+  color: var(--color-white);
+  border-radius: var(--radius-full);
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-base);
+  transition: background var(--transition-fast), transform var(--transition-spring);
+}
+
+.nav-drawer__whatsapp:hover {
+  background: #158a63;
+  transform: scale(1.02);
+}
+
+/* ── 08. Footer ─────────────────────────────────────────────── */
+.footer {
+  background: var(--color-bg-dark);
+  color: rgba(255,255,255,0.8);
+  padding-top: clamp(var(--space-12), 8vw, var(--space-20));
+}
+
+.footer__top {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  gap: var(--space-10);
+  padding-bottom: var(--space-12);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer__brand-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.footer__brand-logo .logo-text {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  color: var(--color-white);
+  letter-spacing: 0.06em;
+}
+
+.footer__tagline {
+  font-size: var(--text-sm);
+  color: rgba(255,255,255,0.5);
+  line-height: var(--leading-loose);
+  margin-bottom: var(--space-6);
+  font-style: italic;
+  font-family: var(--font-heading);
+}
+
+.footer__description {
+  font-size: var(--text-sm);
+  color: rgba(255,255,255,0.55);
+  line-height: var(--leading-loose);
+  margin-bottom: var(--space-6);
+}
+
+.footer__social {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.footer__social-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-base);
+  color: rgba(255,255,255,0.6);
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-spring);
+}
+
+.footer__social-btn:hover {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-text);
+  transform: translateY(-2px);
+}
+
+.footer__col-title {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: var(--space-5);
+}
+
+.footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.footer__link {
+  font-size: var(--text-sm);
+  color: rgba(255,255,255,0.55);
+  transition: color var(--transition-fast), padding-left var(--transition-fast);
+  display: inline-block;
+}
+
+.footer__link:hover {
+  color: var(--color-primary-light);
+  padding-left: var(--space-2);
+}
+
+.footer__contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  font-size: var(--text-sm);
+  color: rgba(255,255,255,0.55);
+}
+
+.footer__contact-item i {
+  color: var(--color-primary);
+  margin-top: 3px;
+  flex-shrink: 0;
+  width: 16px;
+}
+
+.footer__whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  background: var(--color-success);
+  color: var(--color-white);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  margin-top: var(--space-4);
+  transition: background var(--transition-fast), transform var(--transition-spring);
+}
+
+.footer__whatsapp-btn:hover {
+  background: #158a63;
+  transform: scale(1.03);
+}
+
+.footer__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: var(--space-6);
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.footer__copyright {
+  font-size: var(--text-xs);
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.03em;
+}
+
+.footer__delivery-note {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  color: rgba(255,255,255,0.4);
+}
+
+.footer__delivery-note i { color: var(--color-primary); }
+
+/* ── 09. Floating WhatsApp Button ───────────────────────────── */
+.whatsapp-float {
+  position: fixed;
+  bottom: var(--space-6);
+  right: var(--space-6);
+  width: 58px;
+  height: 58px;
+  border-radius: var(--radius-full);
+  background: var(--color-success);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  z-index: var(--z-top);
+  box-shadow: 0 4px 20px rgba(29,158,117,0.45);
+  transition:
+    transform var(--transition-spring),
+    box-shadow var(--transition-fast);
+  animation: whatsapp-pulse 2.5s ease-in-out infinite;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.12);
+  box-shadow: 0 6px 28px rgba(29,158,117,0.55);
+  animation: none;
+}
+
+@keyframes whatsapp-pulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(29,158,117,0.45); }
+  50%       { box-shadow: 0 4px 28px rgba(29,158,117,0.70), 0 0 0 8px rgba(29,158,117,0.12); }
+}
+
+/* Tooltip on hover */
+.whatsapp-float::before {
+  content: "Chat with us";
+  position: absolute;
+  right: calc(100% + var(--space-3));
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--color-text);
+  color: var(--color-white);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  white-space: nowrap;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-fast);
+}
+
+.whatsapp-float:hover::before { opacity: 1; }
+
+/* ── 10. Toast Notifications ────────────────────────────────── */
+.toast-container {
+  position: fixed;
+  bottom: var(--space-6);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column-reverse;
+  gap: var(--space-3);
+  z-index: var(--z-toast);
+  pointer-events: none;
+  width: min(400px, 90vw);
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-xl);
+  background: var(--color-white);
+  box-shadow: var(--shadow-xl);
+  border-left: 4px solid transparent;
+  pointer-events: all;
+  animation: toast-in 0.35s var(--transition-spring) forwards;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+}
+
+.toast.removing {
+  animation: toast-out 0.25s ease forwards;
+}
+
+.toast--success {
+  border-left-color: var(--color-success);
+}
+.toast--success .toast__icon { color: var(--color-success); }
+
+.toast--error {
+  border-left-color: var(--color-error);
+}
+.toast--error .toast__icon { color: var(--color-error); }
+
+.toast--info {
+  border-left-color: var(--color-primary);
+}
+.toast--info .toast__icon { color: var(--color-primary); }
+
+.toast__icon { font-size: var(--text-lg); flex-shrink: 0; }
+.toast__message { flex: 1; color: var(--color-text); }
+
+.toast__close {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+  flex-shrink: 0;
+}
+.toast__close:hover { background: var(--color-bg-secondary); }
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(16px) scale(0.94); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes toast-out {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to   { opacity: 0; transform: translateY(8px) scale(0.96); }
+}
+
+/* ── 11. Loading Skeletons ──────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position:  600px 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-secondary) 25%,
+    var(--color-border)        50%,
+    var(--color-bg-secondary) 75%
+  );
+  background-size: 1200px 100%;
+  animation: shimmer 1.6s infinite linear;
+  border-radius: var(--radius-md);
+}
+
+.skeleton-card {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--color-white);
+  box-shadow: var(--shadow-sm);
+}
+
+.skeleton-card .skeleton-img {
+  aspect-ratio: 3 / 4;
+  width: 100%;
+}
+
+.skeleton-card .skeleton-text {
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.skeleton-line {
+  height: 14px;
+  border-radius: var(--radius-full);
+}
+
+.skeleton-line.w-80 { width: 80%; }
+.skeleton-line.w-60 { width: 60%; }
+.skeleton-line.w-40 { width: 40%; }
+.skeleton-line.w-full{ width: 100%; }
+
+/* ── 12. Product Cards (shared across shop, home, etc.) ─────── */
+.product-card {
+  position: relative;
+  border-radius: var(--radius-xl);
+  background: var(--color-white);
+  box-shadow: var(--shadow-xs);
+  overflow: hidden;
+  transition:
+    box-shadow var(--transition-base),
+    transform var(--transition-base);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.product-card:active { transform: translateY(-2px); }
+
+/* Image wrapper */
+.product-card__img-wrap {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  background: var(--color-bg-secondary);
+  flex-shrink: 0;
+}
+
+.product-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-card__img {
+  transform: scale(1.06);
+}
+
+/* Placeholder image */
+.product-card__img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--color-bg-secondary) 0%, var(--color-border) 100%);
+  color: var(--color-text-light);
+  font-size: 3rem;
+}
+
+/* Wishlist heart */
+.product-card__wishlist {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+  transition:
+    color var(--transition-fast),
+    background var(--transition-fast),
+    transform var(--transition-spring);
+  z-index: 2;
+}
+
+.product-card__wishlist:hover,
+.product-card__wishlist.active {
+  color: var(--color-error);
+  background: var(--color-white);
+  transform: scale(1.15);
+}
+
+.product-card__wishlist.active i::before { content: "\f004"; } /* solid heart */
+
+/* Badge */
+.product-card__badge {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.04em;
+  z-index: 2;
+}
+
+.badge--new {
+  background: var(--color-primary);
+  color: var(--color-text);
+}
+
+.badge--bestseller {
+  background: var(--color-text);
+  color: var(--color-primary);
+}
+
+.badge--sale {
+  background: var(--color-error);
+  color: var(--color-white);
+}
+
+/* Card body */
+.product-card__body {
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  flex: 1;
+}
+
+.product-card__category {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.product-card__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text);
+  line-height: var(--leading-snug);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Stars */
+.product-card__stars {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.stars {
+  display: flex;
+  gap: 2px;
+}
+
+.stars i {
+  font-size: 11px;
+  color: var(--color-primary);
+}
+
+.stars__count {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-left: var(--space-1);
+}
+
+/* Price */
+.product-card__price {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.price-current {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  color: var(--color-primary-dark);
+}
+
+.price-original {
+  font-size: var(--text-sm);
+  color: var(--color-text-light);
+  text-decoration: line-through;
+}
+
+/* Add to cart */
+.product-card__add-btn {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-primary-muted);
+  color: var(--color-primary-dark);
+  border-radius: var(--radius-lg);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.02em;
+  margin-top: auto;
+  border: 1.5px solid transparent;
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    transform var(--transition-spring);
+}
+
+.product-card__add-btn:hover {
+  background: var(--color-primary);
+  color: var(--color-text);
+  transform: scale(1.02);
+}
+
+.product-card__add-btn:active {
+  transform: scale(0.98);
+}
+
+.product-card__add-btn.added {
+  background: var(--color-success);
+  color: var(--color-white);
+}
+
+/* ── 13. Section Dividers & Decorative Elements ─────────────── */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-block: var(--space-4);
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.divider-ornament {
+  color: var(--color-primary);
+  font-size: var(--text-lg);
+}
+
+/* Indian geometric section divider */
+.section-divider {
+  position: relative;
+  text-align: center;
+  margin-block: clamp(var(--space-8), 6vw, var(--space-16));
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+}
+
+.section-divider::before,
+.section-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-border),
+    var(--color-primary),
+    var(--color-border),
+    transparent
+  );
+}
+
+.section-divider__symbol {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-primary);
+  font-size: var(--text-lg);
+}
+
+/* Decorative dots pattern */
+.pattern-dots {
+  background-image: radial-gradient(circle, var(--color-border) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Warm texture overlay */
+.texture-overlay {
+  position: relative;
+}
+.texture-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(201,168,76,0.03) 10px,
+      rgba(201,168,76,0.03) 20px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── 14. Buttons ────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-8);
+  border-radius: var(--radius-full);
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-spring);
+  min-height: 44px;
+  text-decoration: none;
+}
+
+.btn:active { transform: scale(0.97); }
+
+/* Primary */
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-text);
+  border-color: var(--color-primary);
+}
+.btn-primary:hover {
+  background: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  box-shadow: var(--shadow-gold);
+  transform: translateY(-2px);
+}
+
+/* Secondary (outline) */
+.btn-secondary {
+  background: transparent;
+  color: var(--color-primary-dark);
+  border-color: var(--color-primary);
+}
+.btn-secondary:hover {
+  background: var(--color-primary-muted);
+  transform: translateY(-2px);
+}
+
+/* Dark */
+.btn-dark {
+  background: var(--color-text);
+  color: var(--color-white);
+  border-color: var(--color-text);
+}
+.btn-dark:hover {
+  background: #2D2D2D;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Ghost */
+.btn-ghost {
+  background: transparent;
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+.btn-ghost:hover {
+  background: var(--color-bg-secondary);
+  border-color: var(--color-border-dark);
+}
+
+/* WhatsApp */
+.btn-whatsapp {
+  background: var(--color-success);
+  color: var(--color-white);
+  border-color: var(--color-success);
+}
+.btn-whatsapp:hover {
+  background: #158a63;
+  border-color: #158a63;
+  box-shadow: 0 4px 16px rgba(29,158,117,0.35);
+  transform: translateY(-2px);
+}
+
+/* Sizes */
+.btn-sm { padding: var(--space-2) var(--space-5); font-size: var(--text-sm); min-height: 36px; }
+.btn-lg { padding: var(--space-5) var(--space-10); font-size: var(--text-md); min-height: 52px; }
+.btn-full { width: 100%; }
+
+/* Loading state */
+.btn.loading {
+  position: relative;
+  pointer-events: none;
+  color: transparent;
+}
+.btn.loading::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── 15. Form Elements ──────────────────────────────────────── */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+.form-label {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text);
+  letter-spacing: 0.02em;
+}
+
+.form-label .required {
+  color: var(--color-error);
+  margin-left: var(--space-1);
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: var(--space-4) var(--space-5);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-white);
+  color: var(--color-text);
+  font-size: var(--text-base);
+  font-family: var(--font-body);
+  line-height: var(--leading-normal);
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+  min-height: 44px;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--color-text-light);
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-muted);
+}
+
+.form-input.error,
+.form-select.error,
+.form-textarea.error {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px var(--color-error-light);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: var(--leading-loose);
+}
+
+.form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236B6560' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--space-4) center;
+  background-size: 18px;
+  padding-right: var(--space-10);
+  cursor: pointer;
+}
+
+.form-hint {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.form-error {
+  font-size: var(--text-xs);
+  color: var(--color-error);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+/* Checkbox */
+.form-check {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  cursor: pointer;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.form-check input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--color-border-dark);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  accent-color: var(--color-primary);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* Input with icon */
+.input-icon-wrap {
+  position: relative;
+}
+
+.input-icon-wrap .input-icon {
+  position: absolute;
+  left: var(--space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+  font-size: var(--text-base);
+  pointer-events: none;
+}
+
+.input-icon-wrap .form-input {
+  padding-left: calc(var(--space-4) + 20px + var(--space-3));
+}
+
+/* ── 16. Modals ─────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26,18,8,0.65);
+  backdrop-filter: blur(6px);
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-base);
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal {
+  background: var(--color-white);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-xl);
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  transform: translateY(24px) scale(0.97);
+  transition: transform var(--transition-slow) cubic-bezier(0.32, 0, 0.15, 1);
+}
+
+.modal-overlay.open .modal {
+  transform: translateY(0) scale(1);
+}
+
+.modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-6) var(--space-8);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  background: var(--color-white);
+  z-index: 1;
+}
+
+.modal__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+}
+
+.modal__close {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.modal__close:hover {
+  background: var(--color-error-light);
+  color: var(--color-error);
+}
+
+.modal__body {
+  padding: var(--space-8);
+}
+
+.modal__footer {
+  display: flex;
+  gap: var(--space-3);
+  justify-content: flex-end;
+  padding: var(--space-5) var(--space-8);
+  border-top: 1px solid var(--color-border);
+  background: var(--color-bg-secondary);
+  border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
+}
+
+/* ── 17. Badges & Tags ──────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 3px var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+}
+
+.badge-gold    { background: var(--color-primary-muted); color: var(--color-primary-dark); }
+.badge-green   { background: var(--color-success-light); color: var(--color-success); }
+.badge-red     { background: var(--color-error-light);   color: var(--color-error); }
+.badge-gray    { background: var(--color-bg-secondary);  color: var(--color-text-muted); }
+.badge-dark    { background: var(--color-text);          color: var(--color-primary); }
+
+/* Order status badges */
+.status-new        { background: #EEF2FF; color: #4F46E5; }
+.status-contacted  { background: #FEF3C7; color: #D97706; }
+.status-in-progress{ background: #DBEAFE; color: #2563EB; }
+.status-completed  { background: var(--color-success-light); color: var(--color-success); }
+.status-cancelled  { background: var(--color-error-light);   color: var(--color-error); }
+
+/* ── 18. Scroll Animations ──────────────────────────────────── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 0.65s ease,
+    transform 0.65s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-in {
+  opacity: 0;
+  transition: opacity 0.65s ease;
+}
+.fade-in.visible { opacity: 1; }
+
+.scale-in {
+  opacity: 0;
+  transform: scale(0.92);
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s var(--transition-spring);
+}
+.scale-in.visible { opacity: 1; transform: scale(1); }
+
+/* Stagger delays for grid children */
+.stagger-children > *:nth-child(1) { transition-delay: 0ms; }
+.stagger-children > *:nth-child(2) { transition-delay: 80ms; }
+.stagger-children > *:nth-child(3) { transition-delay: 160ms; }
+.stagger-children > *:nth-child(4) { transition-delay: 240ms; }
+.stagger-children > *:nth-child(5) { transition-delay: 320ms; }
+.stagger-children > *:nth-child(6) { transition-delay: 400ms; }
+.stagger-children > *:nth-child(7) { transition-delay: 480ms; }
+.stagger-children > *:nth-child(8) { transition-delay: 560ms; }
+
+/* ── 19. Page Transition ────────────────────────────────────── */
+.page-transition {
+  animation: page-fade-in 0.45s ease forwards;
+}
+
+@keyframes page-fade-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Global loader */
+.page-loader {
+  position: fixed;
+  inset: 0;
+  background: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  z-index: var(--z-top);
+  transition: opacity 0.4s ease;
+}
+
+.page-loader.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.page-loader__spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.page-loader__text {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  color: var(--color-primary);
+  letter-spacing: 0.08em;
+}
+
+/* ── 20. Responsive Breakpoints ─────────────────────────────── */
+
+/* Tablet — ≤1024px */
+@media (max-width: 1024px) {
+  .navbar__nav { display: none; }
+  .navbar__cta { display: none; }
+  .navbar__hamburger { display: flex; }
+
+  .footer__top {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+  }
+
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Mobile — ≤768px */
+@media (max-width: 768px) {
+  :root {
+    --navbar-height: 64px;
+    --announcement-height: 40px;
+  }
+
+  .grid-3 { grid-template-columns: repeat(2, 1fr); gap: var(--space-4); }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); gap: var(--space-4); }
+  .grid-2 { grid-template-columns: 1fr; }
+
+  .footer__top {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .footer__bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .modal__body { padding: var(--space-5); }
+  .modal__header { padding: var(--space-5) var(--space-5); }
+  .modal__footer { padding: var(--space-4) var(--space-5); }
+
+  .btn-lg {
+    padding: var(--space-4) var(--space-8);
+    font-size: var(--text-base);
+  }
+
+  .section-subtitle { max-width: 100%; }
+}
+
+/* Small mobile — ≤480px */
+@media (max-width: 480px) {
+  .grid-3 { grid-template-columns: 1fr; }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); gap: var(--space-3); }
+
+  .whatsapp-float {
+    bottom: var(--space-4);
+    right: var(--space-4);
+    width: 52px;
+    height: 52px;
+    font-size: 1.4rem;
+  }
+
+  .whatsapp-float::before { display: none; }
+
+  .toast-container {
+    bottom: var(--space-4);
+    width: calc(100vw - var(--space-8));
+  }
+
+  .navbar__logo-text { font-size: var(--text-lg); }
+}
+
+/* Large screens — ≥1440px */
+@media (min-width: 1440px) {
+  :root { --container-max: 1360px; }
+}
+
+
+
+/* ============================================================
+   ALVOR — Services Page Styles (services.css)
+   ============================================================ */
+
+/* ============================================================
+   ALVOR — Services Page Stylesheet  (css/services.css)
+   "Where Thread Meets Tradition"
+   ============================================================
+   TABLE OF CONTENTS
+   01. Services Hero
+   02. Process Steps
+   03. Client Type Cards
+   04. Portfolio Grid
+   05. Pricing Section
+   06. Consultation Form
+   07. FAQ Accordion
+   08. Responsive Breakpoints
+   ============================================================ */
+
+
+/* ── 01. Services Hero ──────────────────────────────────────── */
+
+.services-hero {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #1A1208;
+}
+
+.services-hero__bg {
+  position: absolute;
+  inset: 0;
+  background-color: #1A1208;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      transparent, transparent 28px,
+      rgba(201,168,76,0.07) 28px, rgba(201,168,76,0.07) 30px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent, transparent 28px,
+      rgba(201,168,76,0.05) 28px, rgba(201,168,76,0.05) 30px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent, transparent 58px,
+      rgba(201,168,76,0.03) 58px, rgba(201,168,76,0.03) 60px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent, transparent 58px,
+      rgba(201,168,76,0.03) 58px, rgba(201,168,76,0.03) 60px
+    );
+  background-size: 60px 60px, 60px 60px, 60px 60px, 60px 60px;
+}
+
+.services-hero__bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 80% 70% at 50% 40%,
+    rgba(201,168,76,0.12) 0%,
+    rgba(26,18,8,0.55) 55%,
+    rgba(26,18,8,0.88) 100%
+  );
+}
+
+.services-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    175deg,
+    rgba(26,18,8,0.50) 0%,
+    rgba(26,18,8,0.25) 50%,
+    rgba(26,18,8,0.70) 100%
+  );
+  z-index: 1;
+}
+
+.services-hero__content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding-block: var(--space-16);
+  max-width: 800px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+/* Ornament */
+.services-hero__ornament {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.services-hero__ornament-line {
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-primary));
+  opacity: 0.7;
+}
+
+.services-hero__ornament-line--right {
+  background: linear-gradient(90deg, var(--color-primary), transparent);
+}
+
+.services-hero__ornament-diamond {
+  width: 8px;
+  height: 8px;
+  background: var(--color-primary);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+.services-hero__title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 6.5vw, 4.2rem);
+  font-weight: var(--weight-bold);
+  line-height: 1.1;
+  color: var(--color-white);
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 24px rgba(0,0,0,0.4);
+  animation: hero-fade-up 0.9s ease 0.2s forwards;
+  opacity: 0;
+}
+
+.services-hero__subtitle {
+  font-size: clamp(var(--text-base), 2vw, var(--text-md));
+  color: rgba(255,255,255,0.75);
+  line-height: var(--leading-loose);
+  max-width: 560px;
+  animation: hero-fade-up 0.9s ease 0.4s forwards;
+  opacity: 0;
+}
+
+.services-hero__actions {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: hero-fade-up 0.9s ease 0.55s forwards;
+  opacity: 0;
+}
+
+/* Trust pills */
+.services-hero__trust {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  animation: hero-fade-up 0.9s ease 0.7s forwards;
+  opacity: 0;
+}
+
+.services-hero__trust-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(201,168,76,0.30);
+  background: rgba(201,168,76,0.10);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  color: rgba(255,255,255,0.80);
+  letter-spacing: 0.04em;
+}
+
+.services-hero__trust-pill i {
+  color: var(--color-primary);
+  font-size: 0.65rem;
+}
+
+@keyframes hero-fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ── 02. Process Steps ──────────────────────────────────────── */
+
+.services-process {
+  background: var(--color-bg);
+}
+
+.services-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+  position: relative;
+}
+
+/* Horizontal connector line */
+.services-steps::before {
+  content: "";
+  position: absolute;
+  top: 48px;
+  left: calc(12.5% + 24px);
+  right: calc(12.5% + 24px);
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--color-primary) 0%,
+    rgba(201,168,76,0.25) 50%,
+    var(--color-primary) 100%
+  );
+  z-index: 0;
+}
+
+.service-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* The last step has no right connector */
+.service-step:last-child .service-step__connector { display: none; }
+
+.service-step__connector {
+  display: none; /* desktop uses ::before on parent */
+}
+
+.service-step__circle {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--color-white);
+  border: 2px solid var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: var(--color-primary);
+  margin-bottom: var(--space-5);
+  box-shadow: var(--shadow-gold);
+  position: relative;
+  z-index: 1;
+  transition: background var(--transition-base), color var(--transition-base), transform var(--transition-spring);
+}
+
+.service-step:hover .service-step__circle {
+  background: var(--color-primary);
+  color: var(--color-text);
+  transform: scale(1.1);
+}
+
+.service-step__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.service-step__num {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.service-step__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+  margin-bottom: var(--space-2);
+}
+
+.service-step__text {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: var(--leading-loose);
+  max-width: 240px;
+}
+
+
+/* ── 03. Client Type Cards ──────────────────────────────────── */
+
+.services-clients {
+  background: var(--color-bg-secondary);
+}
+
+.clients-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+}
+
+.client-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8) var(--space-6);
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+}
+
+.client-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary);
+}
+
+.client-card__icon {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-lg);
+  background: var(--color-primary-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  transition: background var(--transition-base), color var(--transition-base), transform var(--transition-spring);
+}
+
+.client-card:hover .client-card__icon {
+  background: var(--color-primary);
+  color: var(--color-text);
+  transform: scale(1.08) rotate(-3deg);
+}
+
+.client-card__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+}
+
+.client-card__text {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: var(--leading-loose);
+  flex: 1;
+}
+
+.client-card__features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+}
+
+.client-card__features li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.client-card__features li i {
+  color: var(--color-success);
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+
+/* ── 04. Portfolio Grid ─────────────────────────────────────── */
+
+.services-portfolio {
+  background: var(--color-bg);
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto;
+  gap: var(--space-4);
+}
+
+/* First item spans 2 rows */
+.portfolio-item--large {
+  grid-row: span 2;
+}
+
+.portfolio-item {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  min-height: 200px;
+  cursor: pointer;
+}
+
+.portfolio-item--large {
+  min-height: 440px;
+}
+
+/* Warm placeholder pattern backgrounds */
+.portfolio-item__bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform var(--transition-slow);
+}
+
+.portfolio-item:hover .portfolio-item__bg {
+  transform: scale(1.06);
+}
+
+.portfolio-item__bg--1 { background-color: #2B1A06; background-image: radial-gradient(circle at 35% 40%, rgba(201,168,76,0.25) 30%, transparent 65%), radial-gradient(circle at 70% 75%, rgba(201,168,76,0.12) 20%, transparent 55%); }
+.portfolio-item__bg--2 { background-color: #1E1010; background-image: radial-gradient(circle at 60% 35%, rgba(201,168,76,0.20) 25%, transparent 60%); }
+.portfolio-item__bg--3 { background-color: #0D1E18; background-image: radial-gradient(circle at 40% 55%, rgba(201,168,76,0.18) 22%, transparent 58%); }
+.portfolio-item__bg--4 { background-color: #101A1E; background-image: radial-gradient(circle at 55% 45%, rgba(201,168,76,0.16) 20%, transparent 55%); }
+.portfolio-item__bg--5 { background-color: #1A1208; background-image: radial-gradient(circle at 45% 50%, rgba(201,168,76,0.20) 25%, transparent 60%); }
+
+.portfolio-item__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.80) 0%,
+    rgba(0,0,0,0.20) 55%,
+    transparent 100%
+  );
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-5);
+  transition: background var(--transition-base);
+}
+
+.portfolio-item:hover .portfolio-item__overlay {
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.90) 0%,
+    rgba(0,0,0,0.40) 60%,
+    transparent 100%
+  );
+}
+
+.portfolio-item__label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.portfolio-item__type {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.portfolio-item__name {
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  color: var(--color-white);
+}
+
+.services-portfolio__note {
+  margin-top: var(--space-8);
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+.services-portfolio__note a {
+  color: var(--color-primary);
+  font-weight: var(--weight-semibold);
+  transition: opacity var(--transition-fast);
+}
+
+.services-portfolio__note a:hover { opacity: 0.75; }
+
+
+/* ── 05. Pricing Section ────────────────────────────────────── */
+
+.services-pricing {
+  position: relative;
+  overflow: hidden;
+  background: #1A1208;
+  padding-block: clamp(var(--space-16), 8vw, var(--space-20));
+}
+
+.services-pricing__bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      transparent, transparent 34px,
+      rgba(201,168,76,0.05) 34px, rgba(201,168,76,0.05) 36px
+    );
+  background-size: 72px 72px;
+}
+
+.services-pricing__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: clamp(var(--space-10), 6vw, var(--space-16));
+  align-items: center;
+}
+
+.services-pricing__content .section-label {
+  margin-bottom: var(--space-4);
+}
+
+.services-pricing__title {
+  font-family: var(--font-heading);
+  font-size: clamp(var(--text-2xl), 3.5vw, var(--text-4xl));
+  font-weight: var(--weight-bold);
+  color: var(--color-white);
+  line-height: var(--leading-tight);
+  margin-bottom: var(--space-5);
+}
+
+.services-pricing__text {
+  font-size: var(--text-base);
+  color: rgba(255,255,255,0.62);
+  line-height: var(--leading-loose);
+  max-width: 520px;
+  margin-bottom: var(--space-6);
+}
+
+.services-pricing__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.services-pricing__list li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  color: rgba(255,255,255,0.70);
+}
+
+.services-pricing__list li i {
+  color: var(--color-success);
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+/* CTA box */
+.services-pricing__cta-box {
+  width: 260px;
+  flex-shrink: 0;
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.22);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-8) var(--space-6);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.services-pricing__cta-icon {
+  font-size: 2.5rem;
+  color: var(--color-primary);
+  opacity: 0.7;
+  margin-bottom: var(--space-4);
+}
+
+.services-pricing__cta-label {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.50);
+  margin-bottom: var(--space-1);
+}
+
+.services-pricing__cta-price {
+  font-family: var(--font-heading);
+  font-size: 2.4rem;
+  font-weight: var(--weight-bold);
+  color: var(--color-primary);
+  line-height: 1;
+  margin-bottom: var(--space-1);
+}
+
+.services-pricing__cta-note {
+  font-size: var(--text-xs);
+  color: rgba(255,255,255,0.40);
+  margin-bottom: 0;
+}
+
+
+/* ── 06. Consultation Form ──────────────────────────────────── */
+
+.services-form-section {
+  background: var(--color-bg-secondary);
+}
+
+.services-form-wrap {
+  max-width: 820px;
+  margin-inline: auto;
+  background: var(--color-white);
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--color-border);
+  padding: clamp(var(--space-8), 5vw, var(--space-12));
+  box-shadow: var(--shadow-md);
+}
+
+.services-form__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+  margin-bottom: var(--space-5);
+}
+
+.services-form__privacy {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-6);
+}
+
+.services-form__privacy i {
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+.services-form__submit {
+  width: 100%;
+  justify-content: center;
+  gap: var(--space-3);
+  font-size: var(--text-md);
+}
+
+/* Success state */
+.services-form__success {
+  text-align: center;
+  padding: var(--space-10) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.services-form__success-icon {
+  font-size: 3.5rem;
+  color: var(--color-success);
+  animation: success-pop 0.5s var(--transition-spring) forwards;
+}
+
+@keyframes success-pop {
+  0%   { transform: scale(0); opacity: 0; }
+  70%  { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.services-form__success h3 {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  color: var(--color-text);
+}
+
+.services-form__success p {
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+  max-width: 440px;
+  line-height: var(--leading-loose);
+}
+
+/* Input error state */
+.form-input--error,
+.form-select--error,
+.form-textarea--error {
+  border-color: var(--color-error) !important;
+  box-shadow: 0 0 0 3px var(--color-error-light);
+}
+
+.form-error {
+  display: none;
+  font-size: var(--text-xs);
+  color: var(--color-error);
+  margin-top: var(--space-1);
+}
+
+.form-required {
+  color: var(--color-error);
+}
+
+
+/* ── 07. FAQ Accordion ──────────────────────────────────────── */
+
+.services-faq {
+  background: var(--color-bg);
+}
+
+.faq-list {
+  max-width: 760px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.faq-item {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.faq-item[open],
+.faq-item:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.faq-item__question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-6);
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  transition: color var(--transition-fast);
+}
+
+.faq-item__question::-webkit-details-marker { display: none; }
+
+.faq-item[open] .faq-item__question {
+  color: var(--color-primary-dark);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.faq-item__icon {
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  flex-shrink: 0;
+  transition: transform var(--transition-base);
+}
+
+.faq-item[open] .faq-item__icon {
+  transform: rotate(180deg);
+}
+
+.faq-item__answer {
+  padding: var(--space-5) var(--space-6);
+}
+
+.faq-item__answer p {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: var(--leading-loose);
+}
+
+
+/* ── 08. Responsive Breakpoints ─────────────────────────────── */
+
+@media (max-width: 1100px) {
+  .clients-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .services-pricing__inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .services-pricing__text { margin-inline: auto; }
+  .services-pricing__list { align-items: center; }
+
+  .services-pricing__cta-box {
+    width: 100%;
+    max-width: 360px;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 1024px) {
+  .services-steps {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-8);
+  }
+
+  .services-steps::before { display: none; }
+
+  /* Show per-step connector on tablet */
+  .service-step__connector {
+    display: none;
+  }
+
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .portfolio-item--large {
+    grid-column: span 2;
+    grid-row: span 1;
+    min-height: 260px;
+  }
+}
+
+@media (max-width: 768px) {
+  .services-hero {
+    min-height: 100svh;
+  }
+
+  .services-hero__actions {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+
+  .services-hero__actions .btn {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .services-form__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .clients-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .portfolio-item--large {
+    grid-column: span 1;
+    min-height: 260px;
+  }
+
+  .faq-item__question {
+    padding: var(--space-4) var(--space-5);
+  }
+
+  .faq-item__answer {
+    padding: var(--space-4) var(--space-5);
+  }
+}
+
+@media (max-width: 480px) {
+  .services-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .clients-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .services-hero__trust {
+    gap: var(--space-2);
+  }
+
+  .services-hero__trust-pill {
+    font-size: 11px;
+    padding: var(--space-1) var(--space-3);
+  }
+
+  .services-form-wrap {
+    padding: var(--space-6);
+  }
+
+  .services-pricing__cta-box {
+    padding: var(--space-6) var(--space-5);
+  }
+}
+
+  </style>
+</head>
+
+<body class="page-transition">
+
+  <!-- ── Page Loader ─────────────────────────────────────────── -->
+  <div class="page-loader" id="page-loader">
+    <div class="page-loader__spinner"></div>
+    <span class="page-loader__text">ALVOR</span>
+  </div>
+
+  <!-- ── Announcement Bar ────────────────────────────────────── -->
+  <div class="announcement-bar" id="announcement-bar">
+    <p class="announcement-bar__text" id="announcement-text">
+      ✨ Free delivery across Andhra Pradesh on all orders!
+    </p>
+    <button class="announcement-bar__close" id="announcement-close" aria-label="Dismiss">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+
+  <!-- ── Navbar ──────────────────────────────────────────────── -->
+  <header class="navbar navbar--solid" id="navbar">
+    <div class="navbar__inner">
+
+      <a href="index.html" class="navbar__logo" aria-label="ALVOR Home">
+        <svg class="navbar__logo-svg" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <polygon points="18,2 21,13 32,13 23,20 26,31 18,24 10,31 13,20 4,13 15,13" fill="none" stroke="#C9A84C" stroke-width="1.6" stroke-linejoin="round"/>
+          <circle cx="18" cy="18" r="4" fill="#C9A84C" opacity="0.85"/>
+        </svg>
+        <span class="navbar__logo-text">ALVOR</span>
+      </a>
+
+      <nav class="navbar__nav" aria-label="Main navigation">
+        <a href="index.html"    class="navbar__nav-link">Home</a>
+        <a href="shop.html"     class="navbar__nav-link">Shop</a>
+        <a href="services.html" class="navbar__nav-link active" aria-current="page">Services</a>
+        <a href="about.html"    class="navbar__nav-link">About</a>
+        <a href="contact.html"  class="navbar__nav-link">Contact</a>
+      </nav>
+
+      <div class="navbar__actions">
+        <a href="shop.html"    class="navbar__icon-btn" aria-label="Search products"><i class="fa-solid fa-magnifying-glass"></i></a>
+        <a href="account.html" class="navbar__icon-btn" aria-label="My account"><i class="fa-regular fa-user"></i></a>
+        <a href="cart.html"    class="navbar__icon-btn" aria-label="Shopping cart">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="navbar__cart-badge" id="cart-badge" style="display:none">0</span>
+        </a>
+        <a href="shop.html" class="navbar__cta btn btn-primary btn-sm">Order Now</a>
+        <button class="navbar__hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ── Mobile Nav Drawer ───────────────────────────────────── -->
+  <div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
+  <nav class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
+    <div class="nav-drawer__header">
+      <a href="index.html" class="navbar__logo">
+        <svg width="32" height="32" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <polygon points="18,2 21,13 32,13 23,20 26,31 18,24 10,31 13,20 4,13 15,13" fill="none" stroke="#C9A84C" stroke-width="1.6" stroke-linejoin="round"/>
+          <circle cx="18" cy="18" r="4" fill="#C9A84C" opacity="0.85"/>
+        </svg>
+        <span class="navbar__logo-text">ALVOR</span>
+      </a>
+      <button class="nav-drawer__close" id="nav-close" aria-label="Close menu">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="nav-drawer__links">
+      <a href="index.html"    class="nav-drawer__link"><i class="fa-solid fa-house"></i> Home</a>
+      <a href="shop.html"     class="nav-drawer__link"><i class="fa-solid fa-store"></i> Shop</a>
+      <a href="services.html" class="nav-drawer__link active"><i class="fa-solid fa-paintbrush"></i> Services</a>
+      <a href="about.html"    class="nav-drawer__link"><i class="fa-solid fa-circle-info"></i> About</a>
+      <a href="contact.html"  class="nav-drawer__link"><i class="fa-solid fa-envelope"></i> Contact</a>
+      <div class="nav-drawer__divider"></div>
+      <a href="account.html"  class="nav-drawer__link"><i class="fa-regular fa-user"></i> My Account</a>
+      <a href="cart.html"     class="nav-drawer__link"><i class="fa-solid fa-bag-shopping"></i> Cart</a>
+    </div>
+    <div class="nav-drawer__footer">
+      <a href="https://wa.me/919182492525" target="_blank" rel="noopener" class="nav-drawer__whatsapp">
+        <i class="fa-brands fa-whatsapp"></i> Order on WhatsApp
+      </a>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════════════════
+       MAIN CONTENT
+  ══════════════════════════════════════════════════════════ -->
+  <main id="main-content">
+
+    <!-- ── 1. Services Hero ──────────────────────────────────── -->
+    <section class="services-hero">
+      <div class="services-hero__bg" aria-hidden="true"></div>
+      <div class="services-hero__overlay" aria-hidden="true"></div>
+      <div class="services-hero__content container">
+        <div class="services-hero__ornament" aria-hidden="true">
+          <span class="services-hero__ornament-line"></span>
+          <span class="services-hero__ornament-diamond"></span>
+          <span class="services-hero__ornament-line services-hero__ornament-line--right"></span>
+        </div>
+        <p class="section-label">Shop Decoration</p>
+        <h1 class="services-hero__title">Transform Your Space<br><span class="text-gold">With Art</span></h1>
+        <p class="services-hero__subtitle">
+          End-to-end interior decoration for commercial spaces — from concept to installation. We bring the timeless beauty of handcrafted embroidery to your café, boutique, or office.
+        </p>
+        <div class="services-hero__actions">
+          <a href="#consultation-form" class="btn btn-primary btn-lg">
+            <i class="fa-solid fa-calendar-check"></i> Get Free Consultation
+          </a>
+          <a href="https://wa.me/919182492525?text=Hi%20ALVOR!%20I%27m%20interested%20in%20your%20shop%20decoration%20service." target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg">
+            <i class="fa-brands fa-whatsapp"></i> Chat Now
+          </a>
+        </div>
+        <!-- Trust pills -->
+        <div class="services-hero__trust">
+          <span class="services-hero__trust-pill"><i class="fa-solid fa-check"></i> Free Site Visit</span>
+          <span class="services-hero__trust-pill"><i class="fa-solid fa-check"></i> Custom Quote</span>
+          <span class="services-hero__trust-pill"><i class="fa-solid fa-check"></i> AP-Wide Service</span>
+          <span class="services-hero__trust-pill"><i class="fa-solid fa-check"></i> Installed by Us</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 2. How It Works ───────────────────────────────────── -->
+    <section class="section services-process">
+      <div class="container">
+        <div class="section-header fade-up">
+          <p class="section-label">The Process</p>
+          <h2 class="section-title">How It Works</h2>
+          <p class="section-subtitle">
+            From your first enquiry to the final nail — we handle everything so you can focus on running your business.
+          </p>
+        </div>
+
+        <div class="services-steps stagger-children">
+
+          <div class="service-step fade-up">
+            <div class="service-step__connector" aria-hidden="true"></div>
+            <div class="service-step__circle">
+              <i class="fa-solid fa-phone"></i>
+            </div>
+            <div class="service-step__body">
+              <span class="service-step__num">Step 1</span>
+              <h3 class="service-step__title">Enquiry &amp; Site Visit</h3>
+              <p class="service-step__text">
+                Send us a WhatsApp or fill the form below. We schedule a free site visit to understand your space, vibe, and vision — completely obligation-free.
+              </p>
+            </div>
+          </div>
+
+          <div class="service-step fade-up">
+            <div class="service-step__connector" aria-hidden="true"></div>
+            <div class="service-step__circle">
+              <i class="fa-solid fa-magnifying-glass-chart"></i>
+            </div>
+            <div class="service-step__body">
+              <span class="service-step__num">Step 2</span>
+              <h3 class="service-step__title">Analyse &amp; Plan</h3>
+              <p class="service-step__text">
+                We measure your walls, study the lighting and colour palette, and craft a detailed decoration plan with placement suggestions and product recommendations.
+              </p>
+            </div>
+          </div>
+
+          <div class="service-step fade-up">
+            <div class="service-step__connector" aria-hidden="true"></div>
+            <div class="service-step__circle">
+              <i class="fa-solid fa-paintbrush"></i>
+            </div>
+            <div class="service-step__body">
+              <span class="service-step__num">Step 3</span>
+              <h3 class="service-step__title">Curate &amp; Create</h3>
+              <p class="service-step__text">
+                Once approved, our artisans begin creating your bespoke pieces — handcrafted specifically for your space, in sizes and styles that fit perfectly.
+              </p>
+            </div>
+          </div>
+
+          <div class="service-step fade-up">
+            <div class="service-step__circle">
+              <i class="fa-solid fa-truck"></i>
+            </div>
+            <div class="service-step__body">
+              <span class="service-step__num">Step 4</span>
+              <h3 class="service-step__title">Deliver &amp; Install</h3>
+              <p class="service-step__text">
+                We deliver, install, and style every piece ourselves. You don't lift a finger. We don't leave until you're completely delighted with how your space looks.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Divider ────────────────────────────────────────────── -->
+    <div class="section-divider container" aria-hidden="true">
+      <span class="section-divider__line"></span>
+      <span class="section-divider__symbol"><i class="fa-solid fa-star"></i></span>
+      <span class="section-divider__line"></span>
+    </div>
+
+    <!-- ── 3. Who It's For ───────────────────────────────────── -->
+    <section class="section services-clients">
+      <div class="container">
+        <div class="section-header fade-up">
+          <p class="section-label">Who We Serve</p>
+          <h2 class="section-title">Perfect For</h2>
+          <p class="section-subtitle">
+            Any commercial space that wants to stand out and tell a story through art.
+          </p>
+        </div>
+
+        <div class="clients-grid stagger-children">
+
+          <div class="client-card fade-up">
+            <div class="client-card__icon"><i class="fa-solid fa-mug-hot"></i></div>
+            <h3 class="client-card__title">Cafés &amp; Coffee Shops</h3>
+            <p class="client-card__text">
+              Create a warm, Instagram-worthy atmosphere that keeps customers coming back — and posting. Our textile art adds texture and soul to every corner.
+            </p>
+            <ul class="client-card__features">
+              <li><i class="fa-solid fa-check"></i> Wall-mounted art clusters</li>
+              <li><i class="fa-solid fa-check"></i> Counter backdrop pieces</li>
+              <li><i class="fa-solid fa-check"></i> Menu board surrounds</li>
+            </ul>
+          </div>
+
+          <div class="client-card fade-up">
+            <div class="client-card__icon"><i class="fa-solid fa-utensils"></i></div>
+            <h3 class="client-card__title">Restaurants</h3>
+            <p class="client-card__text">
+              Set the mood for every dining experience with art that speaks to your cuisine's heritage. From intimate fine dining to lively family restaurants.
+            </p>
+            <ul class="client-card__features">
+              <li><i class="fa-solid fa-check"></i> Dining area feature walls</li>
+              <li><i class="fa-solid fa-check"></i> Private dining room art</li>
+              <li><i class="fa-solid fa-check"></i> Entrance statement pieces</li>
+            </ul>
+          </div>
+
+          <div class="client-card fade-up">
+            <div class="client-card__icon"><i class="fa-solid fa-shirt"></i></div>
+            <h3 class="client-card__title">Boutiques &amp; Retail</h3>
+            <p class="client-card__text">
+              Elevate your retail environment so that the shopping experience feels as premium as the products you sell. Art that matches your brand identity.
+            </p>
+            <ul class="client-card__features">
+              <li><i class="fa-solid fa-check"></i> Display wall art</li>
+              <li><i class="fa-solid fa-check"></i> Fitting room décor</li>
+              <li><i class="fa-solid fa-check"></i> Storefront window frames</li>
+            </ul>
+          </div>
+
+          <div class="client-card fade-up">
+            <div class="client-card__icon"><i class="fa-solid fa-briefcase"></i></div>
+            <h3 class="client-card__title">Offices &amp; Workspaces</h3>
+            <p class="client-card__text">
+              A beautiful workspace inspires better work. Our art brings warmth and culture into corporate environments — from reception walls to conference rooms.
+            </p>
+            <ul class="client-card__features">
+              <li><i class="fa-solid fa-check"></i> Reception area art</li>
+              <li><i class="fa-solid fa-check"></i> Conference room pieces</li>
+              <li><i class="fa-solid fa-check"></i> Brand value wall art</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 4. Portfolio Placeholder ──────────────────────────── -->
+    <section class="section services-portfolio">
+      <div class="container">
+        <div class="section-header fade-up">
+          <p class="section-label">Our Work</p>
+          <h2 class="section-title">Spaces We've Transformed</h2>
+          <p class="section-subtitle">
+            A glimpse into some of our recent commercial decoration projects across Andhra Pradesh.
+          </p>
+        </div>
+
+        <div class="portfolio-grid stagger-children">
+
+          <div class="portfolio-item portfolio-item--large fade-up">
+            <div class="portfolio-item__bg portfolio-item__bg--1" aria-hidden="true"></div>
+            <div class="portfolio-item__overlay">
+              <div class="portfolio-item__label">
+                <span class="portfolio-item__type">Café</span>
+                <span class="portfolio-item__name">Visakhapatnam Coffee House</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="portfolio-item fade-up">
+            <div class="portfolio-item__bg portfolio-item__bg--2" aria-hidden="true"></div>
+            <div class="portfolio-item__overlay">
+              <div class="portfolio-item__label">
+                <span class="portfolio-item__type">Boutique</span>
+                <span class="portfolio-item__name">Vijayawada Fashion Store</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="portfolio-item fade-up">
+            <div class="portfolio-item__bg portfolio-item__bg--3" aria-hidden="true"></div>
+            <div class="portfolio-item__overlay">
+              <div class="portfolio-item__label">
+                <span class="portfolio-item__type">Restaurant</span>
+                <span class="portfolio-item__name">Guntur Heritage Dining</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="portfolio-item fade-up">
+            <div class="portfolio-item__bg portfolio-item__bg--4" aria-hidden="true"></div>
+            <div class="portfolio-item__overlay">
+              <div class="portfolio-item__label">
+                <span class="portfolio-item__type">Office</span>
+                <span class="portfolio-item__name">Tirupati Tech Office</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="portfolio-item fade-up">
+            <div class="portfolio-item__bg portfolio-item__bg--5" aria-hidden="true"></div>
+            <div class="portfolio-item__overlay">
+              <div class="portfolio-item__label">
+                <span class="portfolio-item__type">Café</span>
+                <span class="portfolio-item__name">Nellore Brew Bar</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <p class="services-portfolio__note fade-up">
+          <i class="fa-solid fa-image"></i>
+          Portfolio photos coming soon — follow <a href="https://instagram.com/alvor_emb" target="_blank" rel="noopener">@alvor_emb</a> for ongoing project updates.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── 5. Pricing Note ───────────────────────────────────── -->
+    <section class="services-pricing">
+      <div class="services-pricing__bg" aria-hidden="true"></div>
+      <div class="container services-pricing__inner fade-up">
+        <div class="services-pricing__content">
+          <p class="section-label">Investment</p>
+          <h2 class="services-pricing__title">Custom Quote Based on Your Space</h2>
+          <p class="services-pricing__text">
+            Every space is different — in size, style, and vision. That's why we don't offer fixed pricing packages. Instead, we give you a detailed, transparent quote after our free site visit. No hidden costs, no surprises.
+          </p>
+          <ul class="services-pricing__list">
+            <li><i class="fa-solid fa-check-circle"></i> Free initial consultation &amp; site visit</li>
+            <li><i class="fa-solid fa-check-circle"></i> Detailed quotation with itemised breakdown</li>
+            <li><i class="fa-solid fa-check-circle"></i> Flexible payment — 50% advance, 50% on completion</li>
+            <li><i class="fa-solid fa-check-circle"></i> Installation included in quote</li>
+            <li><i class="fa-solid fa-check-circle"></i> 6-month workmanship guarantee</li>
+          </ul>
+        </div>
+        <div class="services-pricing__cta-box">
+          <div class="services-pricing__cta-icon" aria-hidden="true">
+            <i class="fa-solid fa-file-invoice"></i>
+          </div>
+          <p class="services-pricing__cta-label">Starting from</p>
+          <p class="services-pricing__cta-price">₹15,000</p>
+          <p class="services-pricing__cta-note">for a single room decoration</p>
+          <a href="#consultation-form" class="btn btn-primary btn-full" style="margin-top:1.5rem">
+            Get My Free Quote
+          </a>
+          <a href="https://wa.me/919876543210?text=Hi%20ALVOR!%20I%27m%20interested%20in%20shop%20decoration.%20Can%20we%20schedule%20a%20site%20visit%3F" target="_blank" rel="noopener" class="btn btn-whatsapp btn-full" style="margin-top:0.75rem">
+            <i class="fa-brands fa-whatsapp"></i> WhatsApp Us
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 6. Consultation Form ──────────────────────────────── -->
+    <section class="section services-form-section" id="consultation-form">
+      <div class="container">
+        <div class="section-header fade-up">
+          <p class="section-label">Get In Touch</p>
+          <h2 class="section-title">Request a Free Consultation</h2>
+          <p class="section-subtitle">
+            Fill in your details and we'll contact you within 2–3 hours on WhatsApp to schedule your free site visit.
+          </p>
+        </div>
+
+        <div class="services-form-wrap fade-up">
+
+          <!-- Success message (hidden by default) -->
+          <div class="services-form__success" id="form-success" hidden>
+            <div class="services-form__success-icon"><i class="fa-solid fa-circle-check"></i></div>
+            <h3>Consultation Request Sent!</h3>
+            <p>Thank you! We've received your request and will WhatsApp you within 2–3 hours to schedule your free site visit.</p>
+            <a href="https://wa.me/919876543210" target="_blank" rel="noopener" class="btn btn-whatsapp">
+              <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp Now
+            </a>
+          </div>
+
+          <form class="services-form" id="consultation-form-el" novalidate>
+
+            <div class="services-form__grid">
+
+              <!-- Name -->
+              <div class="form-group">
+                <label class="form-label" for="cons-name">
+                  Your Name <span class="form-required" aria-hidden="true">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="cons-name"
+                  name="name"
+                  class="form-input"
+                  placeholder="e.g. Ravi Kumar"
+                  required
+                  autocomplete="name"
+                />
+                <span class="form-error" id="name-error"></span>
+              </div>
+
+              <!-- Phone -->
+              <div class="form-group">
+                <label class="form-label" for="cons-phone">
+                  WhatsApp Number <span class="form-required" aria-hidden="true">*</span>
+                </label>
+                <input
+                  type="tel"
+                  id="cons-phone"
+                  name="phone"
+                  class="form-input"
+                  placeholder="e.g. 98765 43210"
+                  required
+                  autocomplete="tel"
+                  pattern="[0-9\s\+\-]{10,15}"
+                />
+                <span class="form-error" id="phone-error"></span>
+              </div>
+
+              <!-- Business Name -->
+              <div class="form-group">
+                <label class="form-label" for="cons-business">
+                  Business Name <span class="form-required" aria-hidden="true">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="cons-business"
+                  name="businessName"
+                  class="form-input"
+                  placeholder="e.g. Sunrise Café"
+                  required
+                />
+                <span class="form-error" id="business-error"></span>
+              </div>
+
+              <!-- Business Type -->
+              <div class="form-group">
+                <label class="form-label" for="cons-type">
+                  Business Type <span class="form-required" aria-hidden="true">*</span>
+                </label>
+                <select id="cons-type" name="businessType" class="form-select" required>
+                  <option value="" disabled selected>Select your business type</option>
+                  <option value="Café / Coffee Shop">Café / Coffee Shop</option>
+                  <option value="Restaurant">Restaurant</option>
+                  <option value="Boutique / Retail">Boutique / Retail</option>
+                  <option value="Office / Workspace">Office / Workspace</option>
+                  <option value="Hotel / Homestay">Hotel / Homestay</option>
+                  <option value="Salon / Spa">Salon / Spa</option>
+                  <option value="Other">Other</option>
+                </select>
+                <span class="form-error" id="type-error"></span>
+              </div>
+
+              <!-- City -->
+              <div class="form-group">
+                <label class="form-label" for="cons-city">
+                  City <span class="form-required" aria-hidden="true">*</span>
+                </label>
+                <select id="cons-city" name="city" class="form-select" required>
+                  <option value="" disabled selected>Select your city</option>
+                  <option>Visakhapatnam</option>
+                  <option>Vijayawada</option>
+                  <option>Guntur</option>
+                  <option>Tirupati</option>
+                  <option>Nellore</option>
+                  <option>Kurnool</option>
+                  <option>Rajahmundry</option>
+                  <option>Kakinada</option>
+                  <option>Kadapa</option>
+                  <option>Anantapur</option>
+                  <option>Eluru</option>
+                  <option>Ongole</option>
+                  <option>Srikakulam</option>
+                  <option>Vizianagaram</option>
+                  <option>Tenali</option>
+                  <option>Proddatur</option>
+                  <option>Chittoor</option>
+                  <option>Other (Andhra Pradesh)</option>
+                </select>
+                <span class="form-error" id="city-error"></span>
+              </div>
+
+              <!-- Budget range (optional) -->
+              <div class="form-group">
+                <label class="form-label" for="cons-budget">Approximate Budget</label>
+                <select id="cons-budget" name="budget" class="form-select">
+                  <option value="" selected>Not sure yet</option>
+                  <option value="Under ₹15,000">Under ₹15,000</option>
+                  <option value="₹15,000 – ₹30,000">₹15,000 – ₹30,000</option>
+                  <option value="₹30,000 – ₹60,000">₹30,000 – ₹60,000</option>
+                  <option value="₹60,000 – ₹1,00,000">₹60,000 – ₹1,00,000</option>
+                  <option value="Above ₹1,00,000">Above ₹1,00,000</option>
+                </select>
+              </div>
+
+            </div><!-- /.services-form__grid -->
+
+            <!-- Message -->
+            <div class="form-group">
+              <label class="form-label" for="cons-message">
+                Tell Us About Your Space <span class="form-required" aria-hidden="true">*</span>
+              </label>
+              <textarea
+                id="cons-message"
+                name="message"
+                class="form-textarea"
+                rows="4"
+                placeholder="Describe your space, theme, or any specific ideas you have in mind..."
+                required
+              ></textarea>
+              <span class="form-error" id="message-error"></span>
+            </div>
+
+            <!-- Privacy note -->
+            <p class="services-form__privacy">
+              <i class="fa-solid fa-lock"></i>
+              Your details are private. We will only use them to contact you about your consultation request.
+            </p>
+
+            <!-- Submit -->
+            <button type="submit" class="btn btn-primary btn-lg services-form__submit" id="form-submit">
+              <i class="fa-solid fa-calendar-check"></i>
+              <span>Book Free Consultation</span>
+            </button>
+
+          </form>
+        </div><!-- /.services-form-wrap -->
+      </div>
+    </section>
+
+    <!-- ── 7. FAQ ─────────────────────────────────────────────── -->
+    <section class="section services-faq">
+      <div class="container">
+        <div class="section-header fade-up">
+          <p class="section-label">Questions</p>
+          <h2 class="section-title">Frequently Asked</h2>
+        </div>
+
+        <div class="faq-list fade-up">
+
+          <details class="faq-item">
+            <summary class="faq-item__question">
+              How long does a decoration project take?
+              <i class="fa-solid fa-chevron-down faq-item__icon"></i>
+            </summary>
+            <div class="faq-item__answer">
+              <p>It depends on the scope. A single-room decoration typically takes 2–3 weeks from approval to installation. Larger projects (multiple rooms) may take 4–6 weeks. We'll give you an accurate timeline in your quote.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-item__question">
+              Do you service all cities in Andhra Pradesh?
+              <i class="fa-solid fa-chevron-down faq-item__icon"></i>
+            </summary>
+            <div class="faq-item__answer">
+              <p>Yes! We service all major cities in Andhra Pradesh including Visakhapatnam, Vijayawada, Guntur, Tirupati, Nellore, Rajahmundry, Kakinada, and more. For smaller towns, please contact us to confirm availability.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-item__question">
+              Can I choose my own designs or themes?
+              <i class="fa-solid fa-chevron-down faq-item__icon"></i>
+            </summary>
+            <div class="faq-item__answer">
+              <p>Absolutely. During the consultation, we discuss your brand, colour palette, and aesthetic preferences in detail. We can customise designs completely to match your vision — or suggest curated options that complement your space.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-item__question">
+              What is included in the "installation"?
+              <i class="fa-solid fa-chevron-down faq-item__icon"></i>
+            </summary>
+            <div class="faq-item__answer">
+              <p>We handle all wall-mounting, hanging hardware, levelling, and final styling. We bring all necessary tools. You don't need to arrange anything — just be present (or have a staff member available) on installation day.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-item__question">
+              Is the site visit really free with no obligation?
+              <i class="fa-solid fa-chevron-down faq-item__icon"></i>
+            </summary>
+            <div class="faq-item__answer">
+              <p>Yes, 100% free and zero obligation. We visit, discuss your ideas, take measurements, and provide a detailed quote. You are under no pressure to proceed. We believe in earning your trust through quality, not pressure.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-item__question">
+              How do payments work?
+              <i class="fa-solid fa-chevron-down faq-item__icon"></i>
+            </summary>
+            <div class="faq-item__answer">
+              <p>Once you approve the quote, we collect a 50% advance to begin production. The remaining 50% is due on installation day — after you've seen the final result and are happy with it. We accept UPI, bank transfer, and cash.</p>
+            </div>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── Footer ──────────────────────────────────────────────── -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__top">
+
+        <div class="footer__col">
+          <div class="footer__brand-logo">
+            <svg width="32" height="32" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <polygon points="18,2 21,13 32,13 23,20 26,31 18,24 10,31 13,20 4,13 15,13" fill="none" stroke="#C9A84C" stroke-width="1.6" stroke-linejoin="round"/>
+              <circle cx="18" cy="18" r="4" fill="#C9A84C" opacity="0.85"/>
+            </svg>
+            <span class="logo-text">ALVOR</span>
+          </div>
+          <p class="footer__tagline">"Where Thread Meets Tradition"</p>
+          <p class="footer__description">Premium handcrafted embroidery art and interior decoration from the heart of Andhra Pradesh.</p>
+          <div class="footer__social">
+            <a href="https://instagram.com/alvor_emb" target="_blank" rel="noopener" class="footer__social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://wa.me/919876543210"       target="_blank" rel="noopener" class="footer__social-btn" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <div class="footer__col">
+          <h3 class="footer__col-title">Explore</h3>
+          <ul class="footer__links">
+            <li><a href="shop.html"     class="footer__link">Shop All</a></li>
+            <li><a href="about.html"    class="footer__link">About Us</a></li>
+            <li><a href="services.html" class="footer__link">Services</a></li>
+            <li><a href="contact.html"  class="footer__link">Contact</a></li>
+            <li><a href="admin.html"    class="footer__link">Admin</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <h3 class="footer__col-title">Categories</h3>
+          <ul class="footer__links">
+            <li><a href="shop.html?category=Embroidery%20Art" class="footer__link">Embroidery Art</a></li>
+            <li><a href="shop.html?category=Framed%20Pieces"  class="footer__link">Framed Pieces</a></li>
+            <li><a href="shop.html?category=Shop%20Decor"     class="footer__link">Shop Decor</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <h3 class="footer__col-title">Contact</h3>
+          <div class="footer__contact-item"><i class="fa-brands fa-whatsapp"></i><span>+91 91824 92525</span></div>
+          <div class="footer__contact-item"><i class="fa-brands fa-instagram"></i><span>@alvor_emb</span></div>
+          <div class="footer__contact-item"><i class="fa-solid fa-location-dot"></i><span>Andhra Pradesh, India</span></div>
+          <a href="https://wa.me/919182492525" target="_blank" rel="noopener" class="footer__whatsapp-btn">
+            <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+          </a>
+        </div>
+
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copyright">&copy; 2026 ALVOR. All rights reserved.</p>
+        <p class="footer__delivery-note">
+          <i class="fa-solid fa-location-dot"></i> Currently delivering across Andhra Pradesh
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ── Floating WhatsApp ────────────────────────────────────── -->
+  <a href="https://wa.me/919182492525" target="_blank" rel="noopener"
+     class="whatsapp-float" aria-label="Chat on WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- ══════════════════════════════════════════════════════════
+       INLINE SCRIPT — services page logic
+  ══════════════════════════════════════════════════════════ -->
+  <script>
+    const WHATSAPP_NUMBER = "919182492525";
+
+    // ── Helpers ────────────────────────────────────────────────
+    function hideLoader() {
+      document.getElementById("page-loader")?.classList.add("hidden");
+    }
+
+    function renderCartBadge() {
+      try {
+        const cart = JSON.parse(localStorage.getItem("alvor_cart") || "[]");
+        const badge = document.getElementById("cart-badge");
+        if (badge) {
+          const count = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+          badge.textContent = count;
+          badge.style.display = count > 0 ? "flex" : "none";
+        }
+      } catch(e) {}
+    }
+
+    function sanitise(str) {
+      if (typeof str !== "string") return "";
+      return str.replace(/[<>]/g, "").trim().slice(0, 500);
+    }
+
+    function initAnnouncement(text) {
+      const bar  = document.getElementById("announcement-bar");
+      const txt  = document.getElementById("announcement-text");
+      const btn  = document.getElementById("announcement-close");
+      if (!bar) return;
+      if (sessionStorage.getItem("alvor_ann_dismissed")) { bar.classList.add("dismissed"); return; }
+      if (text && txt) txt.textContent = text;
+      document.body.classList.add("has-announcement");
+      btn?.addEventListener("click", () => {
+        bar.classList.add("dismissed");
+        document.body.classList.remove("has-announcement");
+        sessionStorage.setItem("alvor_ann_dismissed", "1");
+      });
+    }
+
+    function initNavbar() {
+      const navbar  = document.getElementById("navbar");
+      const burger  = document.getElementById("hamburger");
+      const overlay = document.getElementById("nav-overlay");
+      const drawer  = document.getElementById("nav-drawer");
+      const close   = document.getElementById("nav-close");
+      if (!navbar) return;
+      window.addEventListener("scroll", () => {
+        navbar.classList.toggle("navbar--scrolled", window.scrollY > 10);
+      }, { passive: true });
+      const open = () => { drawer?.classList.add("open"); overlay?.classList.add("open"); burger?.setAttribute("aria-expanded","true");  document.body.style.overflow="hidden"; };
+      const shut = () => { drawer?.classList.remove("open"); overlay?.classList.remove("open"); burger?.setAttribute("aria-expanded","false"); document.body.style.overflow=""; };
+      burger?.addEventListener("click", open);
+      close?.addEventListener("click", shut);
+      overlay?.addEventListener("click", shut);
+      document.addEventListener("keydown", e => { if (e.key === "Escape") shut(); });
+    }
+
+    function initScrollAnimations() {
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); obs.unobserve(e.target); } });
+      }, { threshold: 0.12 });
+      document.querySelectorAll(".fade-up, .fade-in, .scale-in").forEach(el => obs.observe(el));
+    }
+
+    function initFAQ() {
+      document.querySelectorAll(".faq-item").forEach(item => {
+        item.addEventListener("toggle", () => {
+          const icon = item.querySelector(".faq-item__icon");
+          if (icon) icon.style.transform = item.open ? "rotate(180deg)" : "";
+        });
+      });
+    }
+
+    function clearErrors() {
+      document.querySelectorAll(".form-error").forEach(el => { el.textContent = ""; el.style.display = "none"; });
+      document.querySelectorAll(".form-input, .form-select, .form-textarea").forEach(el => el.classList.remove("form-input--error"));
+    }
+
+    function markError(inputId, errorId, message) {
+      const input = document.getElementById(inputId);
+      const errEl = document.getElementById(errorId);
+      if (input)  input.classList.add("form-input--error");
+      if (errEl)  { errEl.textContent = message; errEl.style.display = "block"; }
+    }
+
+    function initForm() {
+      const form       = document.getElementById("consultation-form-el");
+      const submitBtn  = document.getElementById("form-submit");
+      const successDiv = document.getElementById("form-success");
+      if (!form) return;
+
+      form.addEventListener("submit", async e => {
+        e.preventDefault();
+        clearErrors();
+
+        const name         = sanitise(document.getElementById("cons-name")?.value     || "");
+        const phone        = sanitise(document.getElementById("cons-phone")?.value    || "");
+        const businessName = sanitise(document.getElementById("cons-business")?.value || "");
+        const businessType = sanitise(document.getElementById("cons-type")?.value     || "");
+        const city         = sanitise(document.getElementById("cons-city")?.value     || "");
+        const budget       = sanitise(document.getElementById("cons-budget")?.value   || "");
+        const message      = sanitise(document.getElementById("cons-message")?.value  || "");
+
+        let hasError = false;
+        if (!name)         { markError("cons-name",     "name-error",     "Please enter your name.");          hasError = true; }
+        if (phone.replace(/\D/g,"").length < 10) { markError("cons-phone", "phone-error", "Please enter a valid 10-digit number."); hasError = true; }
+        if (!businessName) { markError("cons-business", "business-error", "Please enter your business name."); hasError = true; }
+        if (!businessType) { markError("cons-type",     "type-error",     "Please select a business type.");   hasError = true; }
+        if (!city)         { markError("cons-city",     "city-error",     "Please select your city.");         hasError = true; }
+        if (!message)      { markError("cons-message",  "message-error",  "Please tell us about your space."); hasError = true; }
+
+        if (hasError) return;
+
+        submitBtn.classList.add("loading");
+        submitBtn.disabled = true;
+
+        try {
+          // Save to localStorage as fallback (no Firebase)
+          const orders = JSON.parse(localStorage.getItem("alvor_consultation_requests") || "[]");
+          orders.push({ name, phone, businessName, businessType, city, budget, message, createdAt: new Date().toISOString() });
+          localStorage.setItem("alvor_consultation_requests", JSON.stringify(orders));
+        } catch(err) {}
+
+        // Open WhatsApp with pre-filled message
+        const waText = encodeURIComponent(
+          `Hi ALVOR! I'm interested in your Shop Decoration Service.\n\n` +
+          `Name: ${name}\n` +
+          `Business: ${businessName} (${businessType})\n` +
+          `City: ${city}\n` +
+          `Budget: ${budget || "Not specified"}\n\n` +
+          `Message: ${message}`
+        );
+        window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`, "_blank", "noopener");
+
+        form.style.display = "none";
+        if (successDiv) successDiv.hidden = false;
+        successDiv?.scrollIntoView({ behavior: "smooth", block: "center" });
+
+        submitBtn.classList.remove("loading");
+        submitBtn.disabled = false;
+      });
+    }
+
+    // ── Boot ───────────────────────────────────────────────────
+    document.addEventListener("DOMContentLoaded", () => {
+      initNavbar();
+      renderCartBadge();
+      initScrollAnimations();
+      initFAQ();
+      initForm();
+      initAnnouncement(null);
+      hideLoader();
+    });
+  </script>
+
+</body>
+</html>
