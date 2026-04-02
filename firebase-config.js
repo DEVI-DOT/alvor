@@ -36,13 +36,13 @@ import { getAuth,
 // ⚠️  REPLACE THIS BLOCK WITH YOUR REAL FIREBASE CONFIG
 // ============================================================
 const firebaseConfig = {
-  apiKey:            "YOUR_API_KEY",
-  authDomain:        "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId:         "YOUR_PROJECT_ID",
-  storageBucket:     "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId:             "YOUR_APP_ID",
-  measurementId:     "YOUR_MEASUREMENT_ID"   // optional — remove if not using Analytics
+  apiKey:            "AIzaSyBo746KDJuzovRnkZcX_2ZfUbeTL3clOgo",
+  authDomain:        "alvor-website.firebaseapp.com",
+  projectId:         "alvor-website",
+  storageBucket:     "alvor-website.firebasestorage.app",
+  messagingSenderId: "706932421525",
+  appId:             "1:706932421525:web:fc31e4df05bffda0a47c9c",
+  measurementId:     "G-DXNF1ZC0JD"   // optional — remove if not using Analytics
 };
 // ============================================================
 
