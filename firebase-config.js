@@ -23,9 +23,7 @@ import { getFirestore,
          limit, startAfter,
          onSnapshot, serverTimestamp,
          increment }               from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import { getStorage,
-         ref, uploadBytesResumable,
-         getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+
 import { getAuth,
          GoogleAuthProvider,
          signInWithPopup,
@@ -49,7 +47,6 @@ const firebaseConfig = {
 // ── Initialize Firebase ──────────────────────────────────────
 const app     = initializeApp(firebaseConfig);
 const db      = getFirestore(app);
-const storage = getStorage(app);
 const auth    = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 
