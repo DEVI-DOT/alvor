@@ -1253,8 +1253,6 @@ input, select, textarea { font-family: var(--font); }
   import { initializeApp }            from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
   import { getFirestore, collection, getDocs, doc, addDoc, updateDoc, deleteDoc, query, where, orderBy, limit, serverTimestamp, getDoc }
     from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-  import { getStorage, ref, uploadBytes, getDownloadURL }
-    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
   import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
     from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
@@ -1273,7 +1271,6 @@ input, select, textarea { font-family: var(--font); }
   /* ─── Init ─── */
   const app  = initializeApp(firebaseConfig);
   const db   = getFirestore(app);
-  const storage = getStorage(app);
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
 
@@ -1513,10 +1510,17 @@ input, select, textarea { font-family: var(--font); }
       let images = [];
       const files = document.getElementById("pImages").files;
       for (const file of files) {
-        const r = ref(storage, `products/${Date.now()}_${file.name}`);
-        await uploadBytes(r, file);
-        images.push(await getDownloadURL(r));
-      }
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", "alvor-uploads");
+  formData.append("cloud_name", "dmb5bc4cj");
+  const res = await fetch(
+    "https://api.cloudinary.com/v1_1/dmb5bc4cj/image/upload",
+    { method: "POST", body: formData }
+  );
+  const data = await res.json();
+  images.push(data.secure_url);
+}
 
       const data = {
         title,
