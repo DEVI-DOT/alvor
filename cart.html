@@ -1335,12 +1335,17 @@
     }
 
     function getCartTotal(cart) {
-      return cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-    }
+  return cart.reduce((sum, item) => {
+    const qty = item.qty || item.quantity || 1;
+    return sum + (item.price || 0) * qty;
+  }, 0);
+}
 
-    function getCartCount(cart) {
-      return cart.reduce((sum, item) => sum + item.qty, 0);
-    }
+function getCartCount(cart) {
+  return cart.reduce((sum, item) => {
+    return sum + (item.qty || item.quantity || 1);
+  }, 0);
+}
 
     /* =========================================
        NAV BADGE
@@ -1404,7 +1409,8 @@
       /* Render table rows */
       tbody.innerHTML = '';
       cart.forEach((item, index) => {
-        const itemTotal = item.price * item.qty;
+        const qty = item.qty || item.quantity || 1;
+const itemTotal = item.price * qty;
         const tr = document.createElement('tr');
         tr.dataset.index = index;
 
@@ -1446,7 +1452,7 @@
               <button class="qty-btn qty-minus" data-index="${index}" aria-label="Decrease" ${item.qty <= 1 ? 'disabled' : ''}>
                 <i class="fa-solid fa-minus" style="font-size:0.7rem"></i>
               </button>
-              <input class="qty-input" type="number" value="${item.qty}" min="1" max="99" data-index="${index}" readonly aria-label="Quantity" />
+              <input class="qty-input" type="number" value="${item.qty || item.quantity || 1}"" min="1" max="99" data-index="${index}" readonly aria-label="Quantity" />
               <button class="qty-btn qty-plus" data-index="${index}" aria-label="Increase" ${item.qty >= 99 ? 'disabled' : ''}>
                 <i class="fa-solid fa-plus" style="font-size:0.7rem"></i>
               </button>
@@ -1572,8 +1578,9 @@
       if (minusBtn) {
         const index = parseInt(minusBtn.dataset.index);
         const cart = getCart();
-        if (cart[index].qty > 1) {
-          cart[index].qty -= 1;
+        cart[index].qty = cart[index].qty || cart[index].quantity || 1;
+if (cart[index].qty > 1) {
+  cart[index].qty -= 1;
           saveCart(cart);
           renderCart();
         }
