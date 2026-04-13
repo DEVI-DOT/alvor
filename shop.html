@@ -1751,33 +1751,125 @@
   const products = window.__ALL_PRODUCTS || window.__DEMO_PRODUCTS || [];
   const p = products.find(pr => pr.id === productId);
   if (!p) return;
-  quickViewProduct = p;
 
-  // Collect all images — mainImage first, then rest of images array
   let allImages = [];
   if (p.images && p.images.length > 0) {
-    allImages = [...p.images];
+    allImages = [...new Set(p.images.filter(Boolean))];
   } else if (p.mainImage) {
     allImages = [p.mainImage];
   }
 
-  // Remove duplicates
-  allImages = [...new Set(allImages.filter(Boolean))];
-
-  // Store current index globally so prev/next buttons can access it
   window.__qvImages = allImages;
-  window.__qvIndex  = 0;
+  window.__qvIndex = 0;
 
   const disc = calcDiscount(p.price, p.originalPrice);
   const priceHTML = disc > 0
-    ? `${formatPrice(p.price)}
-       ${formatPrice(p.originalPrice)}
-       -${disc}%`
-    : `${formatPrice(p.price)}`;
+    ? `<span class="price-current">${formatPrice(p.price)}</span>
+       <span class="price-original">${formatPrice(p.originalPrice)}</span>
+       <span class="price-discount">-${disc}%</span>`
+    : `<span class="price-current">${formatPrice(p.price)}</span>`;
 
   const whatsappMsg = encodeURIComponent(
     `Hi ALVOR! I'm interested in "${p.title}" (${formatPrice(p.price)}). Can you help me order?`
   );
+
+  const imgSrc = allImages.length > 0 ? allImages[0] : '';
+
+  document.getElementById('modalContent').innerHTML = `
+    <div class="modal-image" style="position:relative;overflow:hidden;background:#F5F0E8;display:flex;flex-direction:column;">
+      <div style="flex:1;position:relative;min-height:260px;">
+        ${imgSrc
+          ? `<img id="qv-main-img" src="${imgSrc}" alt="${p.title}"
+               style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;transition:opacity 0.25s;" />`
+          : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;position:absolute;inset:0;">
+               <i class="fas fa-palette" style="font-size:48px;color:#C9A84C;opacity:0.4;"></i>
+             </div>`
+        }
+        ${allImages.length > 1 ? `
+          <button onclick="qvPrev()" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);
+            width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.92);
+            border:none;cursor:pointer;font-size:18px;z-index:5;display:flex;
+            align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.15);">&#8249;</button>
+          <button onclick="qvNext()" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);
+            width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.92);
+            border:none;cursor:pointer;font-size:18px;z-index:5;display:flex;
+            align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.15);">&#8250;</button>
+          <div style="position:absolute;top:8px;right:8px;background:rgba(0,0,0,0.5);
+            color:white;font-size:11px;padding:2px 8px;border-radius:10px;z-index:5;">
+            <span id="qv-counter">1</span>/${allImages.length}
+          </div>
+        ` : ''}
+      </div>
+      ${allImages.length > 1 ? `
+        <div style="display:flex;gap:5px;padding:6px;background:rgba(0,0,0,0.06);overflow-x:auto;flex-shrink:0;">
+          ${allImages.map((img,i) => `
+            <img onclick="qvGoTo(${i})" id="qv-thumb-${i}" src="${img}" alt="thumb"
+              style="width:48px;height:48px;object-fit:cover;border-radius:4px;cursor:pointer;
+              flex-shrink:0;border:2px solid ${i===0?'#C9A84C':'transparent'};
+              opacity:${i===0?'1':'0.6'};transition:all 0.2s;" />
+          `).join('')}
+        </div>
+      ` : ''}
+    </div>
+    <div class="modal-details">
+      <div class="modal-category">${p.category || 'ALVOR Collection'}</div>
+      <div class="modal-title">${p.title}</div>
+      <div class="modal-stars">${renderStars(p.avgRating||5, p.reviewCount||0)}</div>
+      <div class="modal-price">${priceHTML}</div>
+      <div class="modal-desc">${p.description || 'A beautifully handcrafted embroidery piece from ALVOR.'}</div>
+      <div class="modal-delivery">
+        <i class="fas fa-truck"></i>
+        Estimated delivery in ${p.estimatedDays||5}–${(p.estimatedDays||5)+2} days · AP only
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-primary" style="border-radius:var(--radius-md)"
+          onclick="addToCart('${p.id}','${escapeAttr(p.title)}',${p.price},'${p.mainImage||''}');closeQuickView()">
+          <i class="fas fa-shopping-bag"></i> Add to Cart
+        </button>
+        <a href="https://wa.me/919182492525?text=${whatsappMsg}" target="_blank"
+          class="btn btn-whatsapp" style="border-radius:var(--radius-md)">
+          <i class="fab fa-whatsapp"></i> Order on WhatsApp
+        </a>
+        <a href="product.html?id=${p.id}" class="btn btn-outline-dark btn-sm"
+          style="border-radius:var(--radius-md);border-color:var(--color-border)">
+          View Full Details <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>`;
+
+  document.getElementById('quickViewModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+};
+
+window.qvGoTo = function(index) {
+  const images = window.__qvImages || [];
+  if (!images[index]) return;
+  window.__qvIndex = index;
+  const mainImg = document.getElementById('qv-main-img');
+  if (mainImg) {
+    mainImg.style.opacity = '0';
+    setTimeout(() => { mainImg.src = images[index]; mainImg.style.opacity = '1'; }, 150);
+  }
+  const counter = document.getElementById('qv-counter');
+  if (counter) counter.textContent = index + 1;
+  images.forEach((_, i) => {
+    const thumb = document.getElementById(`qv-thumb-${i}`);
+    if (thumb) {
+      thumb.style.border = i===index ? '2px solid #C9A84C' : '2px solid transparent';
+      thumb.style.opacity = i===index ? '1' : '0.6';
+    }
+  });
+};
+
+window.qvPrev = function() {
+  const images = window.__qvImages || [];
+  qvGoTo((window.__qvIndex - 1 + images.length) % images.length);
+};
+
+window.qvNext = function() {
+  const images = window.__qvImages || [];
+  qvGoTo((window.__qvIndex + 1) % images.length);
+};
 
   // Build gallery HTML
   const mainImgSrc = allImages.length > 0 ? allImages[0] : '';
